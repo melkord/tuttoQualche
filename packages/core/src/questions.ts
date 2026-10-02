@@ -56,6 +56,22 @@ export function renderQuestion(kind: QuestionKind, subject: Concept, object: Con
   }
 }
 
+/** Frase italiana che descrive la relazione di `a` verso `b` (per revisione e interfacce). */
+export function describeRelation(a: Concept, b: Concept, rel: Relation): string {
+  switch (rel) {
+    case 'TUTTI':
+      return `${TUTTI_F[a.det]} ${a.det} ${a.label} sono ${b.label}`;
+    case 'CONTIENE':
+      return `${TUTTI_F[b.det]} ${b.det} ${b.label} sono ${a.label}`;
+    case 'ALCUNI':
+      return `${ALCUNI_F[a.det]} ${a.label} sono ${b.label}, altri no`;
+    case 'NESSUNO':
+      return `${NESSUNO_F[a.det]} ${DEL[a.det]} ${a.label} è tra ${b.det} ${b.label}`;
+    case 'UGUALI':
+      return `${a.label} e ${b.label} coincidono`;
+  }
+}
+
 export const QUESTIONS_PER_PUZZLE = 3;
 
 interface Candidate {

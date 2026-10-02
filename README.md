@@ -7,7 +7,7 @@ Monorepo pnpm + TypeScript strict.
 
 - [x] `packages/core` — tipi, validatore logico, domande, difficoltà
 - [x] `packages/generator` — `pnpm generate --count 50 --theme animali` (richiede `ANTHROPIC_API_KEY`)
-- [ ] `apps/review`
+- [x] `apps/review` — `pnpm review` → http://127.0.0.1:5174 (A approva · S scarta + 1/2/3 · E modifica · ←→)
 - [ ] `apps/web`
 - [ ] `scripts/schedule`
 

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Concept } from '../src';
 import {
   answerOf,
+  describeRelation,
   buildMatrix,
   generateQuestions,
   isAmbiguousQuestion,
@@ -51,6 +52,21 @@ describe('renderQuestion', () => {
     expect(renderQuestion('ALCUNI', rose, fiori)).toBe('Alcune rose sono fiori?');
     expect(renderQuestion('NESSUNO', rose, fiori)).toBe('Nessuna delle rose è tra i fiori?');
     expect(renderQuestion('ALCUNI_NON', rose, fiori)).toBe('Alcune rose non sono fiori?');
+  });
+});
+
+describe('describeRelation', () => {
+  const [cani, mammiferi] = ANIMALI.concepts as [Concept, Concept];
+  const [rose, fiori] = CONCEPTS as [Concept, Concept];
+  it('descrive ogni relazione in italiano', () => {
+    expect(describeRelation(cani, mammiferi, 'TUTTI')).toBe('Tutti i cani sono mammiferi');
+    expect(describeRelation(cani, mammiferi, 'CONTIENE')).toBe('Tutti i mammiferi sono cani');
+    expect(describeRelation(cani, mammiferi, 'ALCUNI')).toBe(
+      'Alcuni cani sono mammiferi, altri no',
+    );
+    expect(describeRelation(cani, mammiferi, 'NESSUNO')).toBe('Nessuno dei cani è tra i mammiferi');
+    expect(describeRelation(rose, fiori, 'TUTTI')).toBe('Tutte le rose sono fiori');
+    expect(describeRelation(rose, fiori, 'UGUALI')).toBe('rose e fiori coincidono');
   });
 });
 
