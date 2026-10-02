@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "aquile",
+        "det": "le"
+      },
+      {
+        "label": "uccelli",
+        "det": "gli"
+      },
+      {
+        "label": "animali che volano",
+        "det": "gli"
+      },
+      {
+        "label": "mammiferi",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-1mvltcj",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 1,
+        "answer": false,
+        "text": "Nessuna delle aquile è tra gli uccelli?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 3,
+        "answer": false,
+        "text": "Tutti gli uccelli sono mammiferi?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni animali che volano non sono aquile?"
+      }
+    ],
+    "difficulty": {
+      "score": 60,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "medio",
+      "reason": "Pinguini e struzzi sono uccelli che non volano: serve conoscerlo."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.743Z",
+    "model": "manuale"
+  }
+}

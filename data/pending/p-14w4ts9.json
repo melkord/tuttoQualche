@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "cibo e bevande",
+    "concepts": [
+      {
+        "label": "vini",
+        "det": "i"
+      },
+      {
+        "label": "bevande alcoliche",
+        "det": "le"
+      },
+      {
+        "label": "bevande",
+        "det": "le"
+      },
+      {
+        "label": "succhi di frutta",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "CONTIENE"
+      }
+    ],
+    "id": "p-14w4ts9",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 3,
+        "object": 1,
+        "answer": false,
+        "text": "Alcuni succhi di frutta sono bevande alcoliche?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 3,
+        "object": 2,
+        "answer": true,
+        "text": "Tutti i succhi di frutta sono bevande?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 0,
+        "answer": false,
+        "text": "Nessuna delle bevande è tra i vini?"
+      }
+    ],
+    "difficulty": {
+      "score": 26,
+      "level": "facile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.905Z",
+    "model": "manuale"
+  }
+}

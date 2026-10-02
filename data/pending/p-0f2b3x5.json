@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "sport",
+    "concepts": [
+      {
+        "label": "sport di squadra con la palla",
+        "det": "gli"
+      },
+      {
+        "label": "sport olimpici",
+        "det": "gli"
+      },
+      {
+        "label": "sport da combattimento",
+        "det": "gli"
+      },
+      {
+        "label": "sport acquatici",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "id": "p-0f2b3x5",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 3,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni sport acquatici sono sport di squadra con la palla?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 1,
+        "answer": false,
+        "text": "Nessuno degli sport di squadra con la palla è tra gli sport olimpici?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 2,
+        "answer": false,
+        "text": "Tutti gli sport olimpici sono sport da combattimento?"
+      }
+    ],
+    "difficulty": {
+      "score": 74,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.166Z",
+    "model": "manuale"
+  }
+}

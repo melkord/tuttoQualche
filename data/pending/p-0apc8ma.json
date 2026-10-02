@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "geografia italiana",
+    "concepts": [
+      {
+        "label": "montagne delle Alpi",
+        "det": "le"
+      },
+      {
+        "label": "montagne italiane",
+        "det": "le"
+      },
+      {
+        "label": "montagne oltre i 4000 metri",
+        "det": "le"
+      },
+      {
+        "label": "vulcani",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-0apc8ma",
+    "questions": [
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcune montagne oltre i 4000 metri non sono montagne delle Alpi?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 1,
+        "answer": true,
+        "text": "Alcune montagne oltre i 4000 metri sono montagne italiane?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 2,
+        "answer": false,
+        "text": "Nessuno dei vulcani è tra le montagne oltre i 4000 metri?"
+      }
+    ],
+    "difficulty": {
+      "score": 88,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "medio",
+      "reason": "I vulcani sono montagne solo in parte (es. Stromboli è un'isola-vulcano)."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.035Z",
+    "model": "manuale"
+  }
+}

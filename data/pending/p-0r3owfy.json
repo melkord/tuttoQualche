@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "api",
+        "det": "le"
+      },
+      {
+        "label": "insetti",
+        "det": "gli"
+      },
+      {
+        "label": "impollinatori",
+        "det": "gli"
+      },
+      {
+        "label": "uccelli",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-0r3owfy",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 1,
+        "answer": true,
+        "text": "Tutte le api sono insetti?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 2,
+        "answer": false,
+        "text": "Nessuno degli uccelli è tra gli impollinatori?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni impollinatori non sono api?"
+      }
+    ],
+    "difficulty": {
+      "score": 60,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.217Z",
+    "model": "manuale"
+  }
+}

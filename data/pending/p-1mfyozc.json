@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "polli",
+        "det": "i"
+      },
+      {
+        "label": "uccelli",
+        "det": "gli"
+      },
+      {
+        "label": "animali che depongono uova",
+        "det": "gli"
+      },
+      {
+        "label": "mammiferi",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-1mfyozc",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 3,
+        "object": 0,
+        "answer": false,
+        "text": "Tutti i mammiferi sono polli?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 3,
+        "answer": false,
+        "text": "Nessuno degli animali che depongono uova è tra i mammiferi?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni uccelli non sono polli?"
+      }
+    ],
+    "difficulty": {
+      "score": 46,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "medio",
+      "reason": "Ornitorinco e echidna sono mammiferi che depongono uova."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.870Z",
+    "model": "manuale"
+  }
+}

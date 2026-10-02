@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "ragni",
+        "det": "i"
+      },
+      {
+        "label": "insetti",
+        "det": "gli"
+      },
+      {
+        "label": "aracnidi",
+        "det": "gli"
+      },
+      {
+        "label": "animali con otto zampe",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "TUTTI"
+      }
+    ],
+    "id": "p-0eepmx4",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 1,
+        "answer": true,
+        "text": "Nessuno dei ragni è tra gli insetti?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 3,
+        "answer": false,
+        "text": "Tutti gli insetti sono animali con otto zampe?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni aracnidi non sono ragni?"
+      }
+    ],
+    "difficulty": {
+      "score": 26,
+      "level": "facile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "medio",
+      "reason": "Altri animali (es. polpi) hanno otto braccia: \"zampe\" è ambiguo."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.832Z",
+    "model": "manuale"
+  }
+}

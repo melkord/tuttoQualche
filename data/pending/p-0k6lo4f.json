@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "piante carnivore",
+        "det": "le"
+      },
+      {
+        "label": "piante",
+        "det": "le"
+      },
+      {
+        "label": "piante grasse",
+        "det": "le"
+      },
+      {
+        "label": "piante acquatiche",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "id": "p-0k6lo4f",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 1,
+        "answer": false,
+        "text": "Nessuna delle piante acquatiche è tra le piante?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 2,
+        "answer": true,
+        "text": "Alcune piante non sono piante grasse?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 3,
+        "answer": false,
+        "text": "Alcune piante grasse sono piante acquatiche?"
+      }
+    ],
+    "difficulty": {
+      "score": 54,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "medio",
+      "reason": "Poche piante grasse semi-acquatiche esistono."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.272Z",
+    "model": "manuale"
+  }
+}

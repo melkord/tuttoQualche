@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "querce",
+        "det": "le"
+      },
+      {
+        "label": "alberi",
+        "det": "gli"
+      },
+      {
+        "label": "piante sempreverdi",
+        "det": "le"
+      },
+      {
+        "label": "conifere",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-1xmpkc2",
+    "questions": [
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 3,
+        "object": 1,
+        "answer": true,
+        "text": "Alcune conifere non sono alberi?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 2,
+        "answer": false,
+        "text": "Tutti gli alberi sono piante sempreverdi?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 3,
+        "answer": true,
+        "text": "Nessuna delle querce è tra le conifere?"
+      }
+    ],
+    "difficulty": {
+      "score": 84,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.199Z",
+    "model": "manuale"
+  }
+}

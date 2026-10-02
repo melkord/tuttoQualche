@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "balene",
+        "det": "le"
+      },
+      {
+        "label": "mammiferi",
+        "det": "i"
+      },
+      {
+        "label": "animali marini",
+        "det": "gli"
+      },
+      {
+        "label": "squali",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "CONTIENE"
+      }
+    ],
+    "id": "p-1s3noxi",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 1,
+        "answer": true,
+        "text": "Tutte le balene sono mammiferi?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 0,
+        "object": 3,
+        "answer": false,
+        "text": "Alcune balene sono squali?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 2,
+        "answer": true,
+        "text": "Alcuni mammiferi non sono animali marini?"
+      }
+    ],
+    "difficulty": {
+      "score": 46,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "medio",
+      "reason": "Alcuni squali (es. squalo toro) risalgono i fiumi."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.842Z",
+    "model": "manuale"
+  }
+}

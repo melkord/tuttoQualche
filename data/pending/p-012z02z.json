@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "geografia italiana",
+    "concepts": [
+      {
+        "label": "regioni del Nord",
+        "det": "le"
+      },
+      {
+        "label": "regioni del Centro",
+        "det": "le"
+      },
+      {
+        "label": "regioni del Sud",
+        "det": "le"
+      },
+      {
+        "label": "regioni italiane",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "TUTTI"
+      }
+    ],
+    "id": "p-012z02z",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 2,
+        "answer": false,
+        "text": "Tutte le regioni del Nord sono regioni del Sud?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Nessuna delle regioni del Centro è tra le regioni del Nord?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 3,
+        "answer": false,
+        "text": "Alcune regioni del Centro non sono regioni italiane?"
+      }
+    ],
+    "difficulty": {
+      "score": 38,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "medio",
+      "reason": "Alcune regioni (es. Abruzzo, Sardegna) sono classificate in modo diverso."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.041Z",
+    "model": "manuale"
+  }
+}

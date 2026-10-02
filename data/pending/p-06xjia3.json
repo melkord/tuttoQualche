@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "geografia italiana",
+    "concepts": [
+      {
+        "label": "regioni del Nord",
+        "det": "le"
+      },
+      {
+        "label": "regioni italiane",
+        "det": "le"
+      },
+      {
+        "label": "regioni con sbocco sul mare",
+        "det": "le"
+      },
+      {
+        "label": "regioni senza sbocco sul mare",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "id": "p-06xjia3",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcune regioni con sbocco sul mare sono regioni del Nord?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 0,
+        "answer": false,
+        "text": "Nessuna delle regioni senza sbocco sul mare è tra le regioni del Nord?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 0,
+        "answer": false,
+        "text": "Tutte le regioni italiane sono regioni del Nord?"
+      }
+    ],
+    "difficulty": {
+      "score": 60,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.001Z",
+    "model": "manuale"
+  }
+}

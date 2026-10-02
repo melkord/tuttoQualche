@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "geografia italiana",
+    "concepts": [
+      {
+        "label": "isole italiane",
+        "det": "le"
+      },
+      {
+        "label": "isole del Tirreno",
+        "det": "le"
+      },
+      {
+        "label": "isole dell'Adriatico",
+        "det": "le"
+      },
+      {
+        "label": "isole greche",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "id": "p-1qgsnga",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 2,
+        "answer": true,
+        "text": "Nessuna delle isole greche è tra le isole dell'Adriatico?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 2,
+        "answer": false,
+        "text": "Tutte le isole del Tirreno sono isole dell'Adriatico?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Alcune isole del Tirreno sono isole italiane?"
+      }
+    ],
+    "difficulty": {
+      "score": 54,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "medio",
+      "reason": "Il confine tra Adriatico e Ionio (Corfù) è sfumato."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.050Z",
+    "model": "manuale"
+  }
+}

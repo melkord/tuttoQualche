@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "cibo e bevande",
+    "concepts": [
+      {
+        "label": "uova",
+        "det": "le"
+      },
+      {
+        "label": "alimenti di origine animale",
+        "det": "gli"
+      },
+      {
+        "label": "carni",
+        "det": "le"
+      },
+      {
+        "label": "prodotti ittici",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "id": "p-0fiq5yz",
+    "questions": [
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 2,
+        "answer": true,
+        "text": "Alcuni alimenti di origine animale non sono carni?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 3,
+        "answer": true,
+        "text": "Nessuna delle carni è tra i prodotti ittici?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 0,
+        "answer": false,
+        "text": "Tutti gli alimenti di origine animale sono uova?"
+      }
+    ],
+    "difficulty": {
+      "score": 38,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.919Z",
+    "model": "manuale"
+  }
+}

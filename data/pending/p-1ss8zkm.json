@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "leoni",
+        "det": "i"
+      },
+      {
+        "label": "gatti",
+        "det": "i"
+      },
+      {
+        "label": "felini",
+        "det": "i"
+      },
+      {
+        "label": "animali domestici",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-1ss8zkm",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 2,
+        "object": 1,
+        "answer": false,
+        "text": "Tutti i felini sono gatti?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 3,
+        "object": 0,
+        "answer": false,
+        "text": "Alcuni animali domestici sono leoni?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 1,
+        "answer": true,
+        "text": "Nessuno dei leoni è tra i gatti?"
+      }
+    ],
+    "difficulty": {
+      "score": 46,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "medio",
+      "reason": "Esistono gatti selvatici/randagi."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.818Z",
+    "model": "manuale"
+  }
+}

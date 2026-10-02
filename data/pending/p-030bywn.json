@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "funghi",
+        "det": "i"
+      },
+      {
+        "label": "piante",
+        "det": "le"
+      },
+      {
+        "label": "animali",
+        "det": "gli"
+      },
+      {
+        "label": "esseri viventi",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "TUTTI"
+      }
+    ],
+    "id": "p-030bywn",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 1,
+        "object": 2,
+        "answer": false,
+        "text": "Alcune piante sono animali?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Nessuna delle piante è tra i funghi?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 3,
+        "answer": true,
+        "text": "Tutti i funghi sono esseri viventi?"
+      }
+    ],
+    "difficulty": {
+      "score": 34,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.207Z",
+    "model": "manuale"
+  }
+}

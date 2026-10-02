@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "oceani",
+        "det": "gli"
+      },
+      {
+        "label": "mari",
+        "det": "i"
+      },
+      {
+        "label": "specchi d'acqua salata",
+        "det": "gli"
+      },
+      {
+        "label": "specchi d'acqua dolce",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "id": "p-0rj7oup",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 3,
+        "answer": false,
+        "text": "Tutti gli oceani sono specchi d'acqua dolce?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 1,
+        "answer": true,
+        "text": "Alcuni specchi d'acqua salata non sono mari?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 3,
+        "answer": false,
+        "text": "Alcuni specchi d'acqua salata sono specchi d'acqua dolce?"
+      }
+    ],
+    "difficulty": {
+      "score": 26,
+      "level": "facile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "medio",
+      "reason": "Il Mar Caspio è salmastro; il Mar Morto è un lago salato."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.245Z",
+    "model": "manuale"
+  }
+}

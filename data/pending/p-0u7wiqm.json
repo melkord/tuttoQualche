@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "gatti",
+        "det": "i"
+      },
+      {
+        "label": "cani",
+        "det": "i"
+      },
+      {
+        "label": "animali domestici",
+        "det": "gli"
+      },
+      {
+        "label": "mammiferi",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-0u7wiqm",
+    "questions": [
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 1,
+        "answer": true,
+        "text": "Alcuni animali domestici non sono cani?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 3,
+        "object": 2,
+        "answer": false,
+        "text": "Tutti i mammiferi sono animali domestici?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 1,
+        "answer": false,
+        "text": "Nessuno dei mammiferi è tra i cani?"
+      }
+    ],
+    "difficulty": {
+      "score": 54,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "medio",
+      "reason": "Cani randagi."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "medio",
+      "reason": "Gatti non domestici (randagi)."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.855Z",
+    "model": "manuale"
+  }
+}

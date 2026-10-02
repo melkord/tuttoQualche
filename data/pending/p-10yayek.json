@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "serpenti",
+        "det": "i"
+      },
+      {
+        "label": "rettili",
+        "det": "i"
+      },
+      {
+        "label": "animali velenosi",
+        "det": "gli"
+      },
+      {
+        "label": "pesci",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-10yayek",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 3,
+        "object": 2,
+        "answer": true,
+        "text": "Alcuni pesci sono animali velenosi?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 2,
+        "answer": false,
+        "text": "Nessuno dei serpenti è tra gli animali velenosi?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 1,
+        "answer": true,
+        "text": "Tutti i serpenti sono rettili?"
+      }
+    ],
+    "difficulty": {
+      "score": 62,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.786Z",
+    "model": "manuale"
+  }
+}

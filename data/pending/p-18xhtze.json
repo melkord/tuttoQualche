@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "cani",
+        "det": "i"
+      },
+      {
+        "label": "mammiferi",
+        "det": "i"
+      },
+      {
+        "label": "animali domestici",
+        "det": "gli"
+      },
+      {
+        "label": "pesci",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-18xhtze",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 1,
+        "object": 3,
+        "answer": false,
+        "text": "Alcuni mammiferi sono pesci?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 0,
+        "answer": false,
+        "text": "Nessuno degli animali domestici è tra i cani?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 1,
+        "answer": true,
+        "text": "Tutti i cani sono mammiferi?"
+      }
+    ],
+    "difficulty": {
+      "score": 56,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "medio",
+      "reason": "Esistono cani randagi o da lavoro non \"domestici\" in senso stretto."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:26.713Z",
+    "model": "manuale"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "puzzle": {
+    "theme": "sport",
+    "concepts": [
+      {
+        "label": "sport con la palla",
+        "det": "gli"
+      },
+      {
+        "label": "sport di squadra",
+        "det": "gli"
+      },
+      {
+        "label": "sport individuali",
+        "det": "gli"
+      },
+      {
+        "label": "sport acquatici",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "id": "p-0zprfpd",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 0,
+        "answer": false,
+        "text": "Nessuno degli sport acquatici è tra gli sport con la palla?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni sport di squadra non sono sport con la palla?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 3,
+        "answer": true,
+        "text": "Alcuni sport individuali sono sport acquatici?"
+      }
+    ],
+    "difficulty": {
+      "score": 88,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "medio",
+      "reason": "Alcuni sport (es. tennis) si giocano sia in singolo sia a squadre."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-02T14:22:27.073Z",
+    "model": "manuale"
+  }
+}
