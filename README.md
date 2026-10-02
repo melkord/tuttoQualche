@@ -6,7 +6,7 @@ Monorepo pnpm + TypeScript strict.
 ## Stato
 
 - [x] `packages/core` — tipi, validatore logico, domande, difficoltà
-- [ ] `packages/generator`
+- [x] `packages/generator` — `pnpm generate --count 50 --theme animali` (richiede `ANTHROPIC_API_KEY`)
 - [ ] `apps/review`
 - [ ] `apps/web`
 - [ ] `scripts/schedule`
