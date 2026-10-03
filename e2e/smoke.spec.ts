@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { collectErrors, skipHowTo } from './helpers';
+import { collectErrors, skipHowTo, themesOf } from './helpers';
 
 test('home: tutorial alla prima visita, "Inizia da qui" e 5 temi', async ({ page }) => {
   const errors = collectErrors(page);
@@ -8,8 +8,10 @@ test('home: tutorial alla prima visita, "Inizia da qui" e 5 temi', async ({ page
   await skipHowTo(page);
 
   await expect(page.getByText('Inizia da qui')).toBeVisible();
-  await expect(page.locator('.theme')).toHaveCount(5);
-  await expect(page.getByText('0 / 10 livelli').first()).toBeVisible();
+  const themes = await themesOf(page);
+  expect(themes.length).toBeGreaterThanOrEqual(5);
+  await expect(page.locator('.theme')).toHaveCount(themes.length);
+  await expect(page.getByText(`0 / ${themes[0]!.levels.length} livelli`).first()).toBeVisible();
 
   // il tutorial non riappare dopo il reload
   await page.reload();
@@ -25,15 +27,16 @@ test('navigazione senza errori: home → tema → livello → indietro → stati
   await page.goto('/');
   await skipHowTo(page);
 
+  const animali = (await themesOf(page)).find((t) => t.theme === 'animali')!;
   await page.locator('.theme', { hasText: 'Animali' }).click();
-  await expect(page.locator('.level')).toHaveCount(10);
+  await expect(page.locator('.level')).toHaveCount(animali.levels.length);
 
   await page.getByRole('button', { name: 'Livello 1', exact: true }).click();
   await expect(page.locator('.options .option-card')).toHaveCount(4);
   await expect(page.locator('.wchip')).toHaveCount(2);
 
   await page.getByRole('button', { name: 'Indietro' }).click();
-  await expect(page.locator('.level')).toHaveCount(10);
+  await expect(page.locator('.level')).toHaveCount(animali.levels.length);
   await page.getByRole('button', { name: 'Indietro' }).click();
   await expect(page.locator('.hero')).toBeVisible();
 

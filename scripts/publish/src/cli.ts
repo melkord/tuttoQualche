@@ -11,6 +11,7 @@ import {
 } from '@eulero/core';
 import type { Puzzle, Translation } from '@eulero/core';
 import { buildLevels } from './levels';
+import type { LevelIndex } from './levels';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -88,11 +89,18 @@ if (untranslated.length > 0) {
 }
 
 const outDir = path.resolve(values.out as string);
+// L'indice già pubblicato fissa l'ordine: i livelli nuovi vanno in coda (vedi buildLevels).
+let previous: LevelIndex | undefined;
+try {
+  previous = JSON.parse(await readFile(path.join(outDir, 'index.json'), 'utf8')) as LevelIndex;
+} catch {
+  // prima pubblicazione
+}
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 for (const p of published)
   await writeFile(path.join(outDir, `${p.id}.json`), JSON.stringify(p) + '\n');
-const index = buildLevels(published);
+const index = buildLevels(published, previous);
 await writeFile(path.join(outDir, 'index.json'), JSON.stringify(index, null, 2) + '\n');
 
 console.log(

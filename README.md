@@ -34,3 +34,11 @@ Build: `pnpm --filter @eulero/web build` → pubblica `apps/web/dist` (Node 22, 
 - Ogni puzzle è scritto in italiano; la traduzione inglese (tema + 4 concetti, stesso ordine) sta in `puzzle.translations.en`. Le relazioni sono uguali per tutte le lingue.
 - Il generatore chiede a Claude anche la traduzione inglese. Per i livelli scritti a mano: `data/translations/en.json` (rigenerabile con `pnpm translations`), unito ai puzzle da `pnpm publish-puzzles`.
 - Aggiungere una lingua: estendere `LANGS` in `packages/core/src/types.ts`, i testi in `packages/core/src/{questions,steps}.ts` e il dizionario in `apps/web/src/i18n/dict.ts`.
+
+## Routine giornaliera
+
+Ogni giorno alle ~5:00 (Europe/Rome) una routine di Claude aggiunge 5 livelli (o un tema nuovo da 10),
+li valida, li pubblica e fa push su `main`: segue `docs/routine-giornaliera.md`.
+Strumenti: `pnpm add-levels <file.json>` (valida e scrive in `data/pending`) e
+`pnpm publish-puzzles --include-pending` (aggiorna il sito; l'ordine dei livelli è stabile).
+I livelli aggiunti dalla routine sono bozze finché non li riveduti con `pnpm review`.

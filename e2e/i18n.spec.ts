@@ -3,6 +3,7 @@ import type { Page } from '@playwright/test';
 import { buildSteps, localizedConcepts } from '@eulero/core';
 import {
   collectErrors,
+  themesOf,
   expectNoItalianUI,
   levelsOf,
   optionButton,
@@ -31,7 +32,8 @@ test.describe('browser in inglese', () => {
 
     await expect(page.getByText('Start here')).toBeVisible();
     await expect(page.locator('.theme').first()).toContainText('Animals');
-    await expect(page.getByText('0 / 10 levels').first()).toBeVisible();
+    const first = (await themesOf(page))[0]!;
+    await expect(page.getByText(`0 / ${first.levels.length} levels`).first()).toBeVisible();
     await expect(page.locator('.hero h2')).toContainText('Animals · level 1');
 
     await page.locator('.theme', { hasText: 'Animals' }).click();

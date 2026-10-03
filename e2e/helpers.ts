@@ -78,3 +78,14 @@ export async function expectNoItalianUI(page: Page) {
     `testo italiano rimasto: ${text.slice(0, 200)}`,
   ).toBeNull();
 }
+
+interface ThemeIndex {
+  theme: string;
+  levels: Level[];
+}
+
+/** I temi pubblicati (il numero di temi e livelli cambia nel tempo: i test non lo fissano). */
+export async function themesOf(page: Page): Promise<ThemeIndex[]> {
+  const res = await page.request.get('/puzzles/index.json');
+  return ((await res.json()) as { themes: ThemeIndex[] }).themes;
+}

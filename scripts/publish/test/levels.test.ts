@@ -51,3 +51,32 @@ describe('buildLevels', () => {
     expect(buildLevels([hard, other, easy])).toEqual(buildLevels([easy, hard, other]));
   });
 });
+
+describe('buildLevels: ordine stabile', () => {
+  const mkT = (theme: string, tag: string, rels: string) => mk(theme, tag, rels);
+  const a = mkT('sport', 'a', 'AAAAAA'); // difficile
+  const b = mkT('sport', 'b', 'NNNNNN'); // facile
+  const first = buildLevels([a, b]); // senza storico: per difficoltà → b, a
+
+  it('i livelli già noti restano al loro posto; i nuovi vanno in coda', () => {
+    expect(first.themes[0]!.levels.map((l) => l.id)).toEqual([b.id, a.id]);
+    const easiest = mkT('sport', 'c', 'NNNNNN'); // più facile di a: senza storico finirebbe prima
+    const next = buildLevels([a, b, easiest], first);
+    const ids = next.themes[0]!.levels.map((l) => l.id);
+    expect(ids.slice(0, 2)).toEqual([b.id, a.id]);
+    expect(ids[2]).toBe(easiest.id);
+    expect(next.themes[0]!.levels.map((l) => l.level)).toEqual([1, 2, 3]);
+  });
+
+  it('i temi nuovi vanno in fondo, anche se alfabeticamente verrebbero prima', () => {
+    const z = mkT('animali', 'z', 'NNNNNN');
+    const next = buildLevels([a, b, z], first);
+    expect(next.themes.map((t) => t.theme)).toEqual(['sport', 'animali']);
+  });
+
+  it('è idempotente e ignora livelli spariti', () => {
+    expect(buildLevels([a, b], first)).toEqual(first);
+    const removed = buildLevels([a], first);
+    expect(removed.themes[0]!.levels.map((l) => l.id)).toEqual([a.id]);
+  });
+});

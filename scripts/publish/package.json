@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "publish-puzzles": "tsx src/cli.ts",
+    "add-levels": "tsx src/add-cli.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@eulero/core": "workspace:*"
+    "@eulero/core": "workspace:*",
+    "zod": "^4.0.0"
   }
 }

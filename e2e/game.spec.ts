@@ -73,7 +73,7 @@ test('un livello bloccato aperto da link diretto riporta alla lista del tema', a
   const [, l2] = await levelsOf(page, 'animali');
   await open(page);
   await page.goto(`/#/p/${l2!.id}`);
-  await expect(page.locator('.level')).toHaveCount(10);
+  await expect(page.locator('.level')).toHaveCount((await levelsOf(page, 'animali')).length);
   await expect(page.locator('.options')).toHaveCount(0);
 });
 

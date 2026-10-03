@@ -15,6 +15,7 @@
     "publish-puzzles": "tsx scripts/publish/src/cli.ts",
     "e2e": "pnpm --filter @eulero/web build && playwright test",
     "translations": "tsx packages/generator/seed/build-translations.ts",
+    "add-levels": "tsx scripts/publish/src/add-cli.ts",
     "seed": "tsx packages/generator/seed/build-seed.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
