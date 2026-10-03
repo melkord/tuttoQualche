@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { prevDay, todayLocal } from '../src/lib/date';
-import { dailyEntry } from '../src/lib/puzzles';
+import { continueEntry, isUnlocked, nextInTheme } from '../src/lib/levels';
+import type { LevelEntry, LevelIndex } from '../src/lib/puzzles';
 import { buildShareText } from '../src/lib/share';
 import {
   computeStreak,
@@ -11,6 +12,9 @@ import {
   saveStore,
   summarize,
 } from '../src/lib/storage';
+import type { Progress } from '../src/lib/storage';
+
+const done = (errors: [number, number, number]): Progress => ({ step: 2, errors, phase: 'done' });
 
 describe('date', () => {
   it('todayLocal e prevDay', () => {
@@ -33,10 +37,7 @@ describe('computeStreak', () => {
   it('si azzera dopo un giorno saltato, ma ricorda il record', () => {
     expect(
       computeStreak(['2026-09-20', '2026-09-21', '2026-09-22', '2026-10-03'], '2026-10-03'),
-    ).toEqual({
-      current: 1,
-      best: 3,
-    });
+    ).toEqual({ current: 1, best: 3 });
     expect(computeStreak(['2026-10-01'], '2026-10-03').current).toBe(0);
   });
   it('nessun gioco', () => {
@@ -45,20 +46,15 @@ describe('computeStreak', () => {
 });
 
 describe('storage', () => {
-  it('round-trip e dati corrotti', () => {
+  it('round-trip e dati corrotti o di versioni vecchie', () => {
     let raw: string | null = null;
     const mem = { getItem: () => raw, setItem: (_: string, v: string) => void (raw = v) };
-    const s = finishPuzzle(
-      emptyStore(),
-      'p-1',
-      { ...emptyProgress(), solved: true, attempts: [[true]] },
-      '2026-10-03',
-    );
+    const s = finishPuzzle(emptyStore(), 'p-1', done([0, 1, 0]), '2026-10-03');
     saveStore(s, mem);
     expect(loadStore(mem)).toEqual(s);
     raw = '{rotto';
     expect(loadStore(mem)).toEqual(emptyStore());
-    raw = JSON.stringify({ version: 9 });
+    raw = JSON.stringify({ version: 1 });
     expect(loadStore(mem)).toEqual(emptyStore());
   });
 
@@ -67,89 +63,95 @@ describe('storage', () => {
     s = finishPuzzle(s, 'p-2', emptyProgress(), '2026-10-03');
     expect(s.finishedDays).toEqual(['2026-10-03']);
     expect(Object.keys(s.progress)).toHaveLength(2);
+    expect(s.progress['p-1']?.phase).toBe('done');
   });
 
-  it('summarize: partite, vittorie, distribuzione', () => {
+  it('summarize: livelli, perfetti, distribuzione degli errori', () => {
     let s = emptyStore();
-    s = finishPuzzle(
-      s,
-      'a',
-      { ...emptyProgress(), solved: true, attempts: [[false], [true]] },
-      '2026-10-01',
-    );
-    s = finishPuzzle(
-      s,
-      'b',
-      { ...emptyProgress(), solved: true, attempts: Array(6).fill([true]) },
-      '2026-10-02',
-    );
-    s = finishPuzzle(
-      s,
-      'c',
-      { ...emptyProgress(), gaveUp: true, attempts: [[false]] },
-      '2026-10-03',
-    );
-    expect(summarize(s)).toEqual({ played: 3, solved: 2, winRate: 67, distribution: [0, 1, 0, 1] });
-  });
-});
-
-describe('dailyEntry', () => {
-  const entry = (id: string) => ({
-    id,
-    theme: 't',
-    level: 1,
-    difficulty: 'facile' as const,
-    score: 0,
-  });
-  const index = { themes: [{ theme: 't', levels: [entry('p-b'), entry('p-a'), entry('p-c')] }] };
-  it('è deterministico per data e cambia ogni giorno', () => {
-    expect(dailyEntry(index, '2026-10-03')?.id).toBe(dailyEntry(index, '2026-10-03')?.id);
-    const ids = ['2026-10-03', '2026-10-04', '2026-10-05'].map((d) => dailyEntry(index, d)?.id);
-    expect(new Set(ids).size).toBe(3);
-  });
-  it('indice vuoto → null', () => {
-    expect(dailyEntry({ themes: [] }, '2026-10-03')).toBeNull();
+    s = finishPuzzle(s, 'a', done([0, 0, 0]), '2026-10-01');
+    s = finishPuzzle(s, 'b', done([1, 0, 0]), '2026-10-02');
+    s = finishPuzzle(s, 'c', done([2, 2, 1]), '2026-10-03');
+    s = { ...s, progress: { ...s.progress, d: emptyProgress() } }; // in corso: non conta
+    expect(summarize(s)).toEqual({
+      played: 3,
+      perfect: 1,
+      perfectRate: 33,
+      distribution: [1, 1, 0, 1],
+    });
   });
 });
 
 describe('buildShareText', () => {
-  it('quadrati per tentativo e riga domande', () => {
+  it('una riga per passo: 🟥 per ogni errore, poi 🟩', () => {
     const text = buildShareText({
       title: 'Animali · livello 3',
       url: 'https://x.test',
-      progress: {
-        ...emptyProgress(),
-        solved: true,
-        attempts: [
-          [true, false, true, true, false, true],
-          [true, true, true, true, true, true],
-        ],
-        answers: [true, true, false],
-      },
+      progress: done([0, 2, 1]),
     });
-    expect(text).toBe(
-      [
-        'TuttiAlcuni · Animali · livello 3',
-        '',
-        '🟩🟥🟩🟩🟥🟩',
-        '🟩🟩🟩🟩🟩🟩',
-        '❓ ✅✅❌',
-        '',
-        'https://x.test',
-      ].join('\n'),
+    expect(text.split('\n')).toEqual([
+      'TuttiAlcuni · Animali · livello 3',
+      '',
+      '1  🟩',
+      '2  🟥🟥🟩',
+      '3  🟥🟩',
+      '',
+      '3 errori',
+      '',
+      'https://x.test',
+    ]);
+  });
+  it('zero errori', () => {
+    const text = buildShareText({ title: 't', url: 'u', progress: done([0, 0, 0]) });
+    expect(text).toContain('✨ Perfetto, zero errori');
+    expect(text).not.toContain('🟥');
+  });
+  it('singolare', () => {
+    expect(buildShareText({ title: 't', url: 'u', progress: done([1, 0, 0]) })).toContain(
+      '1 errore\n',
     );
   });
-  it('soluzione svelata', () => {
-    const text = buildShareText({
-      title: 't',
-      url: 'u',
-      progress: {
-        ...emptyProgress(),
-        gaveUp: true,
-        attempts: [[false, false, false, false, false, false]],
-      },
-    });
-    expect(text).toContain('🏳️ Soluzione svelata');
-    expect(text).not.toContain('❓');
+});
+
+describe('livelli in sequenza', () => {
+  const lv = (theme: string, level: number): LevelEntry => ({
+    id: `p-${theme}${level}`,
+    theme,
+    level,
+    difficulty: 'facile',
+    score: level,
+  });
+  const index: LevelIndex = {
+    themes: [
+      { theme: 'a', levels: [lv('a', 1), lv('a', 2), lv('a', 3)] },
+      { theme: 'b', levels: [lv('b', 1), lv('b', 2)] },
+    ],
+  };
+  const finished = (...ids: string[]) =>
+    ids.reduce((s, id) => finishPuzzle(s, id, done([0, 0, 0]), '2026-10-03'), emptyStore());
+
+  it('il livello 1 è sempre aperto, gli altri si sbloccano a catena per tema', () => {
+    const s = finished('p-a1');
+    expect(isUnlocked(index, emptyStore(), 'p-a1')).toBe(true);
+    expect(isUnlocked(index, emptyStore(), 'p-b1')).toBe(true);
+    expect(isUnlocked(index, emptyStore(), 'p-a2')).toBe(false);
+    expect(isUnlocked(index, s, 'p-a2')).toBe(true);
+    expect(isUnlocked(index, s, 'p-a3')).toBe(false);
+    expect(isUnlocked(index, s, 'p-b2')).toBe(false); // un altro tema non sblocca
+    expect(isUnlocked(index, s, 'p-sconosciuto')).toBe(false);
+  });
+
+  it('continueEntry: inizio, livello in corso, successivo, tutto completato', () => {
+    expect(continueEntry(index, emptyStore())?.id).toBe('p-a1');
+    const playing = { ...emptyStore(), lastPlayed: 'p-b1' };
+    expect(continueEntry(index, playing)?.id).toBe('p-b1');
+    const after = { ...finished('p-b1'), lastPlayed: 'p-b1' };
+    expect(continueEntry(index, after)?.id).toBe('p-b2');
+    expect(continueEntry(index, finished('p-a1', 'p-a2', 'p-a3', 'p-b1', 'p-b2'))).toBeNull();
+  });
+
+  it('nextInTheme', () => {
+    expect(nextInTheme(index, 'p-a1')?.id).toBe('p-a2');
+    expect(nextInTheme(index, 'p-a3')).toBeNull();
+    expect(nextInTheme(index, 'boh')).toBeNull();
   });
 });

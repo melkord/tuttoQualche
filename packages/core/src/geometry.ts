@@ -163,6 +163,32 @@ export function layoutCircles(matrix: Matrix, seed = 1): Circle[] | null {
   return null;
 }
 
+/**
+ * Ruota (attorno al centro) e poi centra/scala i cerchi per riempire il quadrato unitario
+ * lasciando `padding` ai bordi. È una similitudine: le relazioni tra i cerchi non cambiano.
+ */
+export function fitCircles(circles: readonly Circle[], rotation = 0, padding = 0.07): Circle[] {
+  const cos = Math.cos(rotation);
+  const sin = Math.sin(rotation);
+  const rotated = circles.map((c) => {
+    const x = c.cx - 0.5;
+    const y = c.cy - 0.5;
+    return { cx: 0.5 + x * cos - y * sin, cy: 0.5 + x * sin + y * cos, r: c.r };
+  });
+  const minX = Math.min(...rotated.map((c) => c.cx - c.r));
+  const maxX = Math.max(...rotated.map((c) => c.cx + c.r));
+  const minY = Math.min(...rotated.map((c) => c.cy - c.r));
+  const maxY = Math.max(...rotated.map((c) => c.cy + c.r));
+  const scale = (1 - 2 * padding) / Math.max(maxX - minX, maxY - minY);
+  const offX = 0.5 - ((minX + maxX) / 2) * scale;
+  const offY = 0.5 - ((minY + maxY) / 2) * scale;
+  return rotated.map((c) => ({
+    cx: round(c.cx * scale + offX),
+    cy: round(c.cy * scale + offY),
+    r: round(c.r * scale),
+  }));
+}
+
 /** Verifica indipendente: la classificazione geometrica riproduce esattamente la matrice. */
 export function layoutMatches(matrix: Matrix, circles: readonly Circle[]): boolean {
   return evaluateDiagram(matrix, circles).correct;

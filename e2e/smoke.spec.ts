@@ -1,13 +1,13 @@
 import { expect, test } from '@playwright/test';
 import { collectErrors, skipHowTo } from './helpers';
 
-test('home: tutorial alla prima visita, sfida del giorno e 5 temi', async ({ page }) => {
+test('home: tutorial alla prima visita, "Inizia da qui" e 5 temi', async ({ page }) => {
   const errors = collectErrors(page);
   await page.goto('/');
   await expect(page.getByRole('dialog', { name: 'Come si gioca' })).toBeVisible();
   await skipHowTo(page);
 
-  await expect(page.getByText('Sfida del giorno')).toBeVisible();
+  await expect(page.getByText('Inizia da qui')).toBeVisible();
   await expect(page.locator('.theme')).toHaveCount(5);
   await expect(page.getByText('0 / 10 livelli').first()).toBeVisible();
 
@@ -28,9 +28,9 @@ test('navigazione senza errori: home → tema → livello → indietro → stati
   await page.locator('.theme', { hasText: 'Animali' }).click();
   await expect(page.locator('.level')).toHaveCount(10);
 
-  await page.locator('.level').first().click();
-  await expect(page.locator('svg.board')).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Controlla' })).toBeVisible();
+  await page.getByRole('button', { name: 'Livello 1', exact: true }).click();
+  await expect(page.locator('.options .option-card')).toHaveCount(4);
+  await expect(page.locator('.pill-set')).toHaveCount(3);
 
   await page.getByRole('button', { name: 'Indietro' }).click();
   await expect(page.locator('.level')).toHaveCount(10);
@@ -68,12 +68,10 @@ test('regressione: nessun effetto restituisce un valore non-funzione (TypeError 
 });
 
 test('un livello inesistente mostra un messaggio, non una pagina rotta', async ({ page }) => {
-  const errors = collectErrors(page);
   await page.goto('/#/p/p-nonesiste');
   await skipHowTo(page);
-  await expect(page.getByText(/non disponibile|Non trovato|non valido/i)).toBeVisible();
-  // il 404 di rete viene registrato dal browser come console.error: è atteso
-  expect(
-    errors.filter((e) => !e.includes('404') && !e.includes('Failed to load resource')),
-  ).toEqual([]);
+  // non è sbloccato (non esiste nell'indice): si torna alla home senza errori JS
+  const errors = collectErrors(page);
+  await expect(page.locator('.hero, .empty').first()).toBeVisible();
+  expect(errors.filter((e) => e.startsWith('pageerror'))).toEqual([]);
 });

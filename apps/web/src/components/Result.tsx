@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import type { Circle, Puzzle } from '@tuttialcuni/core';
-import { Board } from './Board';
+import { useMemo, useState } from 'react';
+import { buildSteps } from '@tuttialcuni/core';
+import type { Puzzle } from '@tuttialcuni/core';
+import { Diagram } from './Diagram';
 import { Dot } from './Dot';
 import { buildShareText, shareResult } from '../lib/share';
+import { totalErrors } from '../lib/storage';
 import type { Progress } from '../lib/storage';
 import { capitalize } from '../lib/text';
 import type { LevelEntry } from '../lib/puzzles';
@@ -10,16 +12,16 @@ import type { LevelEntry } from '../lib/puzzles';
 interface Props {
   puzzle: Puzzle;
   entry: LevelEntry;
-  onNext: (() => void) | null;
   progress: Progress;
-  circles: Circle[] | null;
   streak: number;
   onHome: () => void;
+  onNext: (() => void) | null;
 }
 
-export function Result({ puzzle, entry, progress, circles, streak, onHome, onNext }: Props) {
+export function Result({ puzzle, entry, progress, streak, onHome, onNext }: Props) {
   const [msg, setMsg] = useState<string | null>(null);
-  const good = progress.answers.filter(Boolean).length;
+  const steps = useMemo(() => buildSteps(puzzle), [puzzle]);
+  const n = totalErrors(progress);
   const text = buildShareText({
     title: `${capitalize(puzzle.theme)} · livello ${entry.level}`,
     progress,
@@ -34,29 +36,27 @@ export function Result({ puzzle, entry, progress, circles, streak, onHome, onNex
 
   return (
     <div className="result">
-      <h1>
-        {progress.gaveUp
-          ? 'Alla prossima!'
-          : good === puzzle.questions.length
-            ? 'Perfetto! 🎉'
-            : 'Fatto!'}
-      </h1>
+      <h1>{n === 0 ? 'Perfetto! 🎉' : 'Fatto!'}</h1>
       <p className="lead">
-        {progress.gaveUp
-          ? 'Ecco la soluzione del diagramma.'
-          : `Diagramma in ${progress.attempts.length} ${progress.attempts.length === 1 ? 'tentativo' : 'tentativi'} · domande ${good}/${puzzle.questions.length}`}
+        {n === 0
+          ? 'Tre su tre al primo colpo.'
+          : `${n} ${n === 1 ? 'errore' : 'errori'} in totale.`}
       </p>
 
-      {circles && (
-        <div className="mini mini--big">
-          <Board circles={circles} readOnly />
-        </div>
-      )}
-      <ul className="legend">
-        {puzzle.concepts.map((c, i) => (
-          <li key={i}>
-            <Dot i={i} />
-            <span>{c.label}</span>
+      <ul className="solved" aria-label="Le soluzioni">
+        {steps.map((s, i) => (
+          <li key={i} className="solved__item">
+            <div className="solved__fig">
+              <Diagram circles={s.options[s.correct]!.circles} concepts={s.concepts} />
+            </div>
+            <ul className="solved__legend">
+              {s.concepts.map((c) => (
+                <li key={c}>
+                  <Dot i={c} />
+                  <span>{puzzle.concepts[c]?.label}</span>
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>

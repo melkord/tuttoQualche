@@ -1,37 +1,40 @@
+import { isDone, isPerfect, isUnlocked } from '../lib/levels';
 import type { LevelEntry, LevelIndex } from '../lib/puzzles';
 import type { Store } from '../lib/storage';
 import { capitalize, themeIcon } from '../lib/text';
 
 const DIFF_LABEL = { facile: 'Facile', medio: 'Medio', difficile: 'Difficile' } as const;
 
-export const isDone = (store: Store, id: string) => store.progress[id]?.phase === 'done';
-export const isSolved = (store: Store, id: string) =>
-  !!store.progress[id]?.solved && isDone(store, id);
-
 interface Props {
   index: LevelIndex;
   store: Store;
-  daily: LevelEntry | null;
+  next: LevelEntry | null;
   onPlay: (id: string) => void;
   onTheme: (theme: string) => void;
 }
 
-export function Home({ index, store, daily, onPlay, onTheme }: Props) {
+export function Home({ index, store, next, onPlay, onTheme }: Props) {
+  const started = Object.keys(store.progress).length > 0;
   return (
     <div className="home">
-      {daily && (
+      {next ? (
         <section className="hero">
-          <p className="hero__eyebrow">Sfida del giorno</p>
+          <p className="hero__eyebrow">{started ? 'Continua' : 'Inizia da qui'}</p>
           <h2>
-            {themeIcon(daily.theme)} {capitalize(daily.theme)} · livello {daily.level}
+            {themeIcon(next.theme)} {capitalize(next.theme)} · livello {next.level}
           </h2>
           <p className="hero__meta">
-            <span className={`chip chip--${daily.difficulty}`}>{DIFF_LABEL[daily.difficulty]}</span>
-            {isDone(store, daily.id) && <span className="chip chip--ok">Completata ✓</span>}
+            <span className={`chip chip--${next.difficulty}`}>{DIFF_LABEL[next.difficulty]}</span>
           </p>
-          <button className="btn btn--primary btn--lg" onClick={() => onPlay(daily.id)}>
-            {isDone(store, daily.id) ? 'Rivedi' : store.progress[daily.id] ? 'Continua' : 'Gioca'}
+          <button className="btn btn--primary btn--lg" onClick={() => onPlay(next.id)}>
+            {store.progress[next.id] ? 'Riprendi' : 'Gioca'}
           </button>
+        </section>
+      ) : (
+        <section className="hero">
+          <p className="hero__eyebrow">Complimenti</p>
+          <h2>🎉 Hai completato tutti i livelli</h2>
+          <p className="lead">Nuovi puzzle in arrivo.</p>
         </section>
       )}
 
@@ -82,22 +85,33 @@ export function ThemeLevels({
       </h2>
       <ul className="level-grid">
         {t.levels.map((l) => {
-          const state = isSolved(store, l.id)
-            ? 'solved'
-            : isDone(store, l.id)
-              ? 'done'
-              : store.progress[l.id]
-                ? 'started'
-                : '';
+          const locked = !isUnlocked(index, store, l.id);
+          const state = locked
+            ? 'locked'
+            : isPerfect(store, l.id)
+              ? 'perfect'
+              : isDone(store, l.id)
+                ? 'done'
+                : store.progress[l.id]
+                  ? 'started'
+                  : '';
           return (
             <li key={l.id}>
               <button
                 className={`level level--${l.difficulty} ${state}`}
+                disabled={locked}
                 onClick={() => onPlay(l.id)}
+                aria-label={`Livello ${l.level}${locked ? ' (bloccato)' : ''}`}
               >
                 <b>{l.level}</b>
                 <small>
-                  {state === 'solved' ? '✓' : state === 'done' ? '•' : DIFF_LABEL[l.difficulty]}
+                  {locked
+                    ? '🔒'
+                    : state === 'perfect'
+                      ? '★'
+                      : state === 'done'
+                        ? '✓'
+                        : DIFF_LABEL[l.difficulty]}
                 </small>
               </button>
             </li>

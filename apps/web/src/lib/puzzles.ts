@@ -36,12 +36,3 @@ export async function fetchPuzzle(id: string): Promise<Puzzle> {
   if (!parsed.success) throw new Error('Puzzle non valido');
   return parsed.data;
 }
-
-/** Livello della sfida del giorno: ruota su tutti i livelli, uguale per tutti nello stesso giorno. */
-export function dailyEntry(index: LevelIndex, today: string): LevelEntry | null {
-  const all = index.themes.flatMap((t) => t.levels).sort((a, b) => a.id.localeCompare(b.id));
-  if (all.length === 0) return null;
-  const [y, m, d] = today.split('-').map(Number) as [number, number, number];
-  const day = Math.floor(Date.UTC(y, m - 1, d) / 86_400_000);
-  return all[day % all.length] as LevelEntry;
-}

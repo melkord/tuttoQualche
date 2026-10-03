@@ -1,213 +1,104 @@
-import { useEffect, useMemo, useState } from 'react';
-import {
-  buildMatrix,
-  describeRelation,
-  evaluateDiagram,
-  layoutCircles,
-  relationBetween,
-} from '@tuttialcuni/core';
-import type { Circle, Concept, Puzzle } from '@tuttialcuni/core';
-import { Board, initialCircles, R_MAX, R_MIN } from './Board';
-import { Dot } from './Dot';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { buildSteps, STEP_COUNT } from '@tuttialcuni/core';
+import type { Puzzle } from '@tuttialcuni/core';
+import { Diagram } from './Diagram';
 import type { Progress } from '../lib/storage';
+import { colorOf } from '../palette';
 
-const MAX_FREE_ATTEMPTS = 3;
-const OPTS = { equalTolerance: 0.06, slack: 0.012 };
+const LETTERS = ['A', 'B', 'C', 'D'];
+const ADVANCE_MS = 700;
 
 interface Props {
   puzzle: Puzzle;
   progress: Progress;
   onProgress: (p: Progress) => void;
-  onFinish: (p: Progress, circles: Circle[]) => void;
+  onFinish: (p: Progress) => void;
 }
 
 export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
-  const matrix = useMemo(() => buildMatrix(puzzle.relations).matrix, [puzzle]);
-  const [circles, setCircles] = useState<Circle[]>(initialCircles);
-  const [selected, setSelected] = useState(0);
-  const [wrongPairs, setWrongPairs] = useState<[number, number][]>([]);
-  const [shake, setShake] = useState(0);
-  const [qIndex, setQIndex] = useState(progress.answers.length);
-  const [picked, setPicked] = useState<boolean | null>(null);
+  const steps = useMemo(() => buildSteps(puzzle), [puzzle]);
+  const step = steps[Math.min(progress.step, STEP_COUNT - 1)];
+  const [wrong, setWrong] = useState<number[]>([]);
+  const [right, setRight] = useState<number | null>(null);
+  const latest = useRef(progress);
+  latest.current = progress;
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
-    setCircles(initialCircles());
-    setWrongPairs([]);
-  }, [puzzle.id]);
+    return () => clearTimeout(timer.current);
+  }, []);
 
-  if (!matrix) return <p className="empty">Puzzle non valido.</p>;
+  if (!step) return null;
 
-  const wrongSet = new Set(wrongPairs.flat());
-
-  const check = () => {
-    const ev = evaluateDiagram(matrix, circles, OPTS);
-    const attempt = ev.pairs.map((p) => p.correct);
-    const attempts = [...progress.attempts, attempt];
-    if (ev.correct) {
-      setWrongPairs([]);
-      onProgress({ ...progress, attempts, solved: true, phase: 'questions' });
+  const pick = (i: number) => {
+    if (right !== null || wrong.includes(i)) return;
+    if (i === step.correct) {
+      setRight(i);
+      timer.current = setTimeout(() => {
+        const p = latest.current;
+        setWrong([]);
+        setRight(null);
+        if (p.step + 1 >= STEP_COUNT) onFinish({ ...p, phase: 'done' });
+        else onProgress({ ...p, step: p.step + 1 });
+      }, ADVANCE_MS);
     } else {
-      setWrongPairs(ev.pairs.filter((p) => !p.correct).map((p) => [p.a, p.b]));
-      setShake((s) => s + 1);
-      onProgress({ ...progress, attempts });
+      setWrong((w) => [...w, i]);
+      const p = latest.current;
+      onProgress({ ...p, errors: p.errors.map((e, k) => (k === p.step ? e + 1 : e)) });
     }
   };
 
-  const reveal = () => {
-    const solution = layoutCircles(matrix) ?? circles;
-    onFinish({ ...progress, gaveUp: true, solved: false, phase: 'done' }, solution);
-  };
-
-  const resize = (d: number) =>
-    setCircles((cs) =>
-      cs.map((c, i) =>
-        i === selected ? { ...c, r: Math.min(R_MAX, Math.max(R_MIN, c.r + d)) } : c,
-      ),
-    );
-
-  /* ---------- Fase domande ---------- */
-  if (progress.phase === 'questions') {
-    const q = puzzle.questions[qIndex];
-    if (!q) return null;
-    const subject = puzzle.concepts[q.subject] as Concept;
-    const object = puzzle.concepts[q.object] as Concept;
-    const rel = relationBetween(matrix, q.subject, q.object);
-    const answer = (value: boolean) => {
-      if (picked !== null) return;
-      setPicked(value);
-      onProgress({ ...progress, answers: [...progress.answers, value === q.answer] });
-    };
-    const next = () => {
-      const answers = progress.answers;
-      setPicked(null);
-      if (qIndex + 1 >= puzzle.questions.length)
-        onFinish({ ...progress, answers, phase: 'done' }, circles);
-      else setQIndex(qIndex + 1);
-    };
-    return (
-      <div className="play">
-        <div className="qdots" aria-label="Avanzamento domande">
-          {puzzle.questions.map((_, i) => (
-            <span
-              key={i}
-              className={`qdot${i < progress.answers.length ? (progress.answers[i] ? ' ok' : ' bad') : i === qIndex ? ' now' : ''}`}
-            />
-          ))}
-        </div>
-        <div className="mini">
-          <Board circles={circles} readOnly highlight={[q.subject, q.object]} />
-        </div>
-        <div className="qcard" key={qIndex}>
-          <p className="qcard__n">
-            Domanda {qIndex + 1} di {puzzle.questions.length}
-          </p>
-          <h2>{q.text}</h2>
-          <div className="qcard__btns">
-            {[true, false].map((v) => {
-              const state =
-                picked === null
-                  ? ''
-                  : v === q.answer
-                    ? ' is-right'
-                    : picked === v
-                      ? ' is-wrong'
-                      : ' is-off';
-              return (
-                <button
-                  key={String(v)}
-                  className={`btn btn--answer${state}`}
-                  onClick={() => answer(v)}
-                >
-                  {v ? 'Vero' : 'Falso'}
-                </button>
-              );
-            })}
-          </div>
-          {picked !== null && (
-            <div className={`reveal ${picked === q.answer ? 'reveal--ok' : 'reveal--bad'}`}>
-              <b>{picked === q.answer ? 'Esatto!' : 'Peccato.'}</b>
-              <span>
-                {q.answer ? 'È vero' : 'È falso'}:{' '}
-                {describeRelation(subject, object, rel).toLowerCase()}.
-              </span>
-              <button className="btn btn--primary" onClick={next}>
-                {qIndex + 1 >= puzzle.questions.length ? 'Vedi il risultato' : 'Avanti'}
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  /* ---------- Fase costruzione ---------- */
-  const attemptsLeft = progress.attempts.length;
   return (
-    <div className="play">
-      <p className="hint">Trascina i cerchi. Ridimensionali con la maniglia numerata.</p>
-      <div key={shake} className={shake ? 'shake' : ''}>
-        <Board
-          circles={circles}
-          selected={selected}
-          onSelect={setSelected}
-          onChange={setCircles}
-          wrong={wrongSet}
-        />
-      </div>
+    <div className="play" data-step={progress.step + 1}>
+      <ol className="stepper" aria-label="Avanzamento">
+        {Array.from({ length: STEP_COUNT }, (_, i) => (
+          <li
+            key={i}
+            className={`stepper__dot${i < progress.step ? ' is-done' : i === progress.step ? ' is-now' : ''}`}
+            aria-current={i === progress.step ? 'step' : undefined}
+          >
+            {i < progress.step ? '✓' : i + 1}
+          </li>
+        ))}
+      </ol>
 
-      <ul className="chips">
-        {puzzle.concepts.map((c, i) => (
-          <li key={i}>
-            <button
-              className={`chip-btn${selected === i ? ' is-on' : ''}`}
-              style={{ ['--c' as string]: `var(--c${i})` }}
-              onClick={() => setSelected(i)}
-            >
-              <Dot i={i} />
-              <span>{c.label}</span>
-            </button>
+      <p className="prompt">Quale diagramma rappresenta questi insiemi?</p>
+      <ul className="pills" key={`p${progress.step}`}>
+        {step.concepts.map((c) => (
+          <li key={c} className="pill-set" style={{ ['--c' as string]: colorOf(c) }}>
+            {puzzle.concepts[c]?.label}
           </li>
         ))}
       </ul>
 
-      {wrongPairs.length > 0 && (
-        <div className="wrong" role="status">
-          <b>Da rivedere:</b>
-          {wrongPairs.map(([a, b]) => (
-            <span key={`${a}${b}`} className="wrong__pair">
-              <Dot i={a} /> ✕ <Dot i={b} />
-            </span>
-          ))}
-        </div>
-      )}
-
-      <div className="toolbar">
-        <div className="size">
-          <button className="icon-btn" onClick={() => resize(-0.02)} aria-label="Rimpicciolisci">
-            −
-          </button>
-          <span>
-            <Dot i={selected} /> misura
-          </span>
-          <button className="icon-btn" onClick={() => resize(0.02)} aria-label="Ingrandisci">
-            +
-          </button>
-        </div>
-        <button className="btn" onClick={() => setCircles(initialCircles())}>
-          Ricomincia
-        </button>
-        <button className="btn btn--primary" onClick={check}>
-          Controlla
-        </button>
+      <div className="options" key={`o${progress.step}`} role="group" aria-label="Diagrammi">
+        {step.options.map((o, i) => {
+          const state =
+            right === i ? 'right' : wrong.includes(i) ? 'wrong' : right !== null ? 'off' : '';
+          return (
+            <button
+              key={i}
+              type="button"
+              className={`option-card${state ? ` is-${state}` : ''}`}
+              data-letter={LETTERS[i]}
+              data-state={state || 'idle'}
+              aria-label={`Opzione ${LETTERS[i]}`}
+              aria-disabled={state === 'wrong' || right !== null}
+              onClick={() => pick(i)}
+            >
+              <Diagram circles={o.circles} concepts={step.concepts} />
+              <span className="option-card__letter">{LETTERS[i]}</span>
+              {state === 'right' && <span className="option-card__mark">✓</span>}
+              {state === 'wrong' && <span className="option-card__mark">✕</span>}
+            </button>
+          );
+        })}
       </div>
-      <p className="tries">
-        Tentativi: <b>{attemptsLeft}</b>
-        {attemptsLeft >= MAX_FREE_ATTEMPTS && (
-          <button className="link" onClick={reveal}>
-            Mostra la soluzione
-          </button>
-        )}
-      </p>
+      {wrong.length > 0 && right === null && (
+        <p className="oops" role="status">
+          Non è questo, riprova.
+        </p>
+      )}
     </div>
   );
 }

@@ -1,21 +1,15 @@
 import type { Progress } from './storage';
+import { totalErrors } from './storage';
 
-/** Testo condivisibile stile Wordle: una riga di quadrati per tentativo + riga domande. */
-export function buildShareText(opts: {
-  /** Es. "Animali · livello 3". */
-  title: string;
-  progress: Progress;
-  url: string;
-}): string {
+/** Testo condivisibile stile Wordle: una riga per passo, 🟥 per ogni errore e 🟩 alla risposta giusta. */
+export function buildShareText(opts: { title: string; progress: Progress; url: string }): string {
   const { progress } = opts;
   const lines = [`TuttiAlcuni · ${opts.title}`, ''];
-  for (const attempt of progress.attempts) {
-    lines.push(attempt.map((ok) => (ok ? '🟩' : '🟥')).join(''));
-  }
-  if (progress.gaveUp) lines.push('🏳️ Soluzione svelata');
-  if (progress.answers.length > 0) {
-    lines.push(`❓ ${progress.answers.map((ok) => (ok ? '✅' : '❌')).join('')}`);
-  }
+  progress.errors.forEach((errors, i) => {
+    lines.push(`${i + 1}  ${'🟥'.repeat(errors)}🟩`);
+  });
+  const n = totalErrors(progress);
+  lines.push('', n === 0 ? '✨ Perfetto, zero errori' : `${n} ${n === 1 ? 'errore' : 'errori'}`);
   lines.push('', opts.url);
   return lines.join('\n');
 }

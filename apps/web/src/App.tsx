@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { buildMatrix, layoutCircles } from '@tuttialcuni/core';
-import type { Circle, Puzzle } from '@tuttialcuni/core';
+import type { Puzzle } from '@tuttialcuni/core';
 import { Home, ThemeLevels } from './components/Home';
 import { HowTo, Stats } from './components/Modals';
 import { Play } from './components/Play';
 import { Result } from './components/Result';
 import { todayLocal } from './lib/date';
-import { dailyEntry, fetchIndex, fetchPuzzle } from './lib/puzzles';
+import { continueEntry, isUnlocked, nextInTheme } from './lib/levels';
+import { fetchIndex, fetchPuzzle } from './lib/puzzles';
 import type { LevelEntry, LevelIndex } from './lib/puzzles';
 import { computeStreak, emptyProgress, finishPuzzle, loadStore, saveStore } from './lib/storage';
 import type { Progress, Store } from './lib/storage';
@@ -67,7 +67,7 @@ export function App() {
   };
 
   const streak = computeStreak(store.finishedDays, today).current;
-  const daily = useMemo(() => (index ? dailyEntry(index, today) : null), [index, today]);
+  const next = useMemo(() => (index ? continueEntry(index, store) : null), [index, store]);
 
   const allEntries = useMemo(() => index?.themes.flatMap((t) => t.levels) ?? [], [index]);
   const entryOf = (id: string): LevelEntry | undefined => allEntries.find((l) => l.id === id);
@@ -132,7 +132,7 @@ export function App() {
           <Home
             index={index}
             store={store}
-            daily={daily}
+            next={next}
             onPlay={(id) => go(`#/p/${id}`)}
             onTheme={(t) => go(`#/t/${encodeURIComponent(t)}`)}
           />
@@ -148,7 +148,7 @@ export function App() {
             key={route.id}
             id={route.id}
             entry={entryOf(route.id)}
-            next={nextEntry(allEntries, route.id)}
+            index={index}
             store={store}
             setStore={setStore}
             streak={streak}
@@ -163,31 +163,33 @@ export function App() {
   );
 }
 
-/** Livello successivo nello stesso tema, se esiste. */
-function nextEntry(all: LevelEntry[], id: string): LevelEntry | null {
-  const cur = all.find((l) => l.id === id);
-  if (!cur) return null;
-  return all.find((l) => l.theme === cur.theme && l.level === cur.level + 1) ?? null;
-}
-
 interface PlayScreenProps {
   id: string;
   entry: LevelEntry | undefined;
-  next: LevelEntry | null;
+  index: LevelIndex;
   store: Store;
   setStore: (f: (s: Store) => Store) => void;
   streak: number;
   today: string;
 }
 
-function PlayScreen({ id, entry, next, store, setStore, streak, today }: PlayScreenProps) {
+function PlayScreen({ id, entry, index, store, setStore, streak, today }: PlayScreenProps) {
   const [puzzle, setPuzzle] = useState<Puzzle | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [finalCircles, setFinalCircles] = useState<Circle[] | null>(null);
+  const unlocked = isUnlocked(index, store, id);
 
   useEffect(() => {
+    if (!unlocked) {
+      // livello bloccato (link diretto): si torna alla lista del tema
+      go(entry ? `#/t/${encodeURIComponent(entry.theme)}` : '#/');
+      return;
+    }
     fetchPuzzle(id).then(setPuzzle, (e: Error) => setError(e.message));
-  }, [id]);
+  }, [id, unlocked, entry]);
+
+  useEffect(() => {
+    if (unlocked) setStore((s) => (s.lastPlayed === id ? s : { ...s, lastPlayed: id }));
+  }, [id, unlocked, setStore]);
 
   const progress: Progress = store.progress[id] ?? emptyProgress();
 
@@ -196,29 +198,20 @@ function PlayScreen({ id, entry, next, store, setStore, streak, today }: PlayScr
     [id, setStore],
   );
   const onFinish = useCallback(
-    (p: Progress, circles: Circle[]) => {
-      setFinalCircles(circles);
-      setStore((s) => finishPuzzle(s, id, p, today));
-    },
+    (p: Progress) => setStore((s) => finishPuzzle(s, id, p, today)),
     [id, setStore, today],
   );
-
-  const solution = useMemo(() => {
-    if (!puzzle) return null;
-    const m = buildMatrix(puzzle.relations).matrix;
-    return m ? layoutCircles(m) : null;
-  }, [puzzle]);
 
   if (error) return <p className="empty">{error}</p>;
   if (!puzzle || !entry) return <p className="empty">Carico…</p>;
 
   if (progress.phase === 'done') {
+    const next = nextInTheme(index, id);
     return (
       <Result
         puzzle={puzzle}
         entry={entry}
         progress={progress}
-        circles={finalCircles ?? solution}
         streak={streak}
         onHome={() => go('#/')}
         onNext={next ? () => go(`#/p/${next.id}`) : null}

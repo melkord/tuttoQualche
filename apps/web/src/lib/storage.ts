@@ -1,47 +1,44 @@
 import { prevDay } from './date';
 
-/** Avanzamento su un singolo puzzle. */
+/** Avanzamento su un singolo puzzle (3 passi a risposta chiusa). */
 export interface Progress {
-  /** Un array per tentativo: esito (giusto/sbagliato) delle 6 coppie. */
-  attempts: boolean[][];
-  phase: 'build' | 'questions' | 'done';
-  /** Per ogni domanda già risposta: era corretta? */
-  answers: boolean[];
-  solved: boolean;
-  gaveUp: boolean;
+  /** Passo corrente (0-based). */
+  step: number;
+  /** Risposte sbagliate date in ogni passo. */
+  errors: number[];
+  phase: 'play' | 'done';
 }
 
 export interface Store {
-  version: 1;
+  version: 2;
   progress: Record<string, Progress>;
   /** Giorni (locali) in cui è stato completato almeno un puzzle. */
   finishedDays: string[];
+  /** Ultimo livello aperto (per "Continua"). */
+  lastPlayed: string | null;
   seenHowTo: boolean;
 }
 
-export const emptyProgress = (): Progress => ({
-  attempts: [],
-  phase: 'build',
-  answers: [],
-  solved: false,
-  gaveUp: false,
-});
+export const emptyProgress = (): Progress => ({ step: 0, errors: [0, 0, 0], phase: 'play' });
 
 export const emptyStore = (): Store => ({
-  version: 1,
+  version: 2,
   progress: {},
   finishedDays: [],
+  lastPlayed: null,
   seenHowTo: false,
 });
 
-const KEY = 'tuttialcuni:v1';
+export const totalErrors = (p: Progress) => p.errors.reduce((a, b) => a + b, 0);
+
+const KEY = 'tuttialcuni:v2';
 
 export function loadStore(storage: Pick<Storage, 'getItem'> = localStorage): Store {
   try {
     const raw = storage.getItem(KEY);
     if (!raw) return emptyStore();
     const parsed = JSON.parse(raw) as Partial<Store>;
-    if (parsed.version !== 1 || typeof parsed.progress !== 'object' || !parsed.progress) {
+    if (parsed.version !== 2 || typeof parsed.progress !== 'object' || !parsed.progress) {
       return emptyStore();
     }
     return {
@@ -74,6 +71,13 @@ export function finishPuzzle(store: Store, id: string, progress: Progress, day: 
   };
 }
 
+const nextDay = (date: string) => {
+  const d = new Date(`${date}T12:00:00`);
+  d.setDate(d.getDate() + 1);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+};
+
 /**
  * Streak = giorni consecutivi con almeno un puzzle completato. Resta viva se oggi non hai
  * ancora giocato ma hai giocato ieri.
@@ -93,14 +97,7 @@ export function computeStreak(
   for (const start of days) {
     if (days.has(prevDay(start))) continue; // non è l'inizio di una serie
     let len = 0;
-    let cur = start;
-    // avanza di un giorno alla volta finché la serie continua
-    while (days.has(cur)) {
-      len++;
-      const next = new Date(`${cur}T12:00:00`);
-      next.setDate(next.getDate() + 1);
-      cur = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, '0')}-${String(next.getDate()).padStart(2, '0')}`;
-    }
+    for (let cur = start; days.has(cur); cur = nextDay(cur)) len++;
     best = Math.max(best, len);
   }
   return { current, best };
@@ -108,24 +105,25 @@ export function computeStreak(
 
 export interface Summary {
   played: number;
-  solved: number;
-  winRate: number;
-  /** Distribuzione dei tentativi per i puzzle risolti: indice 0 = 1 tentativo, … 3 = 4 o più. */
+  perfect: number;
+  /** % di livelli completati senza errori. */
+  perfectRate: number;
+  /** Livelli per numero totale di errori: 0, 1, 2, 3 o più. */
   distribution: [number, number, number, number];
 }
 
 export function summarize(store: Store): Summary {
   const done = Object.values(store.progress).filter((p) => p.phase === 'done');
-  const solved = done.filter((p) => p.solved);
   const distribution: Summary['distribution'] = [0, 0, 0, 0];
-  for (const p of solved) {
-    const k = Math.min(Math.max(p.attempts.length, 1), 4) - 1;
+  for (const p of done) {
+    const k = Math.min(totalErrors(p), 3);
     distribution[k] = (distribution[k] as number) + 1;
   }
+  const perfect = distribution[0];
   return {
     played: done.length,
-    solved: solved.length,
-    winRate: done.length ? Math.round((solved.length / done.length) * 100) : 0,
+    perfect,
+    perfectRate: done.length ? Math.round((perfect / done.length) * 100) : 0,
     distribution,
   };
 }
