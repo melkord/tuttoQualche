@@ -35,6 +35,15 @@ describe('classifyCircles', () => {
     expect(classifyCircles(a, b, { equalTolerance: 0.02 })).toBe('UGUALI');
   });
 
+  it('slack perdona i bordi quasi tangenti', () => {
+    const inner = c(0.4, 0.5, 0.1);
+    const outer = c(0.5, 0.5, 0.195); // sporge di 0.005
+    expect(classifyCircles(inner, outer)).toBe('ALCUNI');
+    expect(classifyCircles(inner, outer, { slack: 0.01 })).toBe('TUTTI');
+    expect(classifyCircles(c(0.2, 0.5, 0.1), c(0.395, 0.5, 0.1))).toBe('ALCUNI');
+    expect(classifyCircles(c(0.2, 0.5, 0.1), c(0.395, 0.5, 0.1), { slack: 0.01 })).toBe('NESSUNO');
+  });
+
   it('è totale e antisimmetrica rispetto all’inverso', () => {
     const cs = [c(0.3, 0.3, 0.2), c(0.5, 0.4, 0.15), c(0.8, 0.8, 0.1), c(0.35, 0.3, 0.05)];
     const inv = {

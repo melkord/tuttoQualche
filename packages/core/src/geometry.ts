@@ -6,16 +6,19 @@ import type { Circle, Matrix, Relation } from './types';
 export interface ClassifyOptions {
   /** Distanza dei centri e differenza dei raggi sotto cui due cerchi sono "uguali". */
   equalTolerance?: number;
+  /** Indulgenza per i bordi quasi tangenti (giocatore): conta come disgiunti/inclusi. Default 0. */
+  slack?: number;
 }
 
 /** Relazione geometrica del cerchio `a` rispetto al cerchio `b` (funzione totale). */
 export function classifyCircles(a: Circle, b: Circle, opts: ClassifyOptions = {}): Relation {
   const tol = opts.equalTolerance ?? 1e-6;
+  const slack = opts.slack ?? 0;
   const d = Math.hypot(a.cx - b.cx, a.cy - b.cy);
   if (d <= tol && Math.abs(a.r - b.r) <= tol) return 'UGUALI';
-  if (d >= a.r + b.r) return 'NESSUNO';
-  if (d + a.r <= b.r) return 'TUTTI';
-  if (d + b.r <= a.r) return 'CONTIENE';
+  if (d >= a.r + b.r - slack) return 'NESSUNO';
+  if (d + a.r <= b.r + slack) return 'TUTTI';
+  if (d + b.r <= a.r + slack) return 'CONTIENE';
   return 'ALCUNI';
 }
 

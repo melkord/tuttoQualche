@@ -12,6 +12,7 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "generate": "tsx packages/generator/src/cli.ts",
     "review": "pnpm --filter @tuttialcuni/review dev",
+    "publish-puzzles": "tsx scripts/publish/src/cli.ts",
     "seed": "tsx packages/generator/seed/build-seed.ts",
     "lint": "eslint .",
     "format": "prettier --write .",

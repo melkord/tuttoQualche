@@ -104,6 +104,12 @@ importers:
         specifier: ^4.0.0
         version: 4.6.5
 
+  scripts/publish:
+    dependencies:
+      '@tuttialcuni/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+
 packages:
 
   '@anthropic-ai/sdk@0.131.0':
