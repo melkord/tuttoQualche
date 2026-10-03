@@ -1,4 +1,4 @@
-import type { PendingPuzzle } from '@tuttialcuni/core';
+import type { PendingPuzzle } from '@eulero/core';
 
 export type RejectReason = 'ambiguo' | 'troppo facile' | 'concetti deboli';
 

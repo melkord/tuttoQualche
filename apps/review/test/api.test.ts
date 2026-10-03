@@ -5,8 +5,8 @@ import type { AddressInfo } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { buildPuzzle } from '@tuttialcuni/core';
-import type { PendingPuzzle, PuzzleDraft } from '@tuttialcuni/core';
+import { buildPuzzle } from '@eulero/core';
+import type { PendingPuzzle, PuzzleDraft } from '@eulero/core';
 import { createApi } from '../server/api';
 
 const DRAFT: PuzzleDraft = {

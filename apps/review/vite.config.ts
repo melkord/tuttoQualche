@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     {
-      name: 'tuttialcuni-review-api',
+      name: 'eulero-review-api',
       configureServer(server) {
         // L'API è TypeScript che importa core: la carichiamo tramite Vite (SSR), non da Node nativo.
         const dataDir = process.env.DATA_DIR ?? path.join(root, 'data');

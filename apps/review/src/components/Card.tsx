@@ -1,11 +1,4 @@
-import type {
-  Circle,
-  Concept,
-  Issue,
-  PairRelation,
-  PendingPuzzle,
-  Relation,
-} from '@tuttialcuni/core';
+import type { Circle, Concept, Issue, PairRelation, PendingPuzzle, Relation } from '@eulero/core';
 import { Diagram } from './Diagram';
 import { Dot, RelationEditor, RelationList } from './Relations';
 

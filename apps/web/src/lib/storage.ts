@@ -37,11 +37,13 @@ export const starsOf = (p: Progress): 1 | 2 | 3 => {
   return n === 0 ? 3 : n <= 2 ? 2 : 1;
 };
 
-const KEY = 'tuttialcuni:v2';
+const KEY = 'eulero:v2';
+/** Chiave usata prima del cambio di nome: i progressi esistenti si leggono da qui. */
+const LEGACY_KEY = 'tuttialcuni:v2';
 
 export function loadStore(storage: Pick<Storage, 'getItem'> = localStorage): Store {
   try {
-    const raw = storage.getItem(KEY);
+    const raw = storage.getItem(KEY) ?? storage.getItem(LEGACY_KEY);
     if (!raw) return emptyStore();
     const parsed = JSON.parse(raw) as Partial<Store>;
     if (parsed.version !== 2 || typeof parsed.progress !== 'object' || !parsed.progress) {

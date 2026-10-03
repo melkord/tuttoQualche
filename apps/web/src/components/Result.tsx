@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { buildSteps, STEP_COUNT } from '@tuttialcuni/core';
-import type { Puzzle } from '@tuttialcuni/core';
+import { buildSteps, STEP_COUNT } from '@eulero/core';
+import type { Puzzle } from '@eulero/core';
 import { Diagram } from './Diagram';
 import { WordChips } from './WordChips';
 import { buildShareText, shareResult } from '../lib/share';

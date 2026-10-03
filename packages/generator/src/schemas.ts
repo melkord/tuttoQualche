@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { ALL_PAIR_KEYS, RELATIONS, RISK_LEVELS } from '@tuttialcuni/core';
-import type { PairKey, PuzzleDraft, Risk } from '@tuttialcuni/core';
+import { ALL_PAIR_KEYS, RELATIONS, RISK_LEVELS } from '@eulero/core';
+import type { PairKey, PuzzleDraft, Risk } from '@eulero/core';
 
 /*
  * Schemi per l'output strutturato di Claude. Volutamente "piatti" (una chiave per coppia,

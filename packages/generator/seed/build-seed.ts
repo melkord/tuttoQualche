@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildPuzzle, PendingPuzzleSchema, validatePuzzle } from '@tuttialcuni/core';
-import type { Determiner, PairRelation, PendingPuzzle, Relation, Risk } from '@tuttialcuni/core';
+import { buildPuzzle, PendingPuzzleSchema, validatePuzzle } from '@eulero/core';
+import type { Determiner, PairRelation, PendingPuzzle, Relation, Risk } from '@eulero/core';
 import { writePending } from '../src/pipeline';
 import { LIVELLI } from './livelli';
 

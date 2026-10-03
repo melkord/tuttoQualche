@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { Puzzle } from '@tuttialcuni/core';
+import type { Puzzle } from '@eulero/core';
 import { Home, ThemeLevels } from './components/Home';
 import { HowTo, Stats } from './components/Modals';
 import { Play } from './components/Play';
@@ -86,7 +86,7 @@ export function App() {
     route.name === 'play'
       ? (() => {
           const e = entryOf(route.id);
-          return e ? `${capitalize(e.theme)} · livello ${e.level}` : 'TuttiAlcuni';
+          return e ? `${capitalize(e.theme)} · livello ${e.level}` : 'Eulero';
         })()
       : null;
 
@@ -101,7 +101,7 @@ export function App() {
           <div className="brand">
             <Logo small />
             <h1>
-              Tutti<span>Alcuni</span>
+              Eu<span>lero</span>
             </h1>
           </div>
         )}

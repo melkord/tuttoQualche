@@ -1,5 +1,5 @@
 {
-  "name": "tuttialcuni",
+  "name": "eulero",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -11,9 +11,9 @@
     "test": "pnpm -r --if-present test",
     "typecheck": "pnpm -r --if-present typecheck",
     "generate": "tsx packages/generator/src/cli.ts",
-    "review": "pnpm --filter @tuttialcuni/review dev",
+    "review": "pnpm --filter @eulero/review dev",
     "publish-puzzles": "tsx scripts/publish/src/cli.ts",
-    "e2e": "pnpm --filter @tuttialcuni/web build && playwright test",
+    "e2e": "pnpm --filter @eulero/web build && playwright test",
     "seed": "tsx packages/generator/seed/build-seed.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "@playwright/test": "1.56.1",
-    "@tuttialcuni/core": "workspace:*",
+    "@eulero/core": "workspace:*",
     "@types/node": "^26.6.4",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^10.0.0",

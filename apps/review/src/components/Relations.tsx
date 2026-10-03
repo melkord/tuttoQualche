@@ -1,5 +1,5 @@
-import { describeRelation, RELATIONS } from '@tuttialcuni/core';
-import type { Concept, PairRelation, PendingPuzzle, Relation } from '@tuttialcuni/core';
+import { describeRelation, RELATIONS } from '@eulero/core';
+import type { Concept, PairRelation, PendingPuzzle, Relation } from '@eulero/core';
 import { colorOf } from '../palette';
 
 export const REL_SYMBOL: Record<Relation, string> = {

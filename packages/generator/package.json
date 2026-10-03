@@ -1,5 +1,5 @@
 {
-  "name": "@tuttialcuni/generator",
+  "name": "@eulero/generator",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "latest",
-    "@tuttialcuni/core": "workspace:*",
+    "@eulero/core": "workspace:*",
     "zod": "^4.0.0"
   }
 }

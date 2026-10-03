@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
-import { buildSteps } from '@tuttialcuni/core';
+import { buildSteps } from '@eulero/core';
 import { collectErrors, levelsOf, playLevel, puzzleOf, skipHowTo } from './helpers';
 
 async function open(page: Page) {

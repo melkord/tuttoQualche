@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { buildSteps, explainMistake, STEP_COUNT } from '@tuttialcuni/core';
-import type { Puzzle } from '@tuttialcuni/core';
+import { buildSteps, explainMistake, STEP_COUNT } from '@eulero/core';
+import type { Puzzle } from '@eulero/core';
 import { Diagram } from './Diagram';
 import { WordChips } from './WordChips';
 import type { Progress } from '../lib/storage';

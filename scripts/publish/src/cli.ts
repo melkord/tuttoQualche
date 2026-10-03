@@ -2,8 +2,8 @@ import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { PendingPuzzleSchema, PuzzleSchema, validatePuzzle } from '@tuttialcuni/core';
-import type { Puzzle } from '@tuttialcuni/core';
+import { PendingPuzzleSchema, PuzzleSchema, validatePuzzle } from '@eulero/core';
+import type { Puzzle } from '@eulero/core';
 import { buildLevels } from './levels';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');

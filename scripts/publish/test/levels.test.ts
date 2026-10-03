@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { buildPuzzle } from '@tuttialcuni/core';
-import type { PuzzleDraft } from '@tuttialcuni/core';
+import { buildPuzzle } from '@eulero/core';
+import type { PuzzleDraft } from '@eulero/core';
 import { buildLevels } from '../src/levels';
 
 const R = { T: 'TUTTI', A: 'ALCUNI', N: 'NESSUNO' } as const;

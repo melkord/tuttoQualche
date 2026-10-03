@@ -1,6 +1,6 @@
 # Netlify: sito statico del gioco (apps/web). Il tool di revisione è solo locale.
 [build]
-  command = "pnpm --filter @tuttialcuni/web build"
+  command = "pnpm --filter @eulero/web build"
   publish = "apps/web/dist"
 
 [build.environment]

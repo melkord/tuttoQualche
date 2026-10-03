@@ -1,7 +1,7 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { buildPuzzle, InvalidPuzzleError, validateDraft } from '@tuttialcuni/core';
-import type { PendingPuzzle } from '@tuttialcuni/core';
+import { buildPuzzle, InvalidPuzzleError, validateDraft } from '@eulero/core';
+import type { PendingPuzzle } from '@eulero/core';
 import type { LlmClient } from './llm';
 import { CRITIC_SYSTEM, criticUser, DRAFT_SYSTEM, draftUser } from './prompts';
 import {

@@ -1,4 +1,4 @@
-import type { Puzzle, PuzzleDraft, Relation } from '@tuttialcuni/core';
+import type { Puzzle, PuzzleDraft, Relation } from '@eulero/core';
 
 export const THEMES = [
   'animali',

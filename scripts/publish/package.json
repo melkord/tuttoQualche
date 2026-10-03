@@ -1,5 +1,5 @@
 {
-  "name": "@tuttialcuni/publish",
+  "name": "@eulero/publish",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,6 +9,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tuttialcuni/core": "workspace:*"
+    "@eulero/core": "workspace:*"
   }
 }

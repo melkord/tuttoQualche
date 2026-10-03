@@ -1,5 +1,5 @@
-import { PuzzleSchema } from '@tuttialcuni/core';
-import type { DifficultyLevel, Puzzle } from '@tuttialcuni/core';
+import { PuzzleSchema } from '@eulero/core';
+import type { DifficultyLevel, Puzzle } from '@eulero/core';
 
 export interface LevelEntry {
   id: string;

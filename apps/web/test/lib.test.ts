@@ -59,6 +59,12 @@ describe('storage', () => {
     expect(loadStore(mem)).toEqual(emptyStore());
   });
 
+  it('legge i progressi salvati con la vecchia chiave (prima del cambio di nome)', () => {
+    const old = finishPuzzle(emptyStore(), 'p-1', done([0, 0, 0]), '2026-10-03');
+    const mem = { getItem: (k: string) => (k === 'tuttialcuni:v2' ? JSON.stringify(old) : null) };
+    expect(loadStore(mem)).toEqual(old);
+  });
+
   it('finishPuzzle non duplica i giorni', () => {
     let s = finishPuzzle(emptyStore(), 'p-1', emptyProgress(), '2026-10-03');
     s = finishPuzzle(s, 'p-2', emptyProgress(), '2026-10-03');
@@ -105,7 +111,7 @@ describe('buildShareText', () => {
       progress: done([0, 2, 1]),
     });
     expect(text.split('\n')).toEqual([
-      'TuttiAlcuni · Animali · livello 3',
+      'Eulero · Animali · livello 3',
       '⭐☆☆',
       '',
       '1  🟩',

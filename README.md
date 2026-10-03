@@ -1,4 +1,4 @@
-# TuttiAlcuni
+# Eulero
 
 Puzzle giornaliero in italiano sulle relazioni tra insiemi (diagrammi di Eulero).
 Monorepo pnpm + TypeScript strict.
@@ -26,4 +26,4 @@ pnpm e2e         # build di produzione + test Playwright (desktop e mobile)
 ## Deploy su Netlify
 
 Il repo contiene `netlify.toml`: collega il repo a Netlify (branch `main`) e non serve altro.
-Build: `pnpm --filter @tuttialcuni/web build` → pubblica `apps/web/dist` (Node 22, pnpm da `packageManager`).
+Build: `pnpm --filter @eulero/web build` → pubblica `apps/web/dist` (Node 22, pnpm da `packageManager`).

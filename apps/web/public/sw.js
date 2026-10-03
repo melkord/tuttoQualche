@@ -2,7 +2,7 @@
 // - asset con hash (/assets/*): cache-first
 // - puzzle (/puzzles/*): network-first con ripiego sulla cache
 // - navigazione: ripiego sull'index in cache
-const CACHE = 'tuttialcuni-v1';
+const CACHE = 'eulero-v1';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['/', '/manifest.webmanifest'])));

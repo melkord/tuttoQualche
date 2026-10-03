@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
-import { buildSteps } from '@tuttialcuni/core';
-import type { Puzzle } from '@tuttialcuni/core';
+import { buildSteps } from '@eulero/core';
+import type { Puzzle } from '@eulero/core';
 
 /** Raccoglie errori JS e `console.error` della pagina: i test falliscono se ce ne sono. */
 export function collectErrors(page: Page): string[] {

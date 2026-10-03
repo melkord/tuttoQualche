@@ -1,4 +1,4 @@
-import type { Circle } from '@tuttialcuni/core';
+import type { Circle } from '@eulero/core';
 import { colorOf } from '../palette';
 
 interface Props {

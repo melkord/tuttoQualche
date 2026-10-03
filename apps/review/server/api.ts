@@ -1,8 +1,8 @@
 import { appendFile, mkdir, readdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import path from 'node:path';
-import { PendingPuzzleSchema, validatePuzzle } from '@tuttialcuni/core';
-import type { PendingPuzzle } from '@tuttialcuni/core';
+import { PendingPuzzleSchema, validatePuzzle } from '@eulero/core';
+import type { PendingPuzzle } from '@eulero/core';
 
 export const REJECT_REASONS = ['ambiguo', 'troppo facile', 'concetti deboli'] as const;
 export type RejectReason = (typeof REJECT_REASONS)[number];

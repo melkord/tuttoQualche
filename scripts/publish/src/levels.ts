@@ -1,4 +1,4 @@
-import type { DifficultyLevel, Puzzle } from '@tuttialcuni/core';
+import type { DifficultyLevel, Puzzle } from '@eulero/core';
 
 export interface LevelEntry {
   id: string;

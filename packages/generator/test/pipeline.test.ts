@@ -2,7 +2,7 @@ import { mkdtemp, readdir, readFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { PendingPuzzleSchema, validatePuzzle } from '@tuttialcuni/core';
+import { PendingPuzzleSchema, validatePuzzle } from '@eulero/core';
 import type { GenerateObjectRequest, LlmClient } from '../src/llm';
 import {
   conceptSignature,
@@ -127,7 +127,7 @@ describe('generateOne', () => {
 
 describe('file I/O', () => {
   it('scrive in pending/<id>.json e rileva i duplicati dai file esistenti', async () => {
-    const dir = await mkdtemp(path.join(os.tmpdir(), 'tuttialcuni-'));
+    const dir = await mkdtemp(path.join(os.tmpdir(), 'eulero-'));
     const res = await generateOne(new MockLlm([GOOD, CRITIQUE]), {
       theme: 'animali',
       seen: new Set(),

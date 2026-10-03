@@ -1,12 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  buildMatrix,
-  buildPuzzle,
-  layoutCircles,
-  RELATIONS,
-  validateDraft,
-} from '@tuttialcuni/core';
-import type { Circle, PendingPuzzle, PuzzleDraft, Relation } from '@tuttialcuni/core';
+import { buildMatrix, buildPuzzle, layoutCircles, RELATIONS, validateDraft } from '@eulero/core';
+import type { Circle, PendingPuzzle, PuzzleDraft, Relation } from '@eulero/core';
 import { api } from './api';
 import type { RejectReason, ReviewState } from './api';
 import { Card } from './components/Card';
@@ -212,7 +206,7 @@ export function App() {
           <Logo />
           <div>
             <h1>
-              Tutti<span>Alcuni</span>
+              Eu<span>lero</span>
             </h1>
             <p>Revisione puzzle</p>
           </div>
