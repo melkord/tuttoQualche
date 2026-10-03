@@ -15,7 +15,7 @@ export function collectErrors(page: Page): string[] {
 
 /** Salta il tutorial della prima visita. */
 export async function skipHowTo(page: Page) {
-  await page.getByRole('button', { name: 'Ho capito' }).click();
+  await page.getByRole('button', { name: /^(Ho capito|Got it)$/ }).click();
   await expect(page.getByRole('dialog')).toBeHidden();
 }
 
@@ -36,6 +36,9 @@ export async function puzzleOf(page: Page, id: string): Promise<Puzzle> {
 }
 
 const LETTERS = ['A', 'B', 'C', 'D'];
+/** Il pulsante di un'opzione, in italiano ("Opzione A") o in inglese ("Option A"). */
+export const optionButton = (page: Page, i: number) =>
+  page.getByRole('button', { name: new RegExp(`^(Opzione|Option) ${LETTERS[i]}$`) });
 
 /**
  * Gioca un livello già aperto. `wrongFirst[k]` = quante risposte sbagliate dare nel passo k
@@ -54,17 +57,24 @@ export async function playLevel(
     await expect(page.locator('.option-card').first().locator('circle')).toHaveCount(k + 2);
     const wrongs = [0, 1, 2, 3].filter((i) => i !== step.correct).slice(0, wrongFirst[k]);
     for (const w of wrongs) {
-      await page.getByRole('button', { name: `Opzione ${LETTERS[w]}` }).click();
-      await expect(page.getByRole('button', { name: `Opzione ${LETTERS[w]}` })).toHaveAttribute(
-        'data-state',
-        'wrong',
-      );
+      await optionButton(page, w).click();
+      await expect(optionButton(page, w)).toHaveAttribute('data-state', 'wrong');
       await expect(page.getByRole('alert')).toContainText('No!');
     }
-    await page.getByRole('button', { name: `Opzione ${LETTERS[step.correct]}` }).click();
-    await expect(
-      page.getByRole('button', { name: `Opzione ${LETTERS[step.correct]}` }),
-    ).toHaveAttribute('data-state', 'correct');
+    await optionButton(page, step.correct).click();
+    await expect(optionButton(page, step.correct)).toHaveAttribute('data-state', 'correct');
   }
   await expect(page.locator('.result')).toBeVisible();
+}
+
+const ITALIAN_UI =
+  /\b(Livello|livelli|Gioca|Riprendi|Continua|Inizia da qui|Temi|Torna|Condividi|errore|errori|Statistiche|Come si gioca|Riprova|giocati|perfetti|Avanzamento|Opzione|Chiudi|Carico)\b/;
+
+/** Fallisce se nell'interfaccia visibile resta del testo italiano (utile nei test in inglese). */
+export async function expectNoItalianUI(page: Page) {
+  const text = await page.locator('body').innerText();
+  expect(
+    text.match(ITALIAN_UI)?.[0] ?? null,
+    `testo italiano rimasto: ${text.slice(0, 200)}`,
+  ).toBeNull();
 }

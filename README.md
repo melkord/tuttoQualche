@@ -27,3 +27,10 @@ pnpm e2e         # build di produzione + test Playwright (desktop e mobile)
 
 Il repo contiene `netlify.toml`: collega il repo a Netlify (branch `main`) e non serve altro.
 Build: `pnpm --filter @eulero/web build` → pubblica `apps/web/dist` (Node 22, pnpm da `packageManager`).
+
+## Lingue (italiano / inglese)
+
+- L'interfaccia si adatta alla lingua del browser (italiano se `it`, altrimenti inglese) e si cambia con il tasto **IT/EN** in alto; la scelta resta salvata.
+- Ogni puzzle è scritto in italiano; la traduzione inglese (tema + 4 concetti, stesso ordine) sta in `puzzle.translations.en`. Le relazioni sono uguali per tutte le lingue.
+- Il generatore chiede a Claude anche la traduzione inglese. Per i livelli scritti a mano: `data/translations/en.json` (rigenerabile con `pnpm translations`), unito ai puzzle da `pnpm publish-puzzles`.
+- Aggiungere una lingua: estendere `LANGS` in `packages/core/src/types.ts`, i testi in `packages/core/src/{questions,steps}.ts` e il dizionario in `apps/web/src/i18n/dict.ts`.

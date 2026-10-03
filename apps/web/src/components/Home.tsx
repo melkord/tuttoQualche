@@ -1,9 +1,8 @@
 import { isDone, isUnlocked, starsFor } from '../lib/levels';
 import type { LevelEntry, LevelIndex } from '../lib/puzzles';
 import type { Store } from '../lib/storage';
+import { useI18n } from '../i18n';
 import { capitalize, themeIcon } from '../lib/text';
-
-const DIFF_LABEL = { facile: 'Facile', medio: 'Medio', difficile: 'Difficile' } as const;
 
 interface Props {
   index: LevelIndex;
@@ -13,46 +12,53 @@ interface Props {
   onTheme: (theme: string) => void;
 }
 
+/** Nome del tema nella lingua corrente (ripiego sul nome italiano, che è anche la chiave). */
+export function useThemeName() {
+  const { lang } = useI18n();
+  return (index: LevelIndex, theme: string) =>
+    capitalize(index.themes.find((t) => t.theme === theme)?.names?.[lang] ?? theme);
+}
+
 export function Home({ index, store, next, onPlay, onTheme }: Props) {
+  const { t } = useI18n();
+  const themeName = useThemeName();
   const started = Object.keys(store.progress).length > 0;
   return (
     <div className="home">
       {next ? (
         <section className="hero">
-          <p className="hero__eyebrow">{started ? 'Continua' : 'Inizia da qui'}</p>
+          <p className="hero__eyebrow">{started ? t.home.continue : t.home.start}</p>
           <h2>
-            {themeIcon(next.theme)} {capitalize(next.theme)} · livello {next.level}
+            {themeIcon(next.theme)} {t.levelTitle(themeName(index, next.theme), next.level)}
           </h2>
           <p className="hero__meta">
-            <span className={`chip chip--${next.difficulty}`}>{DIFF_LABEL[next.difficulty]}</span>
+            <span className={`chip chip--${next.difficulty}`}>{t.difficulty[next.difficulty]}</span>
           </p>
           <button className="btn btn--primary btn--lg" onClick={() => onPlay(next.id)}>
-            {store.progress[next.id] ? 'Riprendi' : 'Gioca'}
+            {store.progress[next.id] ? t.home.resume : t.home.play}
           </button>
         </section>
       ) : (
         <section className="hero">
-          <p className="hero__eyebrow">Complimenti</p>
-          <h2>🎉 Hai completato tutti i livelli</h2>
-          <p className="lead">Nuovi puzzle in arrivo.</p>
+          <p className="hero__eyebrow">{t.home.congrats}</p>
+          <h2>{t.home.allDone}</h2>
+          <p className="lead">{t.home.soon}</p>
         </section>
       )}
 
-      <h3 className="section-title">Temi</h3>
+      <h3 className="section-title">{t.home.themes}</h3>
       <ul className="themes">
-        {index.themes.map((t) => {
-          const done = t.levels.filter((l) => isDone(store, l.id)).length;
+        {index.themes.map((th) => {
+          const done = th.levels.filter((l) => isDone(store, l.id)).length;
           return (
-            <li key={t.theme}>
-              <button className="theme" onClick={() => onTheme(t.theme)}>
-                <span className="theme__icon">{themeIcon(t.theme)}</span>
+            <li key={th.theme}>
+              <button className="theme" onClick={() => onTheme(th.theme)}>
+                <span className="theme__icon">{themeIcon(th.theme)}</span>
                 <span className="theme__body">
-                  <strong>{capitalize(t.theme)}</strong>
-                  <small>
-                    {done} / {t.levels.length} livelli
-                  </small>
+                  <strong>{themeName(index, th.theme)}</strong>
+                  <small>{t.home.levelsCount(done, th.levels.length)}</small>
                   <span className="bar">
-                    <span style={{ width: `${(done / t.levels.length) * 100}%` }} />
+                    <span style={{ width: `${(done / th.levels.length) * 100}%` }} />
                   </span>
                 </span>
                 <span className="theme__go">›</span>
@@ -76,15 +82,17 @@ export function ThemeLevels({
   store: Store;
   onPlay: (id: string) => void;
 }) {
-  const t = index.themes.find((x) => x.theme === theme);
-  if (!t) return <p className="empty">Tema non trovato.</p>;
+  const { t } = useI18n();
+  const themeName = useThemeName();
+  const th = index.themes.find((x) => x.theme === theme);
+  if (!th) return <p className="empty">{t.home.themeNotFound}</p>;
   return (
     <div className="levels">
       <h2>
-        {themeIcon(t.theme)} {capitalize(t.theme)}
+        {themeIcon(th.theme)} {themeName(index, th.theme)}
       </h2>
       <ul className="level-grid">
-        {t.levels.map((l) => {
+        {th.levels.map((l) => {
           const locked = !isUnlocked(index, store, l.id);
           const stars = starsFor(store, l.id);
           const state = locked
@@ -102,11 +110,11 @@ export function ThemeLevels({
                 className={`level level--${l.difficulty} ${state}`}
                 disabled={locked}
                 onClick={() => onPlay(l.id)}
-                aria-label={`Livello ${l.level}${locked ? ' (bloccato)' : ''}`}
+                aria-label={locked ? t.levelLocked(l.level) : t.levelLabel(l.level)}
               >
                 <b>{l.level}</b>
                 <small>
-                  {locked ? '🔒' : stars > 0 ? '★'.repeat(stars) : DIFF_LABEL[l.difficulty]}
+                  {locked ? '🔒' : stars > 0 ? '★'.repeat(stars) : t.difficulty[l.difficulty]}
                 </small>
               </button>
             </li>

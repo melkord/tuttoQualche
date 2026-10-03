@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { buildSteps, explainMistake, STEP_COUNT } from '@eulero/core';
+import { buildSteps, explainMistake, localizedConcepts, STEP_COUNT } from '@eulero/core';
 import type { Puzzle } from '@eulero/core';
 import { Diagram } from './Diagram';
 import { WordChips } from './WordChips';
+import { useI18n } from '../i18n';
 import type { Progress } from '../lib/storage';
 
 const LETTERS = ['A', 'B', 'C', 'D'];
@@ -18,7 +19,9 @@ interface Props {
 }
 
 export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
+  const { lang, t } = useI18n();
   const steps = useMemo(() => buildSteps(puzzle), [puzzle]);
+  const concepts = useMemo(() => localizedConcepts(puzzle, lang), [puzzle, lang]);
   const step = steps[Math.min(progress.step, STEP_COUNT - 1)];
   const [status, setStatus] = useState<Status>('question');
   const [selected, setSelected] = useState<number | null>(null);
@@ -34,7 +37,7 @@ export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
 
   if (!step) return null;
 
-  const words = step.words.map((w) => puzzle.concepts[w]?.label ?? '');
+  const words = step.words.map((w) => concepts[w]?.label ?? '');
 
   const pick = (i: number) => {
     if (locked.includes(i) || status === 'correct') return;
@@ -54,10 +57,11 @@ export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
       setLocked((l) => [...l, i]);
       setExplanation(
         explainMistake(
-          puzzle.concepts,
+          concepts,
           step,
           (step.options[step.correct] as (typeof step.options)[number]).relations,
           (step.options[i] as (typeof step.options)[number]).relations,
+          lang,
         ),
       );
       setStatus('wrong');
@@ -77,7 +81,7 @@ export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
 
   return (
     <div className="play" data-step={progress.step + 1}>
-      <ol className="stepper" aria-label="Avanzamento">
+      <ol className="stepper" aria-label={t.play.progress}>
         {Array.from({ length: STEP_COUNT }, (_, i) => (
           <li
             key={i}
@@ -91,7 +95,7 @@ export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
 
       <WordChips key={`w${progress.step}`} words={words} />
 
-      <div className="options" key={`o${progress.step}`} role="group" aria-label="Diagrammi">
+      <div className="options" key={`o${progress.step}`} role="group" aria-label={t.play.diagrams}>
         {step.options.map((o, i) => {
           const state = stateOf(i);
           return (
@@ -102,7 +106,7 @@ export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
               style={{ animationDelay: `${i * 90}ms` }}
               data-letter={LETTERS[i]}
               data-state={state}
-              aria-label={`Opzione ${LETTERS[i]}`}
+              aria-label={t.play.option(LETTERS[i] as string)}
               aria-disabled={state === 'locked' || status === 'correct'}
               onClick={() => pick(i)}
             >
@@ -121,10 +125,10 @@ export function Play({ puzzle, progress, onProgress, onFinish }: Props) {
 
       {status === 'wrong' && (
         <section className="feedback" role="alert">
-          <h2>No!</h2>
+          <h2>{t.play.nope}</h2>
           <p>{explanation}</p>
           <button className="btn btn--ink" onClick={() => setStatus('question')}>
-            Riprova
+            {t.play.retry}
           </button>
         </section>
       )}

@@ -1,4 +1,4 @@
-import type { DifficultyLevel, Puzzle } from '@eulero/core';
+import type { DifficultyLevel, Lang, Puzzle } from '@eulero/core';
 
 export interface LevelEntry {
   id: string;
@@ -10,7 +10,13 @@ export interface LevelEntry {
 }
 
 export interface LevelIndex {
-  themes: { theme: string; levels: LevelEntry[] }[];
+  themes: {
+    /** Chiave del tema (italiano): identificatore stabile. */
+    theme: string;
+    /** Nome da mostrare, per lingua (ripiego sull'italiano se manca la traduzione). */
+    names: Record<Lang, string>;
+    levels: LevelEntry[];
+  }[];
 }
 
 /**
@@ -24,6 +30,12 @@ export function buildLevels(puzzles: readonly Puzzle[]): LevelIndex {
     .sort((a, b) => a.localeCompare(b, 'it'))
     .map((theme) => ({
       theme,
+      names: {
+        it: theme,
+        en:
+          (byTheme.get(theme) as Puzzle[]).find((p) => p.translations?.en)?.translations?.en
+            ?.theme ?? theme,
+      },
       levels: (byTheme.get(theme) as Puzzle[])
         .sort((a, b) => a.difficulty.score - b.difficulty.score || a.id.localeCompare(b.id))
         .map((p, i): LevelEntry => ({

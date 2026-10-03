@@ -2,6 +2,10 @@
   "themes": [
     {
       "theme": "animali",
+      "names": {
+        "it": "animali",
+        "en": "animals"
+      },
       "levels": [
         {
           "id": "p-0eepmx4",
@@ -77,6 +81,10 @@
     },
     {
       "theme": "cibo e bevande",
+      "names": {
+        "it": "cibo e bevande",
+        "en": "food and drinks"
+      },
       "levels": [
         {
           "id": "p-14w4ts9",
@@ -152,6 +160,10 @@
     },
     {
       "theme": "geografia italiana",
+      "names": {
+        "it": "geografia italiana",
+        "en": "Italian geography"
+      },
       "levels": [
         {
           "id": "p-0q0rdxw",
@@ -227,6 +239,10 @@
     },
     {
       "theme": "natura e piante",
+      "names": {
+        "it": "natura e piante",
+        "en": "nature and plants"
+      },
       "levels": [
         {
           "id": "p-0rj7oup",
@@ -302,6 +318,10 @@
     },
     {
       "theme": "sport",
+      "names": {
+        "it": "sport",
+        "en": "sports"
+      },
       "levels": [
         {
           "id": "p-0zuztzy",

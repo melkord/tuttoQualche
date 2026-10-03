@@ -860,3 +860,8 @@ p {
     transition: none !important;
   }
 }
+
+.icon-btn--lang {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}

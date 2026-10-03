@@ -1,5 +1,5 @@
 import { PuzzleSchema } from '@eulero/core';
-import type { DifficultyLevel, Puzzle } from '@eulero/core';
+import type { DifficultyLevel, Lang, Puzzle } from '@eulero/core';
 
 export interface LevelEntry {
   id: string;
@@ -11,17 +11,32 @@ export interface LevelEntry {
 }
 
 export interface LevelIndex {
-  themes: { theme: string; levels: LevelEntry[] }[];
+  themes: {
+    /** Chiave del tema (italiano): identificatore stabile. */
+    theme: string;
+    /** Nome da mostrare per lingua. */
+    names?: Partial<Record<Lang, string>>;
+    levels: LevelEntry[];
+  }[];
+}
+
+export type LoadErrorCode = 'NOT_FOUND' | 'UNAVAILABLE' | 'INVALID';
+
+/** Errore di caricamento con un codice: il testo lo sceglie l'interfaccia, nella lingua giusta. */
+export class LoadError extends Error {
+  constructor(readonly code: LoadErrorCode) {
+    super(code);
+  }
 }
 
 async function getJson(url: string): Promise<unknown> {
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`Non trovato (${res.status})`);
+  if (!res.ok) throw new LoadError('NOT_FOUND');
   try {
     return await res.json();
   } catch {
     // su hosting SPA un file mancante restituisce l'index.html
-    throw new Error('Puzzle non disponibile');
+    throw new LoadError('UNAVAILABLE');
   }
 }
 
@@ -31,8 +46,8 @@ export async function fetchIndex(): Promise<LevelIndex> {
 }
 
 export async function fetchPuzzle(id: string): Promise<Puzzle> {
-  if (!/^p-[a-z0-9]+$/.test(id)) throw new Error('Puzzle non valido');
+  if (!/^p-[a-z0-9]+$/.test(id)) throw new LoadError('INVALID');
   const parsed = PuzzleSchema.safeParse(await getJson(`/puzzles/${id}.json`));
-  if (!parsed.success) throw new Error('Puzzle non valido');
+  if (!parsed.success) throw new LoadError('INVALID');
   return parsed.data;
 }

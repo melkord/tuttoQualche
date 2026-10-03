@@ -13,6 +13,8 @@ const Det = z.enum(['i', 'gli', 'le']);
 export const DraftOutputSchema = z.object({
   tema: z.string(),
   concetti: z.array(z.object({ etichetta: z.string(), articolo: Det })),
+  /** Traduzione inglese: tema e le 4 etichette, nello stesso ordine di `concetti`. */
+  inglese: z.object({ tema: z.string(), concetti: z.array(z.string()) }),
   r01: Rel,
   r02: Rel,
   r03: Rel,
@@ -40,6 +42,12 @@ export function draftFromOutput(out: DraftOutput): unknown {
       label: c.etichetta.trim().toLowerCase(),
       det: c.articolo,
     })),
+    translations: {
+      en: {
+        theme: out.inglese.tema.trim().toLowerCase(),
+        concepts: out.inglese.concetti.map((c) => c.trim().toLowerCase()),
+      },
+    },
     relations: ALL_PAIR_KEYS.map((k) => ({
       a: Number(k[0]),
       b: Number(k[1]),

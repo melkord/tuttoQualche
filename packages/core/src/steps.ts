@@ -3,7 +3,7 @@ import { fitCircles, layoutCircles } from './geometry';
 import { describeRelation } from './questions';
 import { allPairs, buildMatrix, relationBetween } from './relations';
 import { hashString, mulberry32 } from './rng';
-import type { Circle, Concept, Difficulty, Matrix, PairRelation, Relation } from './types';
+import type { Circle, Concept, Difficulty, Lang, Matrix, PairRelation, Relation } from './types';
 import { RELATIONS } from './types';
 
 /**
@@ -157,12 +157,21 @@ export function buildSteps(
   });
 }
 
-const SHAPE_HINT: Record<Relation, (a: string, b: string) => string> = {
-  TUTTI: (a, b) => `il cerchio «${a}» sta tutto dentro «${b}»`,
-  CONTIENE: (a, b) => `il cerchio «${b}» sta tutto dentro «${a}»`,
-  ALCUNI: (a, b) => `i cerchi «${a}» e «${b}» si sovrappongono solo in parte`,
-  NESSUNO: (a, b) => `i cerchi «${a}» e «${b}» non si toccano`,
-  UGUALI: (a, b) => `i cerchi «${a}» e «${b}» coincidono`,
+const SHAPE_HINT: Record<Lang, Record<Relation, (a: string, b: string) => string>> = {
+  it: {
+    TUTTI: (a, b) => `il cerchio «${a}» sta tutto dentro «${b}»`,
+    CONTIENE: (a, b) => `il cerchio «${b}» sta tutto dentro «${a}»`,
+    ALCUNI: (a, b) => `i cerchi «${a}» e «${b}» si sovrappongono solo in parte`,
+    NESSUNO: (a, b) => `i cerchi «${a}» e «${b}» non si toccano`,
+    UGUALI: (a, b) => `i cerchi «${a}» e «${b}» coincidono`,
+  },
+  en: {
+    TUTTI: (a, b) => `the “${a}” circle sits entirely inside “${b}”`,
+    CONTIENE: (a, b) => `the “${b}” circle sits entirely inside “${a}”`,
+    ALCUNI: (a, b) => `the “${a}” and “${b}” circles overlap only partly`,
+    NESSUNO: (a, b) => `the “${a}” and “${b}” circles don’t touch`,
+    UGUALI: (a, b) => `the “${a}” and “${b}” circles coincide`,
+  },
 };
 
 /**
@@ -174,6 +183,7 @@ export function explainMistake(
   step: Pick<Step, 'words'>,
   truth: Assignment,
   chosen: Assignment,
+  lang: Lang = 'it',
 ): string {
   const n = step.words.length;
   const pairs = allPairs(n);
@@ -185,11 +195,11 @@ export function explainMistake(
   const a = concepts[step.words[pick.i] as number] as Concept;
   const b = concepts[step.words[pick.j] as number] as Concept;
   const rel = truth[pick.k] as Relation;
-  const sentence = describeSentence(a, b, rel);
-  return `${sentence}: ${SHAPE_HINT[rel](a.label, b.label)}.`;
+  const sentence = describeSentence(a, b, rel, lang);
+  return `${sentence}: ${SHAPE_HINT[lang][rel](a.label, b.label)}.`;
 }
 
-const describeSentence = (a: Concept, b: Concept, rel: Relation) => {
-  const s = describeRelation(a, b, rel);
+const describeSentence = (a: Concept, b: Concept, rel: Relation, lang: Lang) => {
+  const s = describeRelation(a, b, rel, lang);
   return s.charAt(0).toUpperCase() + s.slice(1);
 };

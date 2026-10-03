@@ -22,6 +22,7 @@ const GOOD: DraftOutput = {
     { etichetta: 'animali domestici', articolo: 'gli' },
     { etichetta: 'pesci', articolo: 'i' },
   ],
+  inglese: { tema: 'Animals', concetti: ['Dogs', 'mammals', 'pets', 'fish'] },
   r01: 'TUTTI',
   r02: 'TUTTI',
   r03: 'NESSUNO',
@@ -56,6 +57,14 @@ class MockLlm implements LlmClient {
 const fixedNow = () => new Date('2026-10-02T10:00:00Z');
 
 describe('draftFromOutput', () => {
+  it('porta con sé la traduzione inglese', () => {
+    const d = draftFromOutput(GOOD) as {
+      translations: { en: { theme: string; concepts: string[] } };
+    };
+    expect(d.translations.en.theme).toBe('animals');
+    expect(d.translations.en.concepts).toEqual(['dogs', 'mammals', 'pets', 'fish']);
+  });
+
   it('normalizza etichette e costruisce le 6 coppie', () => {
     const d = draftFromOutput(GOOD) as {
       theme: string;
@@ -77,6 +86,11 @@ describe('generateOne', () => {
     expect(PendingPuzzleSchema.safeParse(res.pending).success).toBe(true);
     expect(validatePuzzle(res.pending.puzzle).ok).toBe(true);
     expect(res.pending.risks['02']).toEqual({ level: 'alto', reason: 'randagi' });
+    // la traduzione inglese viaggia nel puzzle, normalizzata come l'italiano
+    expect(res.pending.puzzle.translations?.en).toEqual({
+      theme: 'animals',
+      concepts: ['dogs', 'mammals', 'pets', 'fish'],
+    });
     expect(Object.keys(res.pending.risks).sort()).toEqual(['01', '02', '03', '12', '13', '23']);
     expect(res.pending.meta).toEqual({ generatedAt: '2026-10-02T10:00:00.000Z', model: 'mock' });
     // il critico vede le relazioni in italiano

@@ -1,0 +1,452 @@
+{
+  "cani|mammiferi|animali domestici|pesci": {
+    "theme": "animals",
+    "concepts": [
+      "dogs",
+      "mammals",
+      "pets",
+      "fish"
+    ]
+  },
+  "aquile|uccelli|animali che volano|mammiferi": {
+    "theme": "animals",
+    "concepts": [
+      "eagles",
+      "birds",
+      "flying animals",
+      "mammals"
+    ]
+  },
+  "cani|mammiferi|uccelli|animali": {
+    "theme": "animals",
+    "concepts": [
+      "dogs",
+      "mammals",
+      "birds",
+      "animals"
+    ]
+  },
+  "serpenti|rettili|animali velenosi|pesci": {
+    "theme": "animals",
+    "concepts": [
+      "snakes",
+      "reptiles",
+      "venomous animals",
+      "fish"
+    ]
+  },
+  "farfalle|insetti|animali con le ali|uccelli": {
+    "theme": "animals",
+    "concepts": [
+      "butterflies",
+      "insects",
+      "animals with wings",
+      "birds"
+    ]
+  },
+  "leoni|gatti|felini|animali domestici": {
+    "theme": "animals",
+    "concepts": [
+      "lions",
+      "cats",
+      "felines",
+      "pets"
+    ]
+  },
+  "ragni|insetti|aracnidi|animali con otto zampe": {
+    "theme": "animals",
+    "concepts": [
+      "spiders",
+      "insects",
+      "arachnids",
+      "eight-legged animals"
+    ]
+  },
+  "balene|mammiferi|animali marini|squali": {
+    "theme": "animals",
+    "concepts": [
+      "whales",
+      "mammals",
+      "marine animals",
+      "sharks"
+    ]
+  },
+  "gatti|cani|animali domestici|mammiferi": {
+    "theme": "animals",
+    "concepts": [
+      "cats",
+      "dogs",
+      "pets",
+      "mammals"
+    ]
+  },
+  "polli|uccelli|animali che depongono uova|mammiferi": {
+    "theme": "animals",
+    "concepts": [
+      "chickens",
+      "birds",
+      "egg-laying animals",
+      "mammals"
+    ]
+  },
+  "mele|frutti|ortaggi|alimenti vegetali": {
+    "theme": "food and drinks",
+    "concepts": [
+      "apples",
+      "fruits",
+      "vegetables",
+      "plant-based foods"
+    ]
+  },
+  "arance|agrumi|frutti|frutti di bosco": {
+    "theme": "food and drinks",
+    "concepts": [
+      "oranges",
+      "citrus fruits",
+      "fruits",
+      "berries"
+    ]
+  },
+  "vini|bevande alcoliche|bevande|succhi di frutta": {
+    "theme": "food and drinks",
+    "concepts": [
+      "wines",
+      "alcoholic drinks",
+      "drinks",
+      "fruit juices"
+    ]
+  },
+  "formaggi|latticini|cibi solidi|bevande": {
+    "theme": "food and drinks",
+    "concepts": [
+      "cheeses",
+      "dairy products",
+      "solid foods",
+      "drinks"
+    ]
+  },
+  "uova|alimenti di origine animale|carni|prodotti ittici": {
+    "theme": "food and drinks",
+    "concepts": [
+      "eggs",
+      "animal-based foods",
+      "meats",
+      "seafood"
+    ]
+  },
+  "sardine|prodotti ittici|cibi in scatola|carni": {
+    "theme": "food and drinks",
+    "concepts": [
+      "sardines",
+      "seafood",
+      "canned foods",
+      "meats"
+    ]
+  },
+  "gelati|dolci|cibi freddi|cibi caldi": {
+    "theme": "food and drinks",
+    "concepts": [
+      "ice creams",
+      "desserts",
+      "cold foods",
+      "hot foods"
+    ]
+  },
+  "fagioli|legumi|cereali|alimenti vegetali": {
+    "theme": "food and drinks",
+    "concepts": [
+      "beans",
+      "legumes",
+      "cereals",
+      "plant-based foods"
+    ]
+  },
+  "mele|frutti|cibi che crescono sugli alberi|prodotti ittici": {
+    "theme": "food and drinks",
+    "concepts": [
+      "apples",
+      "fruits",
+      "foods that grow on trees",
+      "seafood"
+    ]
+  },
+  "tiramisù|dolci|piatti italiani|piatti caldi": {
+    "theme": "food and drinks",
+    "concepts": [
+      "tiramisus",
+      "desserts",
+      "Italian dishes",
+      "hot dishes"
+    ]
+  },
+  "città del nord italia|città italiane|capoluoghi di regione italiani|città francesi": {
+    "theme": "Italian geography",
+    "concepts": [
+      "cities in northern Italy",
+      "Italian cities",
+      "Italian regional capitals",
+      "French cities"
+    ]
+  },
+  "fiumi italiani|fiumi|corsi d'acqua|laghi": {
+    "theme": "Italian geography",
+    "concepts": [
+      "Italian rivers",
+      "rivers",
+      "watercourses",
+      "lakes"
+    ]
+  },
+  "isole italiane|isole|regioni italiane|isole del mediterraneo": {
+    "theme": "Italian geography",
+    "concepts": [
+      "Italian islands",
+      "islands",
+      "Italian regions",
+      "Mediterranean islands"
+    ]
+  },
+  "regioni del nord|regioni italiane|regioni con sbocco sul mare|regioni senza sbocco sul mare": {
+    "theme": "Italian geography",
+    "concepts": [
+      "northern regions",
+      "Italian regions",
+      "regions with a coastline",
+      "landlocked regions"
+    ]
+  },
+  "vulcani italiani|vulcani|vulcani attivi|laghi": {
+    "theme": "Italian geography",
+    "concepts": [
+      "Italian volcanoes",
+      "volcanoes",
+      "active volcanoes",
+      "lakes"
+    ]
+  },
+  "città sul mare|città italiane|città di montagna|città europee": {
+    "theme": "Italian geography",
+    "concepts": [
+      "seaside cities",
+      "Italian cities",
+      "mountain cities",
+      "European cities"
+    ]
+  },
+  "montagne delle alpi|montagne italiane|montagne oltre i 4000 metri|vulcani": {
+    "theme": "Italian geography",
+    "concepts": [
+      "Alpine mountains",
+      "Italian mountains",
+      "mountains over 4,000 metres",
+      "volcanoes"
+    ]
+  },
+  "regioni del nord|regioni del centro|regioni del sud|regioni italiane": {
+    "theme": "Italian geography",
+    "concepts": [
+      "northern regions",
+      "central regions",
+      "southern regions",
+      "Italian regions"
+    ]
+  },
+  "isole italiane|isole del tirreno|isole dell'adriatico|isole greche": {
+    "theme": "Italian geography",
+    "concepts": [
+      "Italian islands",
+      "Tyrrhenian islands",
+      "Adriatic islands",
+      "Greek islands"
+    ]
+  },
+  "vette appenniniche|vette alpine|montagne|laghi": {
+    "theme": "Italian geography",
+    "concepts": [
+      "Apennine peaks",
+      "Alpine peaks",
+      "mountains",
+      "lakes"
+    ]
+  },
+  "sport con la palla|sport di squadra|sport individuali|sport acquatici": {
+    "theme": "sports",
+    "concepts": [
+      "ball sports",
+      "team sports",
+      "individual sports",
+      "water sports"
+    ]
+  },
+  "sport con la racchetta|sport con la palla|sport da combattimento|sport acquatici": {
+    "theme": "sports",
+    "concepts": [
+      "racket sports",
+      "ball sports",
+      "combat sports",
+      "water sports"
+    ]
+  },
+  "sport da combattimento|sport olimpici|sport di squadra|sport individuali": {
+    "theme": "sports",
+    "concepts": [
+      "combat sports",
+      "Olympic sports",
+      "team sports",
+      "individual sports"
+    ]
+  },
+  "sport di squadra con la palla|sport di squadra|sport con la palla|sport individuali": {
+    "theme": "sports",
+    "concepts": [
+      "team ball sports",
+      "team sports",
+      "ball sports",
+      "individual sports"
+    ]
+  },
+  "maratone|gare di corsa|gare di atletica leggera|gare di nuoto": {
+    "theme": "sports",
+    "concepts": [
+      "marathons",
+      "running races",
+      "athletics events",
+      "swimming races"
+    ]
+  },
+  "sport sul ghiaccio|sport invernali|sport di squadra|sport individuali": {
+    "theme": "sports",
+    "concepts": [
+      "ice sports",
+      "winter sports",
+      "team sports",
+      "individual sports"
+    ]
+  },
+  "sport di squadra|sport|sport con la palla|sport da combattimento": {
+    "theme": "sports",
+    "concepts": [
+      "team sports",
+      "sports",
+      "ball sports",
+      "combat sports"
+    ]
+  },
+  "gare di nuoto|sport acquatici|sport olimpici|sport invernali": {
+    "theme": "sports",
+    "concepts": [
+      "swimming races",
+      "water sports",
+      "Olympic sports",
+      "winter sports"
+    ]
+  },
+  "sport di squadra con la palla|sport olimpici|sport da combattimento|sport acquatici": {
+    "theme": "sports",
+    "concepts": [
+      "team ball sports",
+      "Olympic sports",
+      "combat sports",
+      "water sports"
+    ]
+  },
+  "sport sulla neve|sport invernali|sport olimpici|sport acquatici": {
+    "theme": "sports",
+    "concepts": [
+      "snow sports",
+      "winter sports",
+      "Olympic sports",
+      "water sports"
+    ]
+  },
+  "rose|piante da fiore|piante|alberi": {
+    "theme": "nature and plants",
+    "concepts": [
+      "roses",
+      "flowering plants",
+      "plants",
+      "trees"
+    ]
+  },
+  "querce|alberi|piante sempreverdi|conifere": {
+    "theme": "nature and plants",
+    "concepts": [
+      "oaks",
+      "trees",
+      "evergreen plants",
+      "conifers"
+    ]
+  },
+  "funghi|piante|animali|esseri viventi": {
+    "theme": "nature and plants",
+    "concepts": [
+      "fungi",
+      "plants",
+      "animals",
+      "living things"
+    ]
+  },
+  "api|insetti|impollinatori|uccelli": {
+    "theme": "nature and plants",
+    "concepts": [
+      "bees",
+      "insects",
+      "pollinators",
+      "birds"
+    ]
+  },
+  "cactus|piante grasse|piante del deserto|piante acquatiche": {
+    "theme": "nature and plants",
+    "concepts": [
+      "cacti",
+      "succulents",
+      "desert plants",
+      "aquatic plants"
+    ]
+  },
+  "ulivi|alberi da frutto|alberi sempreverdi|alberi decidui": {
+    "theme": "nature and plants",
+    "concepts": [
+      "olive trees",
+      "fruit trees",
+      "evergreen trees",
+      "deciduous trees"
+    ]
+  },
+  "oceani|mari|specchi d'acqua salata|specchi d'acqua dolce": {
+    "theme": "nature and plants",
+    "concepts": [
+      "oceans",
+      "seas",
+      "saltwater bodies",
+      "freshwater bodies"
+    ]
+  },
+  "graniti|rocce|minerali|metalli": {
+    "theme": "nature and plants",
+    "concepts": [
+      "granites",
+      "rocks",
+      "minerals",
+      "metals"
+    ]
+  },
+  "temporali|fenomeni atmosferici|fenomeni naturali|terremoti": {
+    "theme": "nature and plants",
+    "concepts": [
+      "thunderstorms",
+      "weather phenomena",
+      "natural phenomena",
+      "earthquakes"
+    ]
+  },
+  "piante carnivore|piante|piante grasse|piante acquatiche": {
+    "theme": "nature and plants",
+    "concepts": [
+      "carnivorous plants",
+      "plants",
+      "succulents",
+      "aquatic plants"
+    ]
+  }
+}

@@ -21,6 +21,18 @@ const mk = (theme: string, tag: string, rels: string) => {
   return buildPuzzle(draft);
 };
 
+describe('buildLevels: nomi dei temi', () => {
+  it('names.en dalla traduzione del puzzle, altrimenti ripiego sull’italiano', () => {
+    const base = mk('sport', '9', 'NNNNNN');
+    const tr = {
+      ...base,
+      translations: { en: { theme: 'sports', concepts: ['a', 'b', 'c', 'd'] } },
+    };
+    expect(buildLevels([tr]).themes[0]!.names).toEqual({ it: 'sport', en: 'sports' });
+    expect(buildLevels([base]).themes[0]!.names).toEqual({ it: 'sport', en: 'sport' });
+  });
+});
+
 describe('buildLevels', () => {
   const easy = mk('sport', '1', 'NNNNNN');
   const hard = mk('sport', '2', 'AAAAAA');

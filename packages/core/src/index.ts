@@ -8,3 +8,4 @@ export * from './difficulty';
 export * from './validate';
 export * from './pending';
 export * from './steps';
+export * from './i18n';

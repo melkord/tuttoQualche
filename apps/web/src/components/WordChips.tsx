@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n';
 import { colorOf } from '../palette';
 
 /**
@@ -5,9 +6,10 @@ import { colorOf } from '../palette';
  * parole già viste diventano chip pieni e solo l'ultima arrivata resta grande, col solo contorno.
  */
 export function WordChips({ words }: { words: string[] }) {
+  const { t } = useI18n();
   const spotlightAll = words.length <= 2;
   return (
-    <ul className="chips" aria-label="Parole">
+    <ul className="chips" aria-label={t.play.words}>
       {words.map((w, slot) => {
         const spot = spotlightAll || slot === words.length - 1;
         return (

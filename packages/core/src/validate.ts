@@ -181,6 +181,7 @@ export function buildPuzzle(input: unknown, seed?: string): Puzzle {
     theme: draft.theme,
     concepts: draft.concepts,
     relations: [...draft.relations].sort((x, y) => x.a - y.a || x.b - y.b),
+    ...(draft.translations ? { translations: draft.translations } : {}),
     questions,
     difficulty: estimateDifficulty(report.matrix, questions),
   };

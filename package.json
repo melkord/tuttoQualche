@@ -14,6 +14,7 @@
     "review": "pnpm --filter @eulero/review dev",
     "publish-puzzles": "tsx scripts/publish/src/cli.ts",
     "e2e": "pnpm --filter @eulero/web build && playwright test",
+    "translations": "tsx packages/generator/seed/build-translations.ts",
     "seed": "tsx packages/generator/seed/build-seed.ts",
     "lint": "eslint .",
     "format": "prettier --write .",

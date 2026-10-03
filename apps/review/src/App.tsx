@@ -26,6 +26,7 @@ function draftOf(item: PendingPuzzle, rels: Relation[]): PuzzleDraft {
   return {
     theme: item.puzzle.theme,
     concepts: item.puzzle.concepts,
+    translations: item.puzzle.translations,
     relations: item.puzzle.relations.map((r, k) => ({ a: r.a, b: r.b, rel: rels[k] as Relation })),
   };
 }

@@ -112,3 +112,28 @@ describe('generateQuestions', () => {
     }
   }, 120_000);
 });
+
+describe('testi in inglese', () => {
+  const dogs = { label: 'dogs', det: 'i' as const };
+  const mammals = { label: 'mammals', det: 'i' as const };
+  it('describeRelation', () => {
+    expect(describeRelation(dogs, mammals, 'TUTTI', 'en')).toBe('All dogs are mammals');
+    expect(describeRelation(dogs, mammals, 'CONTIENE', 'en')).toBe('All mammals are dogs');
+    expect(describeRelation(dogs, mammals, 'ALCUNI', 'en')).toBe(
+      'Some dogs are mammals, others are not',
+    );
+    expect(describeRelation(dogs, mammals, 'NESSUNO', 'en')).toBe('No dogs are mammals');
+    expect(describeRelation(dogs, mammals, 'UGUALI', 'en')).toBe('dogs and mammals are the same');
+  });
+  it('renderQuestion', () => {
+    expect(renderQuestion('TUTTI', dogs, mammals, 'en')).toBe('Are all dogs mammals?');
+    expect(renderQuestion('ALCUNI', dogs, mammals, 'en')).toBe('Are some dogs mammals?');
+    expect(renderQuestion('NESSUNO', dogs, mammals, 'en')).toBe('Are none of the dogs mammals?');
+    expect(renderQuestion('ALCUNI_NON', dogs, mammals, 'en')).toBe('Are some dogs not mammals?');
+  });
+  it('l’italiano resta il default', () => {
+    expect(renderQuestion('TUTTI', ANIMALI.concepts[0]!, ANIMALI.concepts[1]!)).toBe(
+      'Tutti i cani sono mammiferi?',
+    );
+  });
+});

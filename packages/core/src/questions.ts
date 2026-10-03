@@ -1,6 +1,6 @@
 import { hashString, mulberry32 } from './rng';
 import { allPairs, relationBetween } from './relations';
-import type { Concept, Determiner, Matrix, Question, QuestionKind, Relation } from './types';
+import type { Concept, Determiner, Lang, Matrix, Question, QuestionKind, Relation } from './types';
 import { QUESTION_KINDS } from './types';
 
 /**
@@ -41,9 +41,26 @@ const ALCUNI_F: Record<Determiner, string> = { i: 'Alcuni', gli: 'Alcuni', le: '
 const NESSUNO_F: Record<Determiner, string> = { i: 'Nessuno', gli: 'Nessuno', le: 'Nessuna' };
 
 /** Testo italiano della domanda. */
-export function renderQuestion(kind: QuestionKind, subject: Concept, object: Concept): string {
+export function renderQuestion(
+  kind: QuestionKind,
+  subject: Concept,
+  object: Concept,
+  lang: Lang = 'it',
+): string {
   const s = subject.label;
   const o = object.label;
+  if (lang === 'en') {
+    switch (kind) {
+      case 'TUTTI':
+        return `Are all ${s} ${o}?`;
+      case 'ALCUNI':
+        return `Are some ${s} ${o}?`;
+      case 'NESSUNO':
+        return `Are none of the ${s} ${o}?`;
+      case 'ALCUNI_NON':
+        return `Are some ${s} not ${o}?`;
+    }
+  }
   switch (kind) {
     case 'TUTTI':
       return `${TUTTI_F[subject.det]} ${subject.det} ${s} sono ${o}?`;
@@ -57,7 +74,21 @@ export function renderQuestion(kind: QuestionKind, subject: Concept, object: Con
 }
 
 /** Frase italiana che descrive la relazione di `a` verso `b` (per revisione e interfacce). */
-export function describeRelation(a: Concept, b: Concept, rel: Relation): string {
+export function describeRelation(a: Concept, b: Concept, rel: Relation, lang: Lang = 'it'): string {
+  if (lang === 'en') {
+    switch (rel) {
+      case 'TUTTI':
+        return `All ${a.label} are ${b.label}`;
+      case 'CONTIENE':
+        return `All ${b.label} are ${a.label}`;
+      case 'ALCUNI':
+        return `Some ${a.label} are ${b.label}, others are not`;
+      case 'NESSUNO':
+        return `No ${a.label} are ${b.label}`;
+      case 'UGUALI':
+        return `${a.label} and ${b.label} are the same`;
+    }
+  }
   switch (rel) {
     case 'TUTTI':
       return `${TUTTI_F[a.det]} ${a.det} ${a.label} sono ${b.label}`;

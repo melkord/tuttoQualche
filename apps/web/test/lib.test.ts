@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { prevDay, todayLocal } from '../src/lib/date';
 import { continueEntry, isUnlocked, nextInTheme, starsFor } from '../src/lib/levels';
 import type { LevelEntry, LevelIndex } from '../src/lib/puzzles';
+import { DICTS } from '../src/i18n/dict';
+import { detectLang } from '../src/i18n';
 import { buildShareText } from '../src/lib/share';
 import {
   computeStreak,
@@ -88,6 +90,51 @@ describe('storage', () => {
   });
 });
 
+describe('buildShareText in inglese', () => {
+  it('stesse righe, testi inglesi', () => {
+    const text = buildShareText({
+      title: 'Animals · level 3',
+      url: 'https://x.test',
+      progress: done([0, 2, 1]),
+      strings: DICTS.en.share,
+    });
+    expect(text).toContain('Eulero · Animals · level 3');
+    expect(text).toContain('3 mistakes');
+    expect(
+      buildShareText({ title: 't', url: 'u', progress: done([0, 0, 0]), strings: DICTS.en.share }),
+    ).toContain('✨ Perfect, no mistakes');
+    expect(
+      buildShareText({ title: 't', url: 'u', progress: done([1, 0, 0]), strings: DICTS.en.share }),
+    ).toContain('1 mistake\n');
+  });
+});
+
+describe('lingua', () => {
+  it('detectLang: scelta salvata > lingua del browser > inglese', () => {
+    expect(detectLang('en', ['it-IT'])).toBe('en');
+    expect(detectLang('it', ['en-US'])).toBe('it');
+    expect(detectLang(null, ['it-IT', 'en-US'])).toBe('it');
+    expect(detectLang(null, ['fr-FR', 'en-GB'])).toBe('en');
+    expect(detectLang(null, ['de-DE'])).toBe('en');
+    expect(detectLang('xx', ['it'])).toBe('it');
+    expect(detectLang(null, [])).toBe('en');
+  });
+
+  it('i dizionari hanno testi non vuoti per entrambe le lingue', () => {
+    for (const lang of ['it', 'en'] as const) {
+      const d = DICTS[lang];
+      expect(d.result.phrases[1].length).toBeGreaterThan(0);
+      expect(d.result.phrases[2].length).toBeGreaterThan(0);
+      expect(d.result.phrases[3].length).toBeGreaterThan(0);
+      expect(d.levelTitle('animali', 3)).toMatch(/3/);
+      expect(d.result.mistakes(1)).not.toBe(d.result.mistakes(2));
+      expect(d.share.mistakes(1)).not.toBe(d.share.mistakes(2));
+    }
+    expect(DICTS.it.levelTitle('animali', 3)).toBe('Animali · livello 3');
+    expect(DICTS.en.levelTitle('animals', 3)).toBe('Animals · level 3');
+  });
+});
+
 describe('stelle', () => {
   it('3 senza errori, 2 fino a 2 errori, 1 oltre', () => {
     expect(starsOf(done([0, 0, 0]))).toBe(3);
@@ -109,6 +156,7 @@ describe('buildShareText', () => {
       title: 'Animali · livello 3',
       url: 'https://x.test',
       progress: done([0, 2, 1]),
+      strings: DICTS.it.share,
     });
     expect(text.split('\n')).toEqual([
       'Eulero · Animali · livello 3',
@@ -124,15 +172,20 @@ describe('buildShareText', () => {
     ]);
   });
   it('zero errori', () => {
-    const text = buildShareText({ title: 't', url: 'u', progress: done([0, 0, 0]) });
+    const text = buildShareText({
+      title: 't',
+      url: 'u',
+      progress: done([0, 0, 0]),
+      strings: DICTS.it.share,
+    });
     expect(text).toContain('⭐⭐⭐');
     expect(text).toContain('✨ Perfetto, zero errori');
     expect(text).not.toContain('🟥');
   });
   it('singolare', () => {
-    expect(buildShareText({ title: 't', url: 'u', progress: done([1, 0, 0]) })).toContain(
-      '1 errore\n',
-    );
+    expect(
+      buildShareText({ title: 't', url: 'u', progress: done([1, 0, 0]), strings: DICTS.it.share }),
+    ).toContain('1 errore\n');
   });
 });
 

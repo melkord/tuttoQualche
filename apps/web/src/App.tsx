@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Puzzle } from '@eulero/core';
-import { Home, ThemeLevels } from './components/Home';
+import { Home, ThemeLevels, useThemeName } from './components/Home';
 import { HowTo, Stats } from './components/Modals';
 import { Play } from './components/Play';
 import { Result } from './components/Result';
 import { todayLocal } from './lib/date';
 import { continueEntry, isUnlocked, nextInTheme } from './lib/levels';
-import { fetchIndex, fetchPuzzle } from './lib/puzzles';
+import { useI18n } from './i18n';
+import { fetchIndex, fetchPuzzle, LoadError } from './lib/puzzles';
 import type { LevelEntry, LevelIndex } from './lib/puzzles';
 import { computeStreak, emptyProgress, finishPuzzle, loadStore, saveStore } from './lib/storage';
 import type { Progress, Store } from './lib/storage';
-import { capitalize } from './lib/text';
 
 type Route = { name: 'home' } | { name: 'theme'; theme: string } | { name: 'play'; id: string };
 
@@ -39,6 +39,8 @@ function Logo({ small }: { small?: boolean }) {
 export function App() {
   const [route, setRoute] = useState<Route>(() => parseHash(window.location.hash));
   const [index, setIndex] = useState<LevelIndex | null>(null);
+  const { lang, setLang, t } = useI18n();
+  const themeName = useThemeName();
   const [error, setError] = useState<string | null>(null);
   const [store, setStore] = useState<Store>(() => loadStore());
   const [modal, setModal] = useState<'howto' | 'stats' | null>(() =>
@@ -86,7 +88,7 @@ export function App() {
     route.name === 'play'
       ? (() => {
           const e = entryOf(route.id);
-          return e ? `${capitalize(e.theme)} · livello ${e.level}` : 'Eulero';
+          return e && index ? t.levelTitle(themeName(index, e.theme), e.level) : 'Eulero';
         })()
       : null;
 
@@ -94,7 +96,7 @@ export function App() {
     <div className="app">
       <header className="top">
         {back ? (
-          <button className="icon-btn" onClick={back} aria-label="Indietro">
+          <button className="icon-btn" onClick={back} aria-label={t.back}>
             ‹
           </button>
         ) : (
@@ -108,14 +110,22 @@ export function App() {
         {title && <span className="top__title">{title}</span>}
         <div className="top__right">
           {streak > 0 && (
-            <span className="streak" title="Giorni consecutivi">
+            <span className="streak" title={t.streakTitle}>
               🔥 {streak}
             </span>
           )}
-          <button className="icon-btn" onClick={() => setModal('stats')} aria-label="Statistiche">
+          <button className="icon-btn" onClick={() => setModal('stats')} aria-label={t.stats}>
             📊
           </button>
-          <button className="icon-btn" onClick={() => setModal('howto')} aria-label="Come si gioca">
+          <button
+            className="icon-btn icon-btn--lang"
+            onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
+            aria-label={`${t.language}: ${lang === 'it' ? 'English' : 'Italiano'}`}
+            title={lang === 'it' ? 'English' : 'Italiano'}
+          >
+            {lang === 'it' ? 'EN' : 'IT'}
+          </button>
+          <button className="icon-btn" onClick={() => setModal('howto')} aria-label={t.howtoButton}>
             ?
           </button>
         </div>
@@ -123,11 +133,11 @@ export function App() {
 
       <main className={route.name === 'play' ? 'content content--wide' : 'content'}>
         {error ? (
-          <p className="empty">Impossibile caricare i livelli: {error}</p>
+          <p className="empty">{t.loadError(error)}</p>
         ) : !index ? (
-          <p className="empty">Carico…</p>
+          <p className="empty">{t.loading}</p>
         ) : index.themes.length === 0 ? (
-          <p className="empty">Nessun livello disponibile, torna presto!</p>
+          <p className="empty">{t.noLevels}</p>
         ) : route.name === 'home' ? (
           <Home
             index={index}
@@ -174,8 +184,9 @@ interface PlayScreenProps {
 }
 
 function PlayScreen({ id, entry, index, store, setStore, streak, today }: PlayScreenProps) {
+  const { t } = useI18n();
   const [puzzle, setPuzzle] = useState<Puzzle | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<LoadError | Error | null>(null);
   const unlocked = isUnlocked(index, store, id);
 
   useEffect(() => {
@@ -184,7 +195,7 @@ function PlayScreen({ id, entry, index, store, setStore, streak, today }: PlaySc
       go(entry ? `#/t/${encodeURIComponent(entry.theme)}` : '#/');
       return;
     }
-    fetchPuzzle(id).then(setPuzzle, (e: Error) => setError(e.message));
+    fetchPuzzle(id).then(setPuzzle, (e: Error) => setError(e));
   }, [id, unlocked, entry]);
 
   useEffect(() => {
@@ -202,8 +213,11 @@ function PlayScreen({ id, entry, index, store, setStore, streak, today }: PlaySc
     [id, setStore, today],
   );
 
-  if (error) return <p className="empty">{error}</p>;
-  if (!puzzle || !entry) return <p className="empty">Carico…</p>;
+  if (error)
+    return (
+      <p className="empty">{error instanceof LoadError ? t.errors[error.code] : error.message}</p>
+    );
+  if (!puzzle || !entry) return <p className="empty">{t.loading}</p>;
 
   if (progress.phase === 'done') {
     const next = nextInTheme(index, id);

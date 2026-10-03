@@ -152,6 +152,25 @@ describe('revealOrder', () => {
   });
 });
 
+describe('explainMistake (lingue)', () => {
+  it('in inglese usa frasi e virgolette inglesi', () => {
+    const en = [
+      { label: 'dogs', det: 'i' as const },
+      { label: 'mammals', det: 'i' as const },
+      { label: 'domestic animals', det: 'gli' as const },
+      { label: 'fish', det: 'i' as const },
+    ];
+    const text = explainMistake(
+      en,
+      { words: [0, 1, 3] },
+      ['TUTTI', 'NESSUNO', 'NESSUNO'],
+      ['TUTTI', 'ALCUNI', 'NESSUNO'],
+      'en',
+    );
+    expect(text).toBe('No dogs are fish: the “dogs” and “fish” circles don’t touch.');
+  });
+});
+
 describe('explainMistake', () => {
   it('spiega la relazione vera di una coppia sbagliata, preferendo l’ultima parola', () => {
     // cani(0)⊂mammiferi(1); cani(0)∩pesci(3)=∅

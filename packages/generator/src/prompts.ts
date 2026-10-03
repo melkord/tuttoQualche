@@ -31,7 +31,8 @@ Regole di qualità, in ordine di importanza:
 3. Etichette al plurale, minuscole, brevi e inequivocabili (es. "cani", "animali domestici"), tutte distinte. Niente nomi propri.
 4. "articolo" è l'articolo determinativo plurale dell'etichetta: "i", "gli" o "le" (es. "i cani", "gli animali domestici", "le rose").
 5. Varia i tipi di relazione: un buon puzzle mescola inclusioni, intersezioni parziali e disgiunzioni; evita che tutte le coppie siano dello stesso tipo.
-6. Contenuti originali e culturalmente neutri per un pubblico italiano.`;
+6. Contenuti originali e culturalmente neutri per un pubblico italiano.
+7. "inglese": traduzione naturale in inglese del tema e delle 4 etichette, nello STESSO ORDINE di "concetti" (minuscolo, plurale, es. "domestic animals"). Deve conservare esattamente lo stesso significato, perché le relazioni restano identiche; evita traduzioni che cambino l'estensione del concetto.`;
 
 export function draftUser(opts: { theme: string; avoid: string[]; feedback?: string }): string {
   const parts = [`Crea un nuovo puzzle sul tema: ${opts.theme}.`];

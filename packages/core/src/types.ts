@@ -19,6 +19,11 @@ export type Determiner = z.infer<typeof DeterminerSchema>;
 
 export const CONCEPT_COUNT = 4;
 
+/** Lingue supportate. L'italiano è la lingua base di ogni puzzle; le altre sono traduzioni. */
+export const LANGS = ['it', 'en'] as const;
+export const LangSchema = z.enum(LANGS);
+export type Lang = z.infer<typeof LangSchema>;
+
 export const ConceptSchema = z.object({
   /** Etichetta al plurale, minuscola: "cani", "animali domestici". */
   label: z.string().min(1).max(40),
@@ -69,11 +74,20 @@ export const DifficultySchema = z.object({
 });
 export type Difficulty = z.infer<typeof DifficultySchema>;
 
+/** Traduzione di un puzzle: tema e i 4 concetti, nello stesso ordine della versione italiana. */
+export const TranslationSchema = z.object({
+  theme: z.string().min(1).max(60),
+  concepts: z.array(z.string().min(1).max(40)).length(CONCEPT_COUNT),
+});
+export type Translation = z.infer<typeof TranslationSchema>;
+
 /** Bozza: ciò che produce un generatore (o un autore) prima delle domande. */
 export const PuzzleDraftSchema = z.object({
   theme: z.string().min(1).max(60),
   concepts: z.array(ConceptSchema).length(CONCEPT_COUNT),
   relations: z.array(PairRelationSchema),
+  /** Traduzioni opzionali (l'italiano è nei campi sopra). */
+  translations: z.object({ en: TranslationSchema.optional() }).optional(),
 });
 export type PuzzleDraft = z.infer<typeof PuzzleDraftSchema>;
 

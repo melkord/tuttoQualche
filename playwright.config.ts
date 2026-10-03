@@ -9,6 +9,7 @@ export default defineConfig({
   reporter: [['list']],
   use: {
     baseURL: `http://127.0.0.1:${PORT}`,
+    locale: 'it-IT', // i test sono in italiano; quelli in inglese lo impostano da sé
     trace: 'retain-on-failure',
     launchOptions: { executablePath: process.env.CHROMIUM_PATH || undefined },
   },
