@@ -21,3 +21,8 @@ pnpm lint
 ```
 
 (README completo con il flusso generate → review → schedule → deploy: a fine progetto.)
+
+## Deploy su Netlify
+
+Il repo contiene `netlify.toml`: collega il repo a Netlify (branch `main`) e non serve altro.
+Build: `pnpm --filter @tuttialcuni/web build` → pubblica `apps/web/dist` (Node 22, pnpm da `packageManager`).

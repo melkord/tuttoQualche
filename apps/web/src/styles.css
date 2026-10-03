@@ -1,0 +1,57 @@
+:root {
+  --bg: #0a0b1a;
+  font-family:
+    ui-rounded,
+    'SF Pro Rounded',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+body {
+  color: #f2f3ff;
+  background: var(--bg);
+}
+.splash {
+  min-height: 100%;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  padding: 24px;
+  text-align: center;
+  background:
+    radial-gradient(800px 500px at 10% -10%, rgba(255, 92, 147, 0.25), transparent 60%),
+    radial-gradient(800px 500px at 100% 0%, rgba(76, 201, 240, 0.22), transparent 60%),
+    radial-gradient(900px 600px at 50% 110%, rgba(155, 123, 255, 0.25), transparent 60%), var(--bg);
+}
+.splash__logo {
+  width: 120px;
+  height: 120px;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 24px rgba(155, 123, 255, 0.6));
+}
+.splash h1 {
+  margin: 8px 0 0;
+  font-size: clamp(36px, 8vw, 64px);
+  letter-spacing: -0.03em;
+}
+.splash h1 span {
+  background: linear-gradient(90deg, #ff5c93, #9b7bff 60%, #4cc9f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.splash p {
+  margin: 0;
+  color: #9ea2c8;
+}
