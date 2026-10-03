@@ -1,10 +1,11 @@
 import type { Progress } from './storage';
-import { totalErrors } from './storage';
+import { starsOf, totalErrors } from './storage';
 
-/** Testo condivisibile stile Wordle: una riga per passo, 🟥 per ogni errore e 🟩 alla risposta giusta. */
+/** Testo condivisibile: stelle, poi una riga per passo con 🟥 per ogni errore e 🟩 alla risposta giusta. */
 export function buildShareText(opts: { title: string; progress: Progress; url: string }): string {
   const { progress } = opts;
-  const lines = [`TuttiAlcuni · ${opts.title}`, ''];
+  const stars = starsOf(progress);
+  const lines = [`TuttiAlcuni · ${opts.title}`, '⭐'.repeat(stars) + '☆'.repeat(3 - stars), ''];
   progress.errors.forEach((errors, i) => {
     lines.push(`${i + 1}  ${'🟥'.repeat(errors)}🟩`);
   });

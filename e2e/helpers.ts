@@ -49,6 +49,9 @@ export async function playLevel(
   const steps = buildSteps(await puzzleOf(page, id));
   for (const [k, step] of steps.entries()) {
     await expect(page.locator('.play')).toHaveAttribute('data-step', String(k + 1));
+    // a ogni passo si aggiunge una parola e i diagrammi hanno un cerchio in più
+    await expect(page.locator('.wchip')).toHaveCount(k + 2);
+    await expect(page.locator('.option-card').first().locator('circle')).toHaveCount(k + 2);
     const wrongs = [0, 1, 2, 3].filter((i) => i !== step.correct).slice(0, wrongFirst[k]);
     for (const w of wrongs) {
       await page.getByRole('button', { name: `Opzione ${LETTERS[w]}` }).click();
@@ -56,11 +59,12 @@ export async function playLevel(
         'data-state',
         'wrong',
       );
+      await expect(page.getByRole('alert')).toContainText('No!');
     }
     await page.getByRole('button', { name: `Opzione ${LETTERS[step.correct]}` }).click();
     await expect(
       page.getByRole('button', { name: `Opzione ${LETTERS[step.correct]}` }),
-    ).toHaveAttribute('data-state', 'right');
+    ).toHaveAttribute('data-state', 'correct');
   }
   await expect(page.locator('.result')).toBeVisible();
 }

@@ -1,4 +1,4 @@
-import { isDone, isPerfect, isUnlocked } from '../lib/levels';
+import { isDone, isUnlocked, starsFor } from '../lib/levels';
 import type { LevelEntry, LevelIndex } from '../lib/puzzles';
 import type { Store } from '../lib/storage';
 import { capitalize, themeIcon } from '../lib/text';
@@ -86,11 +86,12 @@ export function ThemeLevels({
       <ul className="level-grid">
         {t.levels.map((l) => {
           const locked = !isUnlocked(index, store, l.id);
+          const stars = starsFor(store, l.id);
           const state = locked
             ? 'locked'
-            : isPerfect(store, l.id)
+            : stars === 3
               ? 'perfect'
-              : isDone(store, l.id)
+              : stars > 0
                 ? 'done'
                 : store.progress[l.id]
                   ? 'started'
@@ -105,13 +106,7 @@ export function ThemeLevels({
               >
                 <b>{l.level}</b>
                 <small>
-                  {locked
-                    ? '🔒'
-                    : state === 'perfect'
-                      ? '★'
-                      : state === 'done'
-                        ? '✓'
-                        : DIFF_LABEL[l.difficulty]}
+                  {locked ? '🔒' : stars > 0 ? '★'.repeat(stars) : DIFF_LABEL[l.difficulty]}
                 </small>
               </button>
             </li>

@@ -1,16 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import {
+  allPairs,
+  assignmentMatrix,
   buildMatrix,
   buildSteps,
   classifyCircles,
-  consistentTriples,
+  consistentAssignments,
+  explainMistake,
   fitCircles,
   isConsistent,
   OPTION_COUNT,
+  revealOrder,
   STEP_COUNT,
-  tripleMatrix,
 } from '../src';
-import type { Circle, Triple } from '../src';
+import type { Circle, Relation } from '../src';
 import { allRelationCombos, ANIMALI, draftOf } from './fixtures';
 
 const animals = {
@@ -19,23 +22,21 @@ const animals = {
   difficulty: { level: 'medio' as const },
 };
 
-const relationsOf = (circles: Circle[]): Triple => [
-  classifyCircles(circles[0]!, circles[1]!),
-  classifyCircles(circles[0]!, circles[2]!),
-  classifyCircles(circles[1]!, circles[2]!),
-];
+const relationsOf = (circles: Circle[]): Relation[] =>
+  allPairs(circles.length).map(([i, j]) => classifyCircles(circles[i]!, circles[j]!));
 
-describe('consistentTriples', () => {
-  it('sono un sottoinsieme proprio delle 125 combinazioni, tutte disegnabili', () => {
-    const ts = consistentTriples();
-    expect(ts.length).toBeGreaterThan(20);
-    expect(ts.length).toBeLessThan(125);
-    for (const t of ts) expect(tripleMatrix(t)).not.toBeNull();
+describe('consistentAssignments', () => {
+  it('2 parole: 5; 3 parole: sottoinsieme delle 125; 4 parole: 1191', () => {
+    expect(consistentAssignments(2)).toHaveLength(5);
+    const t = consistentAssignments(3);
+    expect(t.length).toBeGreaterThan(20);
+    expect(t.length).toBeLessThan(125);
+    expect(consistentAssignments(4)).toHaveLength(1191);
   });
-  it('contiene le configurazioni note e non quelle impossibili', () => {
-    const has = (t: Triple) => consistentTriples().some((x) => x.join() === t.join());
-    expect(has(['TUTTI', 'TUTTI', 'TUTTI'])).toBe(true); // A⊂B, A⊂C, B⊂C
-    expect(has(['NESSUNO', 'NESSUNO', 'NESSUNO'])).toBe(true);
+  it('sono tutte disegnabili e non contengono impossibili', () => {
+    for (const a of consistentAssignments(3)) expect(assignmentMatrix(a, 3)).not.toBeNull();
+    const has = (a: Relation[]) => consistentAssignments(3).some((x) => x.join() === a.join());
+    expect(has(['TUTTI', 'TUTTI', 'TUTTI'])).toBe(true);
     expect(has(['TUTTI', 'NESSUNO', 'TUTTI'])).toBe(false); // A⊂B, A∩C=∅, B⊂C
   });
 });
@@ -62,35 +63,44 @@ describe('fitCircles', () => {
 });
 
 describe('buildSteps', () => {
-  it('3 passi, 4 opzioni, una sola corretta, deterministico', () => {
+  it('3 passi con 2, 3 e 4 cerchi; 4 opzioni; una sola corretta; deterministico', () => {
     const steps = buildSteps(animals);
     expect(steps).toHaveLength(STEP_COUNT);
     expect(buildSteps(animals)).toEqual(steps);
-    for (const s of steps) {
+    steps.forEach((s, k) => {
+      expect(s.words).toHaveLength(k + 2);
       expect(s.options).toHaveLength(OPTION_COUNT);
       expect(s.correct).toBeGreaterThanOrEqual(0);
       expect(s.correct).toBeLessThan(OPTION_COUNT);
-    }
+      for (const o of s.options) expect(o.circles).toHaveLength(k + 2);
+    });
   });
 
-  it('i diagrammi disegnati realizzano esattamente le relazioni dichiarate per ogni opzione', () => {
+  it('le parole si aggiungono: ogni passo estende il precedente', () => {
+    const steps = buildSteps(animals);
+    expect(steps[1]!.words.slice(0, 2)).toEqual(steps[0]!.words);
+    expect(steps[2]!.words.slice(0, 3)).toEqual(steps[1]!.words);
+    expect(new Set(steps[2]!.words).size).toBe(4);
+  });
+
+  it('i diagrammi realizzano esattamente le relazioni dichiarate per ogni opzione', () => {
     for (const s of buildSteps(animals)) {
       for (const o of s.options) expect(relationsOf(o.circles)).toEqual(o.relations);
     }
   });
 
-  it('l’opzione giusta corrisponde alle relazioni del puzzle per quella terna', () => {
+  it('l’opzione giusta corrisponde alle relazioni del puzzle per quelle parole', () => {
     const m = buildMatrix(ANIMALI.relations).matrix!;
     for (const s of buildSteps(animals)) {
-      const [a, b, c] = s.concepts;
-      const expected = [m[a]![b], m[a]![c], m[b]![c]];
+      const expected = allPairs(s.words.length).map(([i, j]) => m[s.words[i]!]![s.words[j]!]);
       expect(s.options[s.correct]!.relations).toEqual(expected);
     }
   });
 
-  it('terne diverse: si omette un concetto diverso a ogni passo', () => {
-    const steps = buildSteps(animals);
-    expect(new Set(steps.map((s) => s.concepts.join())).size).toBe(STEP_COUNT);
+  it('opzioni tutte diverse tra loro', () => {
+    for (const s of buildSteps(animals)) {
+      expect(new Set(s.options.map((o) => o.relations.join())).size).toBe(OPTION_COUNT);
+    }
   });
 
   it('livelli difficili hanno risposte sbagliate più vicine a quella giusta', () => {
@@ -98,7 +108,7 @@ describe('buildSteps', () => {
       let sum = 0;
       let n = 0;
       for (const id of ['a', 'b', 'c', 'd', 'e', 'f']) {
-        for (const s of buildSteps({ ...animals, id, difficulty: { level } })) {
+        for (const s of buildSteps({ ...animals, id, difficulty: { level } }).slice(1)) {
           const right = s.options[s.correct]!.relations;
           s.options.forEach((o, i) => {
             if (i === s.correct) return;
@@ -124,12 +134,34 @@ describe('buildSteps', () => {
       });
       expect(steps).toHaveLength(STEP_COUNT);
       for (const s of steps) {
-        const keys = s.options.map((o) => o.relations.join());
-        expect(new Set(keys).size).toBe(OPTION_COUNT);
-        expect(s.options.filter((_, i) => i === s.correct)).toHaveLength(1);
+        expect(new Set(s.options.map((o) => o.relations.join())).size).toBe(OPTION_COUNT);
       }
       n++;
     }
     expect(n).toBe(1191);
-  }, 120_000);
+  }, 180_000);
+});
+
+describe('revealOrder', () => {
+  it('permutazione di 0..3, deterministica, evita la prima coppia disgiunta se possibile', () => {
+    const m = buildMatrix(ANIMALI.relations).matrix!;
+    const o = revealOrder(m, 'x');
+    expect([...o].sort()).toEqual([0, 1, 2, 3]);
+    expect(revealOrder(m, 'x')).toEqual(o);
+    expect(m[o[0]!]![o[1]!]).not.toBe('NESSUNO');
+  });
+});
+
+describe('explainMistake', () => {
+  it('spiega la relazione vera di una coppia sbagliata, preferendo l’ultima parola', () => {
+    // cani(0)⊂mammiferi(1); cani(0)∩pesci(3)=∅
+    const step = { words: [0, 1, 3] };
+    const truth: Relation[] = ['TUTTI', 'NESSUNO', 'NESSUNO']; // (0,1) (0,2) (1,2)
+    const chosen: Relation[] = ['TUTTI', 'ALCUNI', 'NESSUNO'];
+    const text = explainMistake(ANIMALI.concepts, step, truth, chosen);
+    expect(text).toBe('Nessuno dei cani è tra i pesci: i cerchi «cani» e «pesci» non si toccano.');
+  });
+  it('vuoto se non ci sono differenze', () => {
+    expect(explainMistake(ANIMALI.concepts, { words: [0, 1] }, ['TUTTI'], ['TUTTI'])).toBe('');
+  });
 });

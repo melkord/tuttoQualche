@@ -1,11 +1,13 @@
 import type { LevelEntry, LevelIndex } from './puzzles';
+import { starsOf } from './storage';
 import type { Store } from './storage';
 
 export const isDone = (store: Store, id: string) => store.progress[id]?.phase === 'done';
 
-export const isPerfect = (store: Store, id: string) => {
+/** Stelle ottenute su un livello completato (0 se non completato). */
+export const starsFor = (store: Store, id: string): 0 | 1 | 2 | 3 => {
   const p = store.progress[id];
-  return !!p && p.phase === 'done' && p.errors.every((e) => e === 0);
+  return p && p.phase === 'done' ? starsOf(p) : 0;
 };
 
 /** Il livello 1 è sempre aperto; gli altri si sbloccano completando il precedente dello stesso tema. */

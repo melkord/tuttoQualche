@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { prevDay, todayLocal } from '../src/lib/date';
-import { continueEntry, isUnlocked, nextInTheme } from '../src/lib/levels';
+import { continueEntry, isUnlocked, nextInTheme, starsFor } from '../src/lib/levels';
 import type { LevelEntry, LevelIndex } from '../src/lib/puzzles';
 import { buildShareText } from '../src/lib/share';
 import {
@@ -10,6 +10,7 @@ import {
   finishPuzzle,
   loadStore,
   saveStore,
+  starsOf,
   summarize,
 } from '../src/lib/storage';
 import type { Progress } from '../src/lib/storage';
@@ -81,6 +82,21 @@ describe('storage', () => {
   });
 });
 
+describe('stelle', () => {
+  it('3 senza errori, 2 fino a 2 errori, 1 oltre', () => {
+    expect(starsOf(done([0, 0, 0]))).toBe(3);
+    expect(starsOf(done([1, 1, 0]))).toBe(2);
+    expect(starsOf(done([2, 0, 0]))).toBe(2);
+    expect(starsOf(done([2, 1, 0]))).toBe(1);
+  });
+  it('starsFor: 0 se il livello non è completato', () => {
+    expect(starsFor(emptyStore(), 'x')).toBe(0);
+    const s = finishPuzzle(emptyStore(), 'x', done([1, 0, 0]), '2026-10-03');
+    expect(starsFor(s, 'x')).toBe(2);
+    expect(starsFor({ ...s, progress: { x: emptyProgress() } }, 'x')).toBe(0);
+  });
+});
+
 describe('buildShareText', () => {
   it('una riga per passo: 🟥 per ogni errore, poi 🟩', () => {
     const text = buildShareText({
@@ -90,6 +106,7 @@ describe('buildShareText', () => {
     });
     expect(text.split('\n')).toEqual([
       'TuttiAlcuni · Animali · livello 3',
+      '⭐☆☆',
       '',
       '1  🟩',
       '2  🟥🟥🟩',
@@ -102,6 +119,7 @@ describe('buildShareText', () => {
   });
   it('zero errori', () => {
     const text = buildShareText({ title: 't', url: 'u', progress: done([0, 0, 0]) });
+    expect(text).toContain('⭐⭐⭐');
     expect(text).toContain('✨ Perfetto, zero errori');
     expect(text).not.toContain('🟥');
   });

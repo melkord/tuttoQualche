@@ -31,6 +31,12 @@ export const emptyStore = (): Store => ({
 
 export const totalErrors = (p: Progress) => p.errors.reduce((a, b) => a + b, 0);
 
+/** Stelle: 3 senza errori, 2 con al massimo 2 errori, altrimenti 1. */
+export const starsOf = (p: Progress): 1 | 2 | 3 => {
+  const n = totalErrors(p);
+  return n === 0 ? 3 : n <= 2 ? 2 : 1;
+};
+
 const KEY = 'tuttialcuni:v2';
 
 export function loadStore(storage: Pick<Storage, 'getItem'> = localStorage): Store {

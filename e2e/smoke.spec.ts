@@ -30,7 +30,7 @@ test('navigazione senza errori: home → tema → livello → indietro → stati
 
   await page.getByRole('button', { name: 'Livello 1', exact: true }).click();
   await expect(page.locator('.options .option-card')).toHaveCount(4);
-  await expect(page.locator('.pill-set')).toHaveCount(3);
+  await expect(page.locator('.wchip')).toHaveCount(2);
 
   await page.getByRole('button', { name: 'Indietro' }).click();
   await expect(page.locator('.level')).toHaveCount(10);

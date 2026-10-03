@@ -22,9 +22,11 @@ test('gioco completo: errori, riprova, risultato da condividere e sblocco del li
   await page.getByRole('button', { name: 'Livello 1', exact: true }).click();
   await playLevel(page, l1!.id, [2, 0, 1]); // 2 errori al passo 1, 0 al passo 2, 1 al passo 3
 
-  await expect(page.getByRole('heading', { name: 'Fatto!' })).toBeVisible();
   await expect(page.getByText('3 errori in totale')).toBeVisible();
-  await expect(page.locator('.solved__item')).toHaveCount(3);
+  await expect(page.getByRole('img', { name: '1 stelle su 3' })).toBeVisible();
+  await expect(page.locator('.final circle')).toHaveCount(4);
+  await expect(page.locator('.wchip')).toHaveCount(4);
+  await expect(page.locator('.grid')).toContainText('⭐☆☆');
   await expect(page.locator('.grid')).toContainText('1  🟥🟥🟩');
   await expect(page.locator('.grid')).toContainText('2  🟩');
   await expect(page.locator('.grid')).toContainText('3  🟥🟩');
@@ -35,22 +37,22 @@ test('gioco completo: errori, riprova, risultato da condividere e sblocco del li
   await expect(page.locator('.play')).toHaveAttribute('data-step', '1');
   await page.getByRole('button', { name: 'Indietro' }).click();
   await expect(page.getByRole('button', { name: 'Livello 2', exact: true })).toBeEnabled();
-  await expect(page.getByRole('button', { name: 'Livello 1', exact: true })).toContainText('✓');
+  await expect(page.getByRole('button', { name: 'Livello 1', exact: true })).toContainText('★');
   expect(l2).toBeDefined();
   expect(errors).toEqual([]);
 });
 
-test('zero errori: "Perfetto" e stella sul livello', async ({ page }) => {
+test('zero errori: 3 stelle e stelle sul livello', async ({ page }) => {
   const [l1] = await levelsOf(page, 'sport');
   await open(page);
   await page.goto(`/#/p/${l1!.id}`);
   await playLevel(page, l1!.id);
-  await expect(page.getByRole('heading', { name: /Perfetto/ })).toBeVisible();
+  await expect(page.getByRole('img', { name: '3 stelle su 3' })).toBeVisible();
   await expect(page.getByText('✨ Perfetto, zero errori')).toBeVisible();
 
   await page.getByRole('button', { name: 'Torna alla home' }).click();
   await page.locator('.theme', { hasText: 'Sport' }).click();
-  await expect(page.getByRole('button', { name: 'Livello 1', exact: true })).toContainText('★');
+  await expect(page.getByRole('button', { name: 'Livello 1', exact: true })).toContainText('★★★');
 });
 
 test('i progressi restano dopo un reload a metà puzzle e nelle statistiche', async ({ page }) => {

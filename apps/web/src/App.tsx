@@ -121,7 +121,7 @@ export function App() {
         </div>
       </header>
 
-      <main className="content">
+      <main className={route.name === 'play' ? 'content content--wide' : 'content'}>
         {error ? (
           <p className="empty">Impossibile caricare i livelli: {error}</p>
         ) : !index ? (

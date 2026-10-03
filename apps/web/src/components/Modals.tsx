@@ -32,8 +32,9 @@ export function HowTo({ onClose }: { onClose: () => void }) {
   return (
     <Modal title="Come si gioca" onClose={onClose}>
       <p className="lead">
-        Ogni livello ha <b>3 passi</b>. In ogni passo vedi <b>3 insiemi</b> e <b>4 diagrammi</b>:
-        scegli quello che li rappresenta correttamente.
+        Ogni livello ha <b>4 parole</b> e <b>3 domande</b>. Alla prima vedi due parole e scegli tra
+        4 diagrammi quello che le rappresenta. Poi <b>si aggiunge una parola alla volta</b> e il
+        diagramma cresce, fino a tutte e quattro.
       </p>
       <ul className="howto">
         <li>
@@ -58,7 +59,8 @@ export function HowTo({ onClose }: { onClose: () => void }) {
         </li>
       </ul>
       <p className="lead">
-        Se sbagli puoi riprovare, ma gli errori contano nel risultato. Completa un livello per
+        Se sbagli ti spieghiamo perché e puoi riprovare, ma gli errori contano: <b>3 stelle</b>{' '}
+        senza errori, <b>2</b> con al massimo due, <b>1</b> altrimenti. Completa un livello per
         sbloccare il successivo.
       </p>
       <button className="btn btn--primary btn--block" onClick={onClose}>
