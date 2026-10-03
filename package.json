@@ -13,6 +13,7 @@
     "generate": "tsx packages/generator/src/cli.ts",
     "review": "pnpm --filter @tuttialcuni/review dev",
     "publish-puzzles": "tsx scripts/publish/src/cli.ts",
+    "e2e": "pnpm --filter @tuttialcuni/web build && playwright test",
     "seed": "tsx packages/generator/seed/build-seed.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@playwright/test": "1.56.1",
     "@types/node": "^26.6.4",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^10.0.0",

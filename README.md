@@ -18,6 +18,7 @@ pnpm install
 pnpm test        # Vitest
 pnpm typecheck
 pnpm lint
+pnpm e2e         # build di produzione + test Playwright (desktop e mobile)
 ```
 
 (README completo con il flusso generate → review → schedule → deploy: a fine progetto.)

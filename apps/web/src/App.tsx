@@ -54,8 +54,12 @@ export function App() {
   useEffect(() => {
     fetchIndex().then(setIndex, (e: Error) => setError(e.message));
   }, []);
-  useEffect(() => saveStore(store), [store]);
-  useEffect(() => window.scrollTo(0, 0), [route]);
+  useEffect(() => {
+    saveStore(store);
+  }, [store]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [route]);
 
   const closeHowTo = () => {
     setStore((s) => ({ ...s, seenHowTo: true }));
