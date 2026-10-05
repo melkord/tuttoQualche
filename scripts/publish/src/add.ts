@@ -6,7 +6,8 @@ import { z } from 'zod';
  * Formato compatto per aggiungere livelli (lo stesso di packages/generator/seed/livelli.ts, più
  * l'inglese):
  *  - concepts: "<articolo> <etichetta>", articolo = i | gli | le   (es. "i cani", "le aquile")
- *  - conceptsEn: le 4 etichette inglesi, nello STESSO ordine
+ *  - conceptsEn: le 4 etichette inglesi, nello STESSO ordine; minuscole ma con la maiuscola per aggettivi
+ *    e nomi propri ("Italian lakes", "French cities")
  *  - relations: 6 lettere nell'ordine 01 02 03 12 13 23 — T (A⊂B) C (B⊂A) A (alcuni) N (nessuno) U (uguali)
  *  - risks: solo le coppie dubbie, es. { "02": ["medio", "motivo"] }. Un rischio "alto" = non pubblicare.
  */
@@ -52,8 +53,8 @@ export function toDraft(input: LevelInput): PuzzleDraft {
     })),
     translations: {
       en: {
-        theme: input.themeEn.trim().toLowerCase(),
-        concepts: input.conceptsEn.map((c) => c.trim().toLowerCase()),
+        theme: input.themeEn.trim(),
+        concepts: input.conceptsEn.map((c) => c.trim()),
       },
     },
   };
@@ -90,7 +91,7 @@ export function prepareLevel(raw: unknown, seen: Set<string>, now: Date = new Da
   if (!report.ok) return { ok: false, error: report.issues.map((i) => i.message).join(' ') };
 
   const en = draft.translations?.en?.concepts ?? [];
-  if (new Set(en).size !== 4)
+  if (new Set(en.map((c) => c.toLowerCase())).size !== 4)
     return { ok: false, error: 'le etichette inglesi devono essere 4 e distinte' };
 
   const sig = levelSignature(draft.concepts.map((c) => c.label));

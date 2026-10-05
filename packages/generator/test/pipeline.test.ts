@@ -22,7 +22,7 @@ const GOOD: DraftOutput = {
     { etichetta: 'animali domestici', articolo: 'gli' },
     { etichetta: 'pesci', articolo: 'i' },
   ],
-  inglese: { tema: 'Animals', concetti: ['Dogs', 'mammals', 'pets', 'fish'] },
+  inglese: { tema: 'animals', concetti: ['Dogs ', 'mammals', 'pets', 'Italian fish'] },
   r01: 'TUTTI',
   r02: 'TUTTI',
   r03: 'NESSUNO',
@@ -62,7 +62,7 @@ describe('draftFromOutput', () => {
       translations: { en: { theme: string; concepts: string[] } };
     };
     expect(d.translations.en.theme).toBe('animals');
-    expect(d.translations.en.concepts).toEqual(['dogs', 'mammals', 'pets', 'fish']);
+    expect(d.translations.en.concepts).toEqual(['Dogs', 'mammals', 'pets', 'Italian fish']);
   });
 
   it('normalizza etichette e costruisce le 6 coppie', () => {
@@ -89,7 +89,7 @@ describe('generateOne', () => {
     // la traduzione inglese viaggia nel puzzle, normalizzata come l'italiano
     expect(res.pending.puzzle.translations?.en).toEqual({
       theme: 'animals',
-      concepts: ['dogs', 'mammals', 'pets', 'fish'],
+      concepts: ['Dogs', 'mammals', 'pets', 'Italian fish'],
     });
     expect(Object.keys(res.pending.risks).sort()).toEqual(['01', '02', '03', '12', '13', '23']);
     expect(res.pending.meta).toEqual({ generatedAt: '2026-10-02T10:00:00.000Z', model: 'mock' });

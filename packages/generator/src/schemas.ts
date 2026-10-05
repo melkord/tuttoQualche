@@ -44,8 +44,8 @@ export function draftFromOutput(out: DraftOutput): unknown {
     })),
     translations: {
       en: {
-        theme: out.inglese.tema.trim().toLowerCase(),
-        concepts: out.inglese.concetti.map((c) => c.trim().toLowerCase()),
+        theme: out.inglese.tema.trim(),
+        concepts: out.inglese.concetti.map((c) => c.trim()),
       },
     },
     relations: ALL_PAIR_KEYS.map((k) => ({

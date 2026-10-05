@@ -39,8 +39,10 @@ File JSON (array) con questo formato, uno per livello:
 ```
 
 - **concepts**: 4 concetti al plurale, minuscoli, preceduti dall'articolo plurale (`i`, `gli`, `le`).
-- **conceptsEn**: le stesse 4 etichette in inglese, **stesso ordine**, plurale minuscolo, **stessa
-  estensione** (se la traduzione cambia cosa include il concetto, scegli un altro concetto).
+- **conceptsEn**: le stesse 4 etichette in inglese, **stesso ordine**, plurale, minuscolo **tranne
+  aggettivi e nomi propri** (`Italian lakes`, `French cities`, `Alpine mountains`; `themeEn` uguale:
+  `Italian geography`), **stessa estensione** (se la traduzione cambia cosa include il concetto,
+  scegli un altro concetto).
 - **relations**: 6 lettere, nell'ordine delle coppie `01 02 03 12 13 23` (indici dei concetti), ognuna
   riferita al primo concetto della coppia verso il secondo:
   `T` = tutti i primi sono secondi (A⊂B), `C` = tutti i secondi sono primi (B⊂A), `A` = in comune solo
@@ -51,6 +53,11 @@ File JSON (array) con questo formato, uno per livello:
 
 ### Criteri di qualità (in ordine di importanza)
 
+0. **Una relazione che ha un'eccezione nota è FALSA, non "a rischio".** `T`/`C`/`N`/`U` sono
+   affermazioni universali: se per `T` o `C` esiste anche solo un controesempio (il ginepro è una
+   conifera ma non un albero), per `N` esiste un elemento in comune, devi usare `A` oppure cambiare
+   concetto. Il campo `risks` serve solo per dubbi di significato o di interpretazione del termine,
+   **mai** per giustificare una relazione che sai essere inesatta.
 1. Ogni relazione è **vera per conoscenza comune**, senza eccezioni discutibili, senza dipendere da
    opinioni, definizioni tecniche o cultura locale. Nel dubbio, cambia concetto. Controlla sempre i
    controesempi ("tutti i cani sono animali domestici?" → i randagi: rischio medio).
@@ -62,8 +69,11 @@ File JSON (array) con questo formato, uno per livello:
 4. Mix di difficoltà nel lotto: circa 1/3 facili (catene di inclusioni, disgiunti), 1/2 medi, 1/6
    difficili (più `A`). Il comando calcola la difficoltà.
 5. Contenuti **originali**: non copiare puzzle, testi o grafica di altri giochi.
-6. Non ripetere concetti già presenti (il comando scarta i duplicati esatti, ma evita anche quasi-doppioni).
-7. Italiano corretto (articoli!) e inglese naturale.
+6. Concetti **non ambigui nel significato**: evita categorie con due letture comuni (es. "primi
+   piatti" è una portata, non per forza italiana). Prima di inviare, rileggi ogni relazione come frase
+   ("Tutti i X sono Y?", "Alcuni X non sono Y?") e controllala una per una.
+7. Non ripetere concetti già presenti (il comando scarta i duplicati esatti, ma evita anche quasi-doppioni).
+8. Italiano corretto (articoli!) e inglese naturale, con le maiuscole giuste.
 
 ## 4. Aggiungere e pubblicare
 

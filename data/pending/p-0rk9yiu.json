@@ -7,7 +7,7 @@
         "det": "le"
       },
       {
-        "label": "primi piatti",
+        "label": "piatti di pasta",
         "det": "i"
       },
       {
@@ -56,34 +56,34 @@
         "theme": "food and drinks",
         "concepts": [
           "lasagnes",
-          "first courses",
-          "italian dishes",
+          "pasta dishes",
+          "Italian dishes",
           "drinks"
         ]
       }
     },
-    "id": "p-17r8x67",
+    "id": "p-0rk9yiu",
     "questions": [
       {
-        "kind": "ALCUNI",
-        "subject": 3,
-        "object": 1,
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 0,
         "answer": false,
-        "text": "Alcune bevande sono primi piatti?"
+        "text": "Nessuno dei piatti italiani è tra le lasagne?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 1,
+        "object": 0,
+        "answer": false,
+        "text": "Tutti i piatti di pasta sono lasagne?"
       },
       {
         "kind": "ALCUNI_NON",
         "subject": 2,
-        "object": 0,
-        "answer": true,
-        "text": "Alcuni piatti italiani non sono lasagne?"
-      },
-      {
-        "kind": "NESSUNO",
-        "subject": 0,
         "object": 1,
-        "answer": false,
-        "text": "Nessuna delle lasagne è tra i primi piatti?"
+        "answer": true,
+        "text": "Alcuni piatti italiani non sono piatti di pasta?"
       }
     ],
     "difficulty": {
@@ -118,7 +118,7 @@
     }
   },
   "meta": {
-    "generatedAt": "2026-10-05T05:41:52.406Z",
+    "generatedAt": "2026-10-05T05:52:48.347Z",
     "model": "routine"
   }
 }

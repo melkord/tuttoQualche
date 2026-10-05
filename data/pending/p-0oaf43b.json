@@ -53,9 +53,9 @@
     ],
     "translations": {
       "en": {
-        "theme": "italian geography",
+        "theme": "Italian geography",
         "concepts": [
-          "italian lakes",
+          "Italian lakes",
           "lakes",
           "bodies of water",
           "seas"
@@ -102,7 +102,7 @@
     },
     "23": {
       "level": "medio",
-      "reason": "Con «specchio d'acqua» si pensa spesso ai laghi."
+      "reason": "Con «specchio d'acqua» si pensa spesso ai laghi, ma include anche i mari."
     },
     "01": {
       "level": "basso",
@@ -118,7 +118,7 @@
     }
   },
   "meta": {
-    "generatedAt": "2026-10-05T05:41:52.411Z",
+    "generatedAt": "2026-10-05T05:52:48.355Z",
     "model": "routine"
   }
 }

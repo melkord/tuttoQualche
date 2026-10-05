@@ -38,7 +38,7 @@
       {
         "a": 1,
         "b": 2,
-        "rel": "CONTIENE"
+        "rel": "ALCUNI"
       },
       {
         "a": 1,
@@ -62,7 +62,7 @@
         ]
       }
     },
-    "id": "p-0etx3gj",
+    "id": "p-1kxkyvh",
     "questions": [
       {
         "kind": "TUTTI",
@@ -72,11 +72,11 @@
         "text": "Tutti i pini sono alberi?"
       },
       {
-        "kind": "ALCUNI",
-        "subject": 3,
-        "object": 1,
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 3,
         "answer": true,
-        "text": "Alcune piante da fiore sono alberi?"
+        "text": "Alcuni alberi non sono piante da fiore?"
       },
       {
         "kind": "NESSUNO",
@@ -87,14 +87,14 @@
       }
     ],
     "difficulty": {
-      "score": 42,
-      "level": "medio"
+      "score": 60,
+      "level": "difficile"
     }
   },
   "risks": {
     "12": {
-      "level": "medio",
-      "reason": "Alcune conifere, come il ginepro, sono arbusti."
+      "level": "basso",
+      "reason": "Conoscenza comune."
     },
     "13": {
       "level": "basso",
@@ -105,8 +105,8 @@
       "reason": "Conoscenza comune."
     },
     "01": {
-      "level": "basso",
-      "reason": "Conoscenza comune."
+      "level": "medio",
+      "reason": "Il pino mugo è un arbusto, ma i pini sono comunemente considerati alberi."
     },
     "02": {
       "level": "basso",
@@ -118,7 +118,7 @@
     }
   },
   "meta": {
-    "generatedAt": "2026-10-05T05:41:52.399Z",
+    "generatedAt": "2026-10-05T05:52:48.249Z",
     "model": "routine"
   }
 }

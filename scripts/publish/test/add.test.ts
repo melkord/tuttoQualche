@@ -5,9 +5,9 @@ import type { LevelInput } from '../src/add';
 
 const GOOD: LevelInput = {
   theme: 'Animali',
-  themeEn: 'Animals',
+  themeEn: 'animals',
   concepts: ['i cani', 'i mammiferi', 'gli animali domestici', 'i pesci'],
-  conceptsEn: ['Dogs', 'mammals', 'pets', 'fish'],
+  conceptsEn: ['dogs', 'mammals', 'pets', 'fish'],
   relations: 'TTNANA',
   risks: { '02': ['medio', 'Esistono cani randagi.'] },
 };
@@ -30,6 +30,28 @@ describe('toDraft', () => {
       theme: 'animals',
       concepts: ['dogs', 'mammals', 'pets', 'fish'],
     });
+  });
+});
+
+describe('inglese: maiuscole di nomi propri e aggettivi', () => {
+  it('non viene messo in minuscolo ("Italian" resta maiuscolo)', () => {
+    const d = toDraft({
+      ...GOOD,
+      themeEn: 'Italian geography',
+      conceptsEn: ['Italian lakes', 'lakes', 'bodies of water', 'seas'],
+    });
+    expect(d.translations?.en).toEqual({
+      theme: 'Italian geography',
+      concepts: ['Italian lakes', 'lakes', 'bodies of water', 'seas'],
+    });
+  });
+  it('etichette inglesi uguali a meno delle maiuscole contano come duplicate', () => {
+    const res = prepareLevel(
+      { ...GOOD, conceptsEn: ['dogs', 'Dogs', 'pets', 'fish'] },
+      new Set(),
+      new Date(),
+    );
+    expect(res.ok).toBe(false);
   });
 });
 
