@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "pini",
+        "det": "i"
+      },
+      {
+        "label": "alberi",
+        "det": "gli"
+      },
+      {
+        "label": "conifere",
+        "det": "le"
+      },
+      {
+        "label": "piante da fiore",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "nature and plants",
+        "concepts": [
+          "pines",
+          "trees",
+          "conifers",
+          "flowering plants"
+        ]
+      }
+    },
+    "id": "p-0etx3gj",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 1,
+        "answer": true,
+        "text": "Tutti i pini sono alberi?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 3,
+        "object": 1,
+        "answer": true,
+        "text": "Alcune piante da fiore sono alberi?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 0,
+        "answer": false,
+        "text": "Nessuna delle conifere è tra i pini?"
+      }
+    ],
+    "difficulty": {
+      "score": 42,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "medio",
+      "reason": "Alcune conifere, come il ginepro, sono arbusti."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-05T05:41:52.399Z",
+    "model": "routine"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "geografia italiana",
+    "concepts": [
+      {
+        "label": "laghi italiani",
+        "det": "i"
+      },
+      {
+        "label": "laghi",
+        "det": "i"
+      },
+      {
+        "label": "specchi d'acqua",
+        "det": "gli"
+      },
+      {
+        "label": "mari",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "CONTIENE"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "italian geography",
+        "concepts": [
+          "italian lakes",
+          "lakes",
+          "bodies of water",
+          "seas"
+        ]
+      }
+    },
+    "id": "p-0oaf43b",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 3,
+        "answer": false,
+        "text": "Tutti i laghi italiani sono mari?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni laghi non sono laghi italiani?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 0,
+        "answer": false,
+        "text": "Nessuno degli specchi d'acqua è tra i laghi italiani?"
+      }
+    ],
+    "difficulty": {
+      "score": 30,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "medio",
+      "reason": "Con «specchio d'acqua» si pensa spesso ai laghi."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-05T05:41:52.411Z",
+    "model": "routine"
+  }
+}
