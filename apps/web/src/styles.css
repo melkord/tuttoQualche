@@ -865,3 +865,53 @@ p {
   font-size: 13px;
   letter-spacing: 0.04em;
 }
+
+/* ---------- PWA ---------- */
+.offline-chip {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  max-width: min(92vw, 420px);
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: #1c1d3d;
+  border: 1px solid rgba(155, 123, 255, 0.5);
+  box-shadow: 0 16px 40px -10px #000;
+  color: #e6dcff;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  animation: toastIn 0.3s cubic-bezier(0.2, 1.2, 0.3, 1) both;
+  z-index: 30;
+}
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px) scale(0.95);
+  }
+}
+.install {
+  margin-top: 14px;
+}
+.install__hint {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--glass);
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}

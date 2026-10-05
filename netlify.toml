@@ -17,7 +17,24 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Il service worker e i file che cambiano a ogni deploy non devono restare in cache nel browser:
+# così il controllo aggiornamenti vede subito i livelli nuovi. (Offline ci pensa il service worker.)
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "no-cache"
+
 [[headers]]
   for = "/puzzles/*"
   [headers.values]
-    Cache-Control = "public, max-age=300"
+    Cache-Control = "no-cache"

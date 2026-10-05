@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Puzzle } from '@eulero/core';
 import { Home, ThemeLevels, useThemeName } from './components/Home';
 import { HowTo, Stats } from './components/Modals';
@@ -7,6 +7,7 @@ import { Result } from './components/Result';
 import { todayLocal } from './lib/date';
 import { continueEntry, isUnlocked, nextInTheme } from './lib/levels';
 import { useI18n } from './i18n';
+import { startPwa, usePwa } from './lib/pwa';
 import { fetchIndex, fetchPuzzle, LoadError } from './lib/puzzles';
 import type { LevelEntry, LevelIndex } from './lib/puzzles';
 import { computeStreak, emptyProgress, finishPuzzle, loadStore, saveStore } from './lib/storage';
@@ -47,6 +48,25 @@ export function App() {
     loadStore().seenHowTo ? null : 'howto',
   );
   const today = todayLocal();
+  const pwa = usePwa();
+  const [toast, setToast] = useState<string | null>(null);
+  const tRef = useRef(t);
+  tRef.current = t;
+
+  // PWA: tiene il service worker aggiornato; a ogni versione nuova ricarica l'indice dei livelli
+  // (dalla cache appena aggiornata) e avvisa se ci sono livelli nuovi.
+  useEffect(() => {
+    return startPwa((info) => {
+      fetchIndex().then(setIndex, () => undefined);
+      const { pwa: msg } = tRef.current; // lingua del momento in cui il worker è pronto
+      setToast(info.first ? msg.ready : info.added > 0 ? msg.newLevels(info.added) : msg.updated);
+    });
+  }, []);
+  useEffect(() => {
+    if (!toast) return;
+    const id = window.setTimeout(() => setToast(null), 3500);
+    return () => window.clearTimeout(id);
+  }, [toast]);
 
   useEffect(() => {
     const on = () => setRoute(parseHash(window.location.hash));
@@ -109,6 +129,7 @@ export function App() {
         )}
         {title && <span className="top__title">{title}</span>}
         <div className="top__right">
+          {!pwa.online && <span className="offline-chip">{t.pwa.offline}</span>}
           {streak > 0 && (
             <span className="streak" title={t.streakTitle}>
               🔥 {streak}
@@ -143,6 +164,15 @@ export function App() {
             index={index}
             store={store}
             next={next}
+            install={
+              pwa.installed
+                ? null
+                : pwa.canPrompt
+                  ? { kind: 'prompt', run: pwa.install }
+                  : pwa.iosHint
+                    ? { kind: 'ios' }
+                    : null
+            }
             onPlay={(id) => go(`#/p/${id}`)}
             onTheme={(t) => go(`#/t/${encodeURIComponent(t)}`)}
           />
@@ -167,6 +197,11 @@ export function App() {
         )}
       </main>
 
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+        </div>
+      )}
       {modal === 'howto' && <HowTo onClose={closeHowTo} />}
       {modal === 'stats' && <Stats store={store} onClose={() => setModal(null)} />}
     </div>

@@ -63,6 +63,14 @@ export interface Dict {
     outro: string;
     ok: string;
   };
+  pwa: {
+    ready: string;
+    newLevels: (n: number) => string;
+    updated: string;
+    offline: string;
+    install: string;
+    iosHint: string;
+  };
   statsModal: {
     title: string;
     played: string;
@@ -148,6 +156,14 @@ const it: Dict = {
       'Se sbagli ti spieghiamo perché e puoi riprovare, ma gli errori contano: **3 stelle** senza errori, **2** con al massimo due, **1** altrimenti. Completa un livello per sbloccare il successivo.',
     ok: 'Ho capito',
   },
+  pwa: {
+    ready: 'Pronto per giocare offline ✓',
+    newLevels: (n) => `${n} ${n === 1 ? 'nuovo livello scaricato' : 'nuovi livelli scaricati'} 🎉`,
+    updated: 'App aggiornata ✓',
+    offline: 'Offline',
+    install: 'Installa l’app',
+    iosHint: 'Per installarla: tocca Condividi e poi «Aggiungi alla schermata Home».',
+  },
   statsModal: {
     title: 'Statistiche',
     played: 'giocati',
@@ -231,6 +247,14 @@ const en: Dict = {
     outro:
       'If you get one wrong we’ll explain why and you can try again, but mistakes count: **3 stars** with none, **2** with at most two, **1** otherwise. Complete a level to unlock the next one.',
     ok: 'Got it',
+  },
+  pwa: {
+    ready: 'Ready to play offline ✓',
+    newLevels: (n) => `${n} new ${n === 1 ? 'level' : 'levels'} downloaded 🎉`,
+    updated: 'App updated ✓',
+    offline: 'Offline',
+    install: 'Install the app',
+    iosHint: 'To install: tap Share, then “Add to Home Screen”.',
   },
   statsModal: {
     title: 'Stats',

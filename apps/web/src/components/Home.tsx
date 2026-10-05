@@ -8,6 +8,8 @@ interface Props {
   index: LevelIndex;
   store: Store;
   next: LevelEntry | null;
+  /** Installazione dell'app: pulsante (Android/desktop), suggerimento (iOS) o niente. */
+  install?: { kind: 'prompt'; run: () => void } | { kind: 'ios' } | null;
   onPlay: (id: string) => void;
   onTheme: (theme: string) => void;
 }
@@ -19,7 +21,7 @@ export function useThemeName() {
     capitalize(index.themes.find((t) => t.theme === theme)?.names?.[lang] ?? theme);
 }
 
-export function Home({ index, store, next, onPlay, onTheme }: Props) {
+export function Home({ index, store, next, install, onPlay, onTheme }: Props) {
   const { t } = useI18n();
   const themeName = useThemeName();
   const started = Object.keys(store.progress).length > 0;
@@ -43,6 +45,18 @@ export function Home({ index, store, next, onPlay, onTheme }: Props) {
           <p className="hero__eyebrow">{t.home.congrats}</p>
           <h2>{t.home.allDone}</h2>
           <p className="lead">{t.home.soon}</p>
+        </section>
+      )}
+
+      {install && (
+        <section className="install">
+          {install.kind === 'prompt' ? (
+            <button className="btn btn--block" onClick={install.run}>
+              📲 {t.pwa.install}
+            </button>
+          ) : (
+            <p className="install__hint">📲 {t.pwa.iosHint}</p>
+          )}
         </section>
       )}
 
