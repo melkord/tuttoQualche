@@ -61,6 +61,8 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     (async () => {
+      // cache dei service worker precedenti (es. 'eulero-v1', 'tuttialcuni-v1'): non servono più
+      for (const name of await caches.keys()) if (name !== CACHE) await caches.delete(name);
       const cache = await caches.open(CACHE);
       const valid = new Set(Object.keys(TABLE).map(keyOf));
       for (const req of await cache.keys()) {

@@ -204,3 +204,23 @@ test('pulsante "Installa l’app" quando il browser lo permette (beforeinstallpr
     .toBe(true);
   await expect(button).toBeHidden(); // una volta chiesto, il pulsante sparisce
 });
+
+test('le cache dei service worker precedenti vengono eliminate', async ({ page }) => {
+  await page.goto('/');
+  // simula la cache lasciata dalla vecchia versione dell'app
+  await page.evaluate(async () => {
+    await caches.open('eulero-v1');
+  });
+  await skipHowTo(page);
+  await waitReady(page);
+  await page.evaluate(async () => {
+    const reg = await navigator.serviceWorker.getRegistration();
+    await reg?.unregister(); // il prossimo caricamento reinstalla il worker e fa pulizia
+  });
+  await page.reload();
+  await expect
+    .poll(() => page.evaluate(async () => (await caches.keys()).sort().join(',')), {
+      timeout: 15_000,
+    })
+    .toBe('eulero-precache');
+});
