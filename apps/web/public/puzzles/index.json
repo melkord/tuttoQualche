@@ -83,6 +83,13 @@
           "level": 11,
           "difficulty": "medio",
           "score": 56
+        },
+        {
+          "id": "p-0ui29xo",
+          "theme": "animali",
+          "level": 12,
+          "difficulty": "difficile",
+          "score": 84
         }
       ]
     },
@@ -169,6 +176,13 @@
           "level": 11,
           "difficulty": "medio",
           "score": 50
+        },
+        {
+          "id": "p-069bsoy",
+          "theme": "cibo e bevande",
+          "level": 12,
+          "difficulty": "facile",
+          "score": 26
         }
       ]
     },
@@ -255,6 +269,13 @@
           "level": 11,
           "difficulty": "medio",
           "score": 30
+        },
+        {
+          "id": "p-092ju3q",
+          "theme": "geografia italiana",
+          "level": 12,
+          "difficulty": "difficile",
+          "score": 60
         }
       ]
     },
@@ -341,6 +362,13 @@
           "level": 11,
           "difficulty": "difficile",
           "score": 60
+        },
+        {
+          "id": "p-08ldtv8",
+          "theme": "natura e piante",
+          "level": 12,
+          "difficulty": "medio",
+          "score": 50
         }
       ]
     },
@@ -427,6 +455,13 @@
           "level": 11,
           "difficulty": "medio",
           "score": 46
+        },
+        {
+          "id": "p-02nx3l2",
+          "theme": "sport",
+          "level": 12,
+          "difficulty": "difficile",
+          "score": 60
         }
       ]
     }
