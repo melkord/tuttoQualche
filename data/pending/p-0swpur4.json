@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "cibo e bevande",
+    "concepts": [
+      {
+        "label": "gamberi",
+        "det": "i"
+      },
+      {
+        "label": "crostacei",
+        "det": "i"
+      },
+      {
+        "label": "prodotti ittici",
+        "det": "i"
+      },
+      {
+        "label": "pesci",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "CONTIENE"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "food and drinks",
+        "concepts": [
+          "shrimp",
+          "crustaceans",
+          "seafood",
+          "fish"
+        ]
+      }
+    },
+    "id": "p-0swpur4",
+    "questions": [
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni prodotti ittici non sono gamberi?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 2,
+        "answer": false,
+        "text": "Nessuno dei pesci è tra i prodotti ittici?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 1,
+        "object": 3,
+        "answer": false,
+        "text": "Alcuni crostacei sono pesci?"
+      }
+    ],
+    "difficulty": {
+      "score": 30,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-07T02:57:29.869Z",
+    "model": "routine"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "polpi",
+        "det": "i"
+      },
+      {
+        "label": "molluschi",
+        "det": "i"
+      },
+      {
+        "label": "animali marini",
+        "det": "gli"
+      },
+      {
+        "label": "pesci",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "animals",
+        "concepts": [
+          "octopuses",
+          "molluscs",
+          "marine animals",
+          "fish"
+        ]
+      }
+    },
+    "id": "p-15g7lo1",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 1,
+        "object": 0,
+        "answer": false,
+        "text": "Nessuno dei molluschi è tra i polpi?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 3,
+        "object": 2,
+        "answer": true,
+        "text": "Alcuni pesci sono animali marini?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 3,
+        "object": 0,
+        "answer": false,
+        "text": "Tutti i pesci sono polpi?"
+      }
+    ],
+    "difficulty": {
+      "score": 56,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-07T02:57:29.761Z",
+    "model": "routine"
+  }
+}
