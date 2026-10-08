@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "geografia italiana",
+    "concepts": [
+      {
+        "label": "montagne italiane",
+        "det": "le"
+      },
+      {
+        "label": "montagne",
+        "det": "le"
+      },
+      {
+        "label": "rilievi",
+        "det": "i"
+      },
+      {
+        "label": "colline",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "CONTIENE"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "Italian geography",
+        "concepts": [
+          "Italian mountains",
+          "mountains",
+          "landforms",
+          "hills"
+        ]
+      }
+    },
+    "id": "p-1401avr",
+    "questions": [
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Alcune montagne non sono montagne italiane?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 3,
+        "object": 2,
+        "answer": false,
+        "text": "Nessuna delle colline è tra i rilievi?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 2,
+        "object": 1,
+        "answer": false,
+        "text": "Tutti i rilievi sono montagne?"
+      }
+    ],
+    "difficulty": {
+      "score": 30,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-08T02:58:26.222Z",
+    "model": "routine"
+  }
+}

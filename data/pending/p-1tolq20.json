@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "tartarughe",
+        "det": "le"
+      },
+      {
+        "label": "rettili",
+        "det": "i"
+      },
+      {
+        "label": "animali marini",
+        "det": "gli"
+      },
+      {
+        "label": "animali che depongono uova",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "animals",
+        "concepts": [
+          "turtles and tortoises",
+          "reptiles",
+          "marine animals",
+          "egg-laying animals"
+        ]
+      }
+    },
+    "id": "p-1tolq20",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 2,
+        "answer": false,
+        "text": "Tutte le tartarughe sono animali marini?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 1,
+        "answer": true,
+        "text": "Alcuni animali marini non sono rettili?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 3,
+        "answer": true,
+        "text": "Alcuni animali marini sono animali che depongono uova?"
+      }
+    ],
+    "difficulty": {
+      "score": 74,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-08T02:58:33.742Z",
+    "model": "routine"
+  }
+}

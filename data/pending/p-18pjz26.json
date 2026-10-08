@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "cipressi",
+        "det": "i"
+      },
+      {
+        "label": "alberi",
+        "det": "gli"
+      },
+      {
+        "label": "conifere",
+        "det": "le"
+      },
+      {
+        "label": "alberi da frutto",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "nature and plants",
+        "concepts": [
+          "cypresses",
+          "trees",
+          "conifers",
+          "fruit trees"
+        ]
+      }
+    },
+    "id": "p-18pjz26",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 3,
+        "object": 2,
+        "answer": false,
+        "text": "Alcuni alberi da frutto sono conifere?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 0,
+        "object": 3,
+        "answer": false,
+        "text": "Tutti i cipressi sono alberi da frutto?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 3,
+        "answer": true,
+        "text": "Alcuni alberi non sono alberi da frutto?"
+      }
+    ],
+    "difficulty": {
+      "score": 46,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-08T02:58:26.204Z",
+    "model": "routine"
+  }
+}
