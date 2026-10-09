@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "natura e piante",
+    "concepts": [
+      {
+        "label": "felci",
+        "det": "le"
+      },
+      {
+        "label": "piante",
+        "det": "le"
+      },
+      {
+        "label": "piante senza fiori",
+        "det": "le"
+      },
+      {
+        "label": "piante da fiore",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "CONTIENE"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "nature and plants",
+        "concepts": [
+          "ferns",
+          "plants",
+          "flowerless plants",
+          "flowering plants"
+        ]
+      }
+    },
+    "id": "p-10f96ui",
+    "questions": [
+      {
+        "kind": "TUTTI",
+        "subject": 3,
+        "object": 1,
+        "answer": true,
+        "text": "Tutte le piante da fiore sono piante?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 0,
+        "object": 2,
+        "answer": false,
+        "text": "Alcune felci non sono piante senza fiori?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 2,
+        "object": 1,
+        "answer": false,
+        "text": "Nessuna delle piante senza fiori è tra le piante?"
+      }
+    ],
+    "difficulty": {
+      "score": 30,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-09T02:57:43.562Z",
+    "model": "routine"
+  }
+}

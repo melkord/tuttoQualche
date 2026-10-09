@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "animali",
+    "concepts": [
+      {
+        "label": "pesci rossi",
+        "det": "i"
+      },
+      {
+        "label": "pesci",
+        "det": "i"
+      },
+      {
+        "label": "animali domestici",
+        "det": "gli"
+      },
+      {
+        "label": "animali marini",
+        "det": "gli"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "animals",
+        "concepts": [
+          "goldfish",
+          "fish",
+          "pets",
+          "marine animals"
+        ]
+      }
+    },
+    "id": "p-19ty5i3",
+    "questions": [
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni animali domestici non sono pesci rossi?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 1,
+        "object": 3,
+        "answer": false,
+        "text": "Nessuno dei pesci è tra gli animali marini?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 1,
+        "object": 2,
+        "answer": true,
+        "text": "Alcuni pesci sono animali domestici?"
+      }
+    ],
+    "difficulty": {
+      "score": 84,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "medio",
+      "reason": "Esistono pesci rossi che vivono liberi in laghi e stagni."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-09T02:57:43.410Z",
+    "model": "routine"
+  }
+}
