@@ -6,5 +6,6 @@ const ICONS: Record<string, string> = {
   'geografia italiana': '🗺️',
   sport: '⚽',
   'natura e piante': '🌿',
+  veicoli: '🚗',
 };
 export const themeIcon = (theme: string) => ICONS[theme] ?? '✨';

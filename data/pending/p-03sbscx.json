@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "veicoli",
+    "concepts": [
+      {
+        "label": "tram",
+        "det": "i"
+      },
+      {
+        "label": "veicoli su rotaia",
+        "det": "i"
+      },
+      {
+        "label": "mezzi di trasporto pubblico",
+        "det": "i"
+      },
+      {
+        "label": "veicoli che volano",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "vehicles",
+        "concepts": [
+          "trams",
+          "rail vehicles",
+          "public transport vehicles",
+          "flying vehicles"
+        ]
+      }
+    },
+    "id": "p-03sbscx",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 3,
+        "answer": true,
+        "text": "Alcuni mezzi di trasporto pubblico sono veicoli che volano?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 0,
+        "object": 1,
+        "answer": false,
+        "text": "Alcuni tram non sono veicoli su rotaia?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 2,
+        "answer": false,
+        "text": "Nessuno dei tram è tra i mezzi di trasporto pubblico?"
+      }
+    ],
+    "difficulty": {
+      "score": 60,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-10T03:00:50.992Z",
+    "model": "routine"
+  }
+}

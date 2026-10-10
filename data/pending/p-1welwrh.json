@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "veicoli",
+    "concepts": [
+      {
+        "label": "elicotteri",
+        "det": "gli"
+      },
+      {
+        "label": "veicoli che volano",
+        "det": "i"
+      },
+      {
+        "label": "veicoli con le ali",
+        "det": "i"
+      },
+      {
+        "label": "veicoli a motore",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "ALCUNI"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "vehicles",
+        "concepts": [
+          "helicopters",
+          "flying vehicles",
+          "winged vehicles",
+          "motor vehicles"
+        ]
+      }
+    },
+    "id": "p-1welwrh",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 0,
+        "answer": false,
+        "text": "Alcuni veicoli con le ali sono elicotteri?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 1,
+        "object": 3,
+        "answer": false,
+        "text": "Nessuno dei veicoli che volano è tra i veicoli a motore?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 1,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni veicoli che volano non sono elicotteri?"
+      }
+    ],
+    "difficulty": {
+      "score": 74,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-10T03:00:51.107Z",
+    "model": "routine"
+  }
+}

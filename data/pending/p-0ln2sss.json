@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "veicoli",
+    "concepts": [
+      {
+        "label": "traghetti",
+        "det": "i"
+      },
+      {
+        "label": "navi",
+        "det": "le"
+      },
+      {
+        "label": "mezzi di trasporto",
+        "det": "i"
+      },
+      {
+        "label": "automobili",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "CONTIENE"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "vehicles",
+        "concepts": [
+          "ferries",
+          "ships",
+          "vehicles",
+          "cars"
+        ]
+      }
+    },
+    "id": "p-0ln2sss",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 1,
+        "object": 3,
+        "answer": true,
+        "text": "Nessuna delle navi è tra le automobili?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 0,
+        "object": 1,
+        "answer": false,
+        "text": "Alcuni traghetti non sono navi?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 3,
+        "object": 2,
+        "answer": true,
+        "text": "Tutte le automobili sono mezzi di trasporto?"
+      }
+    ],
+    "difficulty": {
+      "score": 30,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-10T03:00:51.059Z",
+    "model": "routine"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "veicoli",
+    "concepts": [
+      {
+        "label": "treni merci",
+        "det": "i"
+      },
+      {
+        "label": "treni",
+        "det": "i"
+      },
+      {
+        "label": "mezzi di trasporto pubblico",
+        "det": "i"
+      },
+      {
+        "label": "navi cargo",
+        "det": "le"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "TUTTI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "NESSUNO"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "vehicles",
+        "concepts": [
+          "freight trains",
+          "trains",
+          "public transport vehicles",
+          "cargo ships"
+        ]
+      }
+    },
+    "id": "p-18vitop",
+    "questions": [
+      {
+        "kind": "NESSUNO",
+        "subject": 0,
+        "object": 3,
+        "answer": true,
+        "text": "Nessuno dei treni merci è tra le navi cargo?"
+      },
+      {
+        "kind": "ALCUNI",
+        "subject": 2,
+        "object": 1,
+        "answer": true,
+        "text": "Alcuni mezzi di trasporto pubblico sono treni?"
+      },
+      {
+        "kind": "TUTTI",
+        "subject": 2,
+        "object": 3,
+        "answer": false,
+        "text": "Tutti i mezzi di trasporto pubblico sono navi cargo?"
+      }
+    ],
+    "difficulty": {
+      "score": 46,
+      "level": "medio"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-10T03:00:51.044Z",
+    "model": "routine"
+  }
+}

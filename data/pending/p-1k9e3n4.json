@@ -1,0 +1,124 @@
+{
+  "puzzle": {
+    "theme": "veicoli",
+    "concepts": [
+      {
+        "label": "mezzi elettrici",
+        "det": "i"
+      },
+      {
+        "label": "mezzi pubblici",
+        "det": "i"
+      },
+      {
+        "label": "mezzi su rotaia",
+        "det": "i"
+      },
+      {
+        "label": "mezzi a pedali",
+        "det": "i"
+      }
+    ],
+    "relations": [
+      {
+        "a": 0,
+        "b": 1,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 0,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 2,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 1,
+        "b": 3,
+        "rel": "ALCUNI"
+      },
+      {
+        "a": 2,
+        "b": 3,
+        "rel": "NESSUNO"
+      }
+    ],
+    "translations": {
+      "en": {
+        "theme": "vehicles",
+        "concepts": [
+          "electric vehicles",
+          "public transport vehicles",
+          "rail vehicles",
+          "pedal vehicles"
+        ]
+      }
+    },
+    "id": "p-1k9e3n4",
+    "questions": [
+      {
+        "kind": "ALCUNI",
+        "subject": 1,
+        "object": 3,
+        "answer": true,
+        "text": "Alcuni mezzi pubblici sono mezzi a pedali?"
+      },
+      {
+        "kind": "NESSUNO",
+        "subject": 1,
+        "object": 2,
+        "answer": false,
+        "text": "Nessuno dei mezzi pubblici è tra i mezzi su rotaia?"
+      },
+      {
+        "kind": "ALCUNI_NON",
+        "subject": 2,
+        "object": 0,
+        "answer": true,
+        "text": "Alcuni mezzi su rotaia non sono mezzi elettrici?"
+      }
+    ],
+    "difficulty": {
+      "score": 88,
+      "level": "difficile"
+    }
+  },
+  "risks": {
+    "12": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "13": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "23": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "01": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "02": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    },
+    "03": {
+      "level": "basso",
+      "reason": "Conoscenza comune."
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-10-10T03:00:51.152Z",
+    "model": "routine"
+  }
+}

@@ -569,6 +569,85 @@
           "score": 84
         }
       ]
+    },
+    {
+      "theme": "veicoli",
+      "names": {
+        "it": "veicoli",
+        "en": "vehicles"
+      },
+      "levels": [
+        {
+          "id": "p-0ln2sss",
+          "theme": "veicoli",
+          "level": 1,
+          "difficulty": "medio",
+          "score": 30
+        },
+        {
+          "id": "p-14q4v4q",
+          "theme": "veicoli",
+          "level": 2,
+          "difficulty": "medio",
+          "score": 46
+        },
+        {
+          "id": "p-18vitop",
+          "theme": "veicoli",
+          "level": 3,
+          "difficulty": "medio",
+          "score": 46
+        },
+        {
+          "id": "p-1ypo4de",
+          "theme": "veicoli",
+          "level": 4,
+          "difficulty": "medio",
+          "score": 46
+        },
+        {
+          "id": "p-1mmnyso",
+          "theme": "veicoli",
+          "level": 5,
+          "difficulty": "medio",
+          "score": 56
+        },
+        {
+          "id": "p-03sbscx",
+          "theme": "veicoli",
+          "level": 6,
+          "difficulty": "difficile",
+          "score": 60
+        },
+        {
+          "id": "p-0yd2nng",
+          "theme": "veicoli",
+          "level": 7,
+          "difficulty": "difficile",
+          "score": 64
+        },
+        {
+          "id": "p-1ryt27a",
+          "theme": "veicoli",
+          "level": 8,
+          "difficulty": "difficile",
+          "score": 74
+        },
+        {
+          "id": "p-1welwrh",
+          "theme": "veicoli",
+          "level": 9,
+          "difficulty": "difficile",
+          "score": 74
+        },
+        {
+          "id": "p-1k9e3n4",
+          "theme": "veicoli",
+          "level": 10,
+          "difficulty": "difficile",
+          "score": 88
+        }
+      ]
     }
   ]
 }
